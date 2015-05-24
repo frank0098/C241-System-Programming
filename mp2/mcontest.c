@@ -14,6 +14,8 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <errno.h>
+ #include <sys/time.h>
+#include <sys/resource.h>
 
 int child_still_running = 1;
 
