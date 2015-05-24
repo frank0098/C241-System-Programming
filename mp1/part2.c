@@ -32,20 +32,16 @@ int main()
 	result = dictionary_add(&dictionary, "key", "value");
 	if (result != 0) { printf("_add() failed, and it should have been successful.\n"); }
 	else { printf("_add(): OKAY!\n"); }
-
 	result = dictionary_add(&dictionary, "key2", "value");
 	if (result != 0) { printf("_add() failed, and it should have been successful.\n"); }
 	else { printf("_add(): OKAY!\n"); }
-
 	result = dictionary_add(&dictionary, "key3", "value");
 	if (result != 0) { printf("_add() failed, and it should have been successful.\n"); }
 	else { printf("_add(): OKAY!\n"); }
-
 	result = dictionary_add(&dictionary, "key", "value2");
 	if (result == 0) { printf("_add() was successful, and it should've failed.\n"); }
 	else { printf("_add(): OKAY!\n"); }
-
-	go(&dictionary);
+	
 
 
 	s = dictionary_get(&dictionary, "key");
@@ -58,20 +54,18 @@ int main()
 	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
 	else { printf("_get(): OKAY!\n"); }
 	
-	/* _remove() */
-	printf("remove something\n");
-	//dictionary_remove(&dictionary, "key");
+	// /* _remove() */
+	//printf("remove something\n");
+	dictionary_remove(&dictionary, "key");
 	dictionary_remove(&dictionary, "key2");
 	dictionary_remove(&dictionary, "key3");
 
-	go(&dictionary);
 
-	/* _get() */
-	printf("get something\n");
+	// /* _get() */
 
 
 	s = dictionary_get(&dictionary, "key");
-	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
+	if (s != NULL) { printf("_get() was successful, and it should've failed.\n"); }
 	else { printf("_get(): OKAY!\n"); }
 	s = dictionary_get(&dictionary, "key2");
 	if (s != NULL) { printf("_get() was successful, and it should've failed.\n"); }
@@ -79,11 +73,10 @@ int main()
 	s = dictionary_get(&dictionary, "key3");
 	if (s != NULL) { printf("_get() was successful, and it should've failed.\n"); }
 	else { printf("_get(): OKAY!\n"); }
-	printf("add somthing\n");
 
 
-	result = dictionary_add(&dictionary, "key", "value2");
-	if (result == 0) { printf("_add() was successful, and it should've failed.\n"); }
+	result = dictionary_add(&dictionary, "key", "value");
+	if (result != 0) { printf("_add() failed, and it should have been successful.\n"); }
 	else { printf("_add(): OKAY!\n"); }
 
 	result = dictionary_add(&dictionary, "key2", "value");
@@ -97,9 +90,6 @@ int main()
 	result = dictionary_add(&dictionary, "key", "value2");
 	if (result == 0) { printf("_add() was successful, and it should've failed.\n"); }
 	else { printf("_add(): OKAY!\n"); }
-
-	go(&dictionary);
-
 
 	s = dictionary_get(&dictionary, "key");
 	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
@@ -132,12 +122,40 @@ int main()
 
 
 
+	result = dictionary_add(&dictionary, "key4", "value");
+	if (result != 0) { printf("_add() failed, and it should have been successful.\n"); }
+	else { printf("_add(): OKAY!\n"); }
+
+	result = dictionary_add(&dictionary, "key5", "value");
+	if (result != 0) { printf("_add() failed, and it should have been successful.\n"); }
+	else { printf("_add(): OKAY!\n"); }
+
+	result = dictionary_add(&dictionary, "key6", "value");
+	if (result != 0) { printf("_add() failed, and it should have been successful.\n"); }
+	else { printf("_add(): OKAY!\n"); }
+
+	result = dictionary_add(&dictionary, "key", "value2");
+	if (result == 0) { printf("_add() was successful, and it should've failed.\n"); }
+	else { printf("_add(): OKAY!\n"); }
+
+	s = dictionary_get(&dictionary, "key4");
+	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
+	else { printf("_get(): OKAY!\n"); }
+	s = dictionary_get(&dictionary, "key5");
+	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
+	else { printf("_get(): OKAY!\n"); }
+	s = dictionary_get(&dictionary, "key");
+	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
+	else { printf("_get(): OKAY!\n"); }
+
+
+
 
 
 
 	/* _parse() */
 	char *s1 = malloc(100);
-	strcpy(s1, "key3: value");
+	strcpy(s1, "key8: value");
 	result = dictionary_parse(&dictionary, s1);
 	if (result != 0) { printf("_parse() failed, and it should have been successful.\n"); }
 	else { printf("_parse(): OKAY!\n"); }
@@ -153,12 +171,17 @@ int main()
 	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
 	else { printf("_get(): OKAY!\n"); }
 
+	s = dictionary_get(&dictionary, "key4");
+	if (s == NULL || strcmp(s, "value") != 0) { printf("_get() failed or was not the expected result.\n"); }
+	else { printf("_get(): OKAY!\n"); }
+
+	free(s1);
+	free(s2);
 	/*
 	 * Free up the memory used by the dictionary and close the file.
 	 */
 	dictionary_destroy(&dictionary);
-	free(s1);
-	free(s2);
+	
 
 	return 0;
 }

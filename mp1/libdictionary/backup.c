@@ -42,13 +42,13 @@ const int ILLEGAL_FORMAT = 3; /**< Return value if the format of the input is il
 *   @endcode
 */
 
+struct _dictionary_t *head = NULL;
+
 
 
 void dictionary_init(dictionary_t *d)
 {
-    d->entry = NULL;
-    //head = malloc(sizeof(dictionary_entry_t));
-    //head = NULL;
+    head = NULL;
     
 }
 
@@ -77,59 +77,61 @@ void dictionary_init(dictionary_t *d)
 */
 int dictionary_add(dictionary_t *d, const char *key, const char *value)
 {
-
-    struct _dictionary_entry_t *curr;
+    struct _dictionary_t *new_node;
+    struct _dictionary_t *curr;
     struct _dictionary_entry_t *new_entry;
-    new_entry = malloc( sizeof(dictionary_entry_t) );
-
+    
+    int flag=0;
     char *tkey,*tvalue;
-    tkey=malloc((strlen(key)+1)*sizeof(char));
-    tvalue=malloc((strlen(value)+1)*sizeof(char));
-    // tkey=malloc(100*sizeof(char));
-    // tvalue=malloc(100*sizeof(char));
+    tkey=malloc(100*sizeof(char));
+    tvalue=malloc(100*sizeof(char));
+    new_entry = (struct dictionary_entry_t*)malloc( sizeof(dictionary_entry_t) );
     strcpy(tkey,key);
     strcpy(tvalue,value);
     new_entry->key = tkey;
     new_entry->value= tvalue;
-    new_entry->next = NULL;
-
-    curr=d->entry;
-
-    int flag=0;
-    if(d->entry == NULL)
+    
+    new_node = (struct dictionary_t*)malloc( sizeof(dictionary_t) );
+    new_node->entry = new_entry;
+    curr=head;
+    
+    if(head == NULL)
     {
+        head = d;
         d->entry = new_entry;
-        return 0;
-    }
-    else
-    {
-
-        while(1)
-        {
-            if(strcmp((curr->key),key)==0)
-            {
-                flag=1;
-            }
-            if(curr->next == NULL)
-                break;
-
-            curr=curr->next;
-
-        }
-        if(flag==1)
-            {
-                free(new_entry->key);
-                free(new_entry->value);
-                free(new_entry);
-                return KEY_EXISTS;
-            }
-        else
-        {
-            curr->next = new_entry;
-        }
+        head -> next= NULL;
         return 0;
     }
     
+    else
+    {
+        
+
+
+        while(1)
+        {
+            //printf("key is %s,input key is %s\n",curr->entry->key,key);
+		if(strcmp((curr->entry->key),key)==0)
+            	{
+                    flag=1;
+                    
+                }
+            
+
+            if(curr->next == NULL)
+                break;
+            curr=curr->next;
+
+        }
+            if(flag==1)
+        	return -1;
+        else
+        {
+        new_node->next = NULL;
+        curr->next = new_node;
+    	}
+        return 0;
+    }
 }
 
 
@@ -183,39 +185,7 @@ int dictionary_add(dictionary_t *d, const char *key, const char *value)
 */
 int dictionary_parse(dictionary_t *d, char *key_value)
 {
-    int len=strlen(key_value);
-    int flag=0;
-    int i;
-    for ( i = 0; i < len; i++)
-    {
-        if(key_value[i]==':')
-            {
-                flag=1;
-                break;
-            }
-    }
-    
-    if(flag==0 || i==0 || i==len)
-        return ILLEGAL_FORMAT;
-    char tkey[i+1];
-    char tvalue[len-i+2];
-    int j=0;
-    for(j=0;j<i;j++)
-    {
-        tkey[j]=key_value[j];
-    }
-    tkey[j]='\0';
-    for(j=0;j<len-i+2;j++)
-    {
-        tvalue[j]=key_value[i+j+2];
-
-    }
-    tvalue[j]='\0';
-
-    dictionary_add(d,tkey,tvalue);
-    return 0;
-
-
+    return -1;
 }
 
 
@@ -237,15 +207,20 @@ int dictionary_parse(dictionary_t *d, char *key_value)
 */
 const char *dictionary_get(dictionary_t *d, const char *key)
 {
-    struct _dictionary_entry_t *ptr;
-    ptr=d->entry;
+    
+    struct _dictionary_t *ptr = d;
+    
+    
+    int found=0;
     
     while( ptr != NULL )
     {
-    	if(strcmp((ptr->key),key)==0)
+    	//printf("the key is %s\n ",(ptr->entry->key));
+    	if(strcmp((ptr->entry->key),key)==0)
     	{
     		
-    		return ptr->value;
+    		found = 1;
+    		break;
     	}
     	else
     	{
@@ -254,7 +229,9 @@ const char *dictionary_get(dictionary_t *d, const char *key)
     	}
     }
     
-    
+    if (found == 1)
+    	return ptr->entry->value;
+    else
     return NULL;
 }
 
@@ -276,42 +253,54 @@ const char *dictionary_get(dictionary_t *d, const char *key)
 *   The dictionary did not contain key.
 */
 
+int go(dictionary_t *d)
+{
+	struct _dictionary_t *ptr = d;
+	while( ptr != NULL )
+    {
+    	printf("what in? %s\n ",(ptr->entry->key));
+    	ptr = ptr->next;
+    }
 
+}
 int dictionary_remove(dictionary_t *d, const char *key)
 {
-    struct _dictionary_entry_t *ptr;
-    struct _dictionary_entry_t *tmp;
-    ptr=d->entry;
-    tmp=d->entry;
+    struct _dictionary_t *ptr = d;
+    struct _dictionary_t *tmp = d;
+    struct _dictionary_entry_t *new_entry;
     
     while( ptr != NULL )
     {
+    	//printf("the key is %s\n ",(ptr->entry->key));
     	
-    	if(strcmp((ptr->key),key)==0)
+    	if(strcmp((ptr->entry->key),key)==0)
     	{
-            //printf("remove %s\n",ptr->key);
-    		if(ptr==d->entry)    //if it is the first element
-            {
-                tmp=ptr->next;
-                d->entry=tmp;
-                free(ptr->key);
-                free(ptr->value);
-                free(ptr);
-                break;
-            }
-            else
-            {
-                tmp->next=ptr->next;
-                free(ptr->key);
-                free(ptr->value);
-                free(ptr);
-                break;
-            }
+    		if(ptr == d)
+    		{
+    			new_entry=ptr->entry;
+    			// free(new_entry->value);
+    			// free(new_entry->key);
+    			// free(d->entry);
+
+    			tmp=d->next;
+    			d=tmp;
+    	 		head = d;
+    	 		break;
+    	 	}
+    	 	else
+    	 	{
+
+    	 		new_entry=ptr->entry;
+    			free(new_entry->value);
+    			free(new_entry->key);
+    	 		tmp->next=ptr->next;
+    	 		free(ptr->entry);
+    	 		
+    	 	}
 
     	}
-
-    	tmp = ptr;
-    	ptr = ptr->next;
+    		tmp = ptr;
+    	 	ptr = ptr->next;
     	 	
     
     }
@@ -337,34 +326,28 @@ int dictionary_remove(dictionary_t *d, const char *key)
 */
 void dictionary_destroy(dictionary_t *d)
 {
-    struct _dictionary_entry_t *tmp;
-    tmp=d->entry;
-    if(tmp == NULL)
-        return;
-    while(1)
+    struct _dictionary_t *ptr = d;
+    struct _dictionary_t *tmp = d;
+    struct _dictionary_entry_t *new_entry;
+    
+    while( 1 )
     {
-        tmp=d->entry;
-        d->entry=tmp->next;
-        free(tmp->value);
-        free(tmp->key);
-        free(tmp);
-        if(d->entry==NULL)
+            
+        new_entry=ptr->entry;
+        
+        tmp=ptr;
+        d=ptr->next;
+        head=d;
+
+        if(ptr->next == NULL)
             break;
+        ptr=ptr->next;
+        free(new_entry->value);
+        free(new_entry->key);
+
+        free(tmp->entry);
             
     }
 
 
 }
-// int go(dictionary_t *d)
-// {
-//  struct _dictionary_entry_t *ptr;
-//     ptr = d->entry;
-    
-//  while( ptr != NULL )
-//     {
-//      printf("what in? %s\n ",ptr->key);
-//      ptr = ptr->next;
-//     }
-//    // printf("removenext\n");
-
-// }

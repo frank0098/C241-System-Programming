@@ -27,8 +27,8 @@ int main()
 
 	int r3[15];
 	 r3[0]=8942;
-	int *p3;
-	int *q3;
+	void *p3;
+	void *q3;
 	q3=&r3;
 	p3=&q3;
 	double_step(p3);
@@ -49,25 +49,17 @@ int main()
 	char empty6[5];
 	empty6[3]='u';
 	void *p6;
-	char *q6;
+	void *q6;
 	q6=&empty6;
 	p6=q6;
 	two_step(p6,q6);
 
-	char *p7,*q7,*r7;
 	char x7=0;
 	char y7=2;
 	char z7=4;
-	// p7=x7;
-	// q7=y7;
-	// r7=z7;
-	// three_step(p7,q7,r7);
-	p7=&x7;
-	q7=&y7;
-	r7=&z7;
-	three_step(*p7,*q7,*r7);
+	three_step(x7,y7,z7);
 
-	char *p8;
+	void *p8;
 	char empty8[4];
 	empty8[1]=0;
 	empty8[2]=8;
@@ -75,7 +67,7 @@ int main()
 	p8=&empty8;
 	step_step_step(p8,p8,p8);
 
-	char *p9;
+	void *p9;
 	int q9=1;
 	p9=&q9;
 	it_may_be_odd(p9,q9);
@@ -95,7 +87,6 @@ int main()
 	char temp[4] = {0,0,0,0};
 	temp[0] = 1;
 	temp[1] = 2;
-	printf("the number is %d\n",*((int *)temp)); 
 	the_end(temp,temp);
 	// int * ten_one; 
 	// int * ten_two; 

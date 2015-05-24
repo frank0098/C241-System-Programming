@@ -16,6 +16,7 @@ typedef struct _dictionary_entry_t
 {
 	char *key;
 	char *value;
+	struct _dictionary_entry_t *next;
 	
 } dictionary_entry_t;
 
@@ -26,7 +27,7 @@ typedef struct _dictionary_t
 	   but your data structure MUST shrink/expand based on
 	   the size of entries. */
 	dictionary_entry_t *entry;
-	struct dictionary_t *next;
+	
 
 } dictionary_t;
 
