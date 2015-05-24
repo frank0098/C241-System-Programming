@@ -63,7 +63,7 @@ void *calloc(size_t num, size_t size)
  */
 void *malloc(size_t size)
 {
-	return sbrk(size);
+	return NULL;
 }
 
 
@@ -86,10 +86,10 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 	// "If a null pointer is passed as argument, no action occurs."
-	// if (!ptr)
-	// 	return;
+	if (!ptr)
+		return;
 
-	// return;
+	return;
 }
 
 
