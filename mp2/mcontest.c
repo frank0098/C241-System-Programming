@@ -146,4 +146,3 @@ int main(int argc, char **argv)
 	unlink(file_name);
 	return 0;
 }
-
