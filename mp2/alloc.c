@@ -87,10 +87,11 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 	// "If a null pointer is passed as argument, no action occurs."
-	if (!ptr)
-		return;
+	printf("i am working!\n");
+	// if (!ptr)
+	// 	return;
 
-	return;
+	// return;
 }
 
 
