@@ -7,7 +7,7 @@ int main()
 	while(1)
 	{
 		count++;
-		int *ptr = malloc(1024*1024*1024*sizeof(int));
+		int *ptr = malloc(sizeof(int));
 			if (ptr == NULL)
 		{
 			printf("Memory failed to allocate!\n");
