@@ -64,7 +64,6 @@ void *calloc(size_t num, size_t size)
 void *malloc(size_t size)
 {
 	// return NULL;
-	printf("i am working!\n");
 	return sbrk(size);
 }
 
@@ -88,7 +87,6 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 	// "If a null pointer is passed as argument, no action occurs."
-	printf("i am working!\n");
 	// if (!ptr)
 	// 	return;
 
