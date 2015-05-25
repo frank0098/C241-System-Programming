@@ -16,7 +16,7 @@ int main()
 
 		//*ptr = 4;
 		printf("the count is %d,the address is %p\n",count,ptr);
-		free(ptr);
+		//free(ptr);
 
 	}
 	
