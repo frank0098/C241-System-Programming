@@ -7,14 +7,14 @@ int main()
 	while(1)
 	{
 		count++;
-		int *ptr = malloc(sizeof(int));
+		int *ptr = malloc(1000000*sizeof(int));
 			if (ptr == NULL)
 		{
 			printf("Memory failed to allocate!\n");
 			return 1;
 		}
 
-		*ptr = 4;
+		//*ptr = 4;
 		printf("the count is %d,the address is %p\n",count,ptr);
 		free(ptr);
 
