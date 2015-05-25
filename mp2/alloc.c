@@ -64,6 +64,7 @@ void *calloc(size_t num, size_t size)
 void *malloc(size_t size)
 {
 	// return NULL;
+	printf("i am working!\n");
 	return sbrk(size);
 }
 
