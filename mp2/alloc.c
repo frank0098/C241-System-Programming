@@ -83,7 +83,7 @@ size_t round_up(size_t size)
     }
 }
 
-void head;
+void* head;
 
 head = NULL;
 
