@@ -70,7 +70,7 @@ typedef struct dict {
 
 
 
-void round_up(size_t size)
+size_t round_up(size_t size)
 {
     size_t i;
     while(1)
@@ -83,7 +83,7 @@ void round_up(size_t size)
     }
 }
 
-Dict* head;
+void head;
 
 head = NULL;
 
@@ -102,15 +102,16 @@ void *malloc(size_t size)
         void *user_head;
         void *return_head;
         
-        Dict* tmp;
+        Dict* tmp_head;
         heap_end = sbrk(16384);
         heap_end++;
-        head = (Dict*) heap_end;
+        head = heap_end;
         head.size = size;
         head.prev = NULL;
         head.next = NULL;
-        tmp++;
-        user_head = void(*) tmp;
+        tmp_head = (Dict) head;
+        tmp_head++;
+        user_head = (void) tmp;
         return_head = user_head;
         
         size_t i=0;
