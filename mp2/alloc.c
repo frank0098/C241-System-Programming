@@ -95,11 +95,10 @@ void *malloc(size_t size)
     
     malloc_size=round_up(size);		//malloc_size is the multiple of 8
     
-    printf("round_up success! \n");
-    
     
     if(head_pointer == NULL)	//first time call,initialization
     {
+    	printf("over here! \n");
         void *heap_end;
         void *user_head;
         void *return_head;
