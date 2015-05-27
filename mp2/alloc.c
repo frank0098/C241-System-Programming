@@ -115,17 +115,15 @@ void *malloc(size_t size)
         heap_end = heap_end+4;
 
         
-        
         head->size = size;
         head->prev = NULL;
         head->next = NULL;
-
-        
 
         printf("the first address is %p\n",heap_end);
 
         // Keep track of the head
         tmp_head = (Dict*) heap_end;
+        *tmp_head = head;
         head_pointer = tmp_head;
 
 
@@ -147,10 +145,11 @@ void *malloc(size_t size)
             
         }
         printf("over here\n");
+
         //The new head
         Dict next_head;
         next_head->size = 16384 - malloc_size;
-        next_head->prev = head;
+        next_head->prev = head_pointer;
         next_head->next = NULL;
         Dict* tmp_next_head;
         tmp_next_head = (Dict*) user_head;
