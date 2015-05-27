@@ -83,7 +83,7 @@ size_t round_up(size_t size)
     }
 }
 
-Dict *head_pointer;
+Dict *head_pointer = NULL;
 
 
 void *malloc(size_t size)
@@ -95,7 +95,7 @@ void *malloc(size_t size)
     
     
     
-    if(head_pointer != NULL)	//first time call,initialization
+    if(head_pointer == NULL)	//first time call,initialization
     {
         void *heap_end;
         void *user_head;
