@@ -124,6 +124,7 @@ void *malloc(size_t size)
         printf("the first address is %p\n",heap_end);
 
         // Keep track of the head
+        tmp_head = (Dict*) heap_end;
         head_pointer = tmp_head;
 
 
