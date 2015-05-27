@@ -121,7 +121,7 @@ void *malloc(size_t size)
 
         
 
-        printf("the first address is %x\n",heap_end);
+        printf("the first address is %p\n",heap_end);
 
         // Keep track of the head
         head_pointer = tmp_head;
@@ -131,7 +131,7 @@ void *malloc(size_t size)
         tmp_head++;
         user_head = (void*) tmp_head;
         return_head = user_head;
-        printf("the user address is %x\n",return_head);
+        printf("the user address is %p\n",return_head);
         size_t i=0;
         while(1)
         {
