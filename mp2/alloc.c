@@ -354,11 +354,34 @@ void *malloc(size_t size)
 */
 void free(void *ptr)
 {
-    // "If a null pointer is passed as argument, no action occurs."
-    // if (!ptr)
-    // 	return;
+    //"If a null pointer is passed as argument, no action occurs."
+    if (!ptr)
+    	return;
+
+    Dict to_free;
+    Dict *to_free_ptr;
+    to_free_ptr = (Dict*) ptr;
+    to_free = *to_free_ptr;
+
+    Dict* prev_bloc_ptr;
+    Dict* next_bloc_ptr;
+
+    prev_bloc_ptr = to_free->prev;
+    next_bloc_ptr = to_free->next;
+
+    Dict prev_bloc;
+
+    prev_bloc = *prev_bloc_ptr;
+
+    prev_bloc->size = to_free->size + prev_bloc->size + 12;
+    prev_bloc->prev = prev_bloc->prev;
+    prev_bloc->next = next_bloc_ptr;
+
+    *prev_bloc_ptr = prev_bloc;
+
+
     
-    // return;
+    return;
 }
 
 
