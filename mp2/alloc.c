@@ -358,9 +358,11 @@ void free(void *ptr)
     if (!ptr)
     	return;
 
+    void* tmp_ptr;
+    tmp_ptr = tmp_ptr - 12;
     Dict to_free;
     Dict *to_free_ptr;
-    to_free_ptr = (Dict*) ptr;
+    to_free_ptr = (Dict*) tmp_ptr;
     to_free = *to_free_ptr;
 
     Dict* prev_bloc_ptr;
