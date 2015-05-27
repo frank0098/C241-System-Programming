@@ -111,7 +111,7 @@ void *malloc(size_t size)
         if(heap_end == NULL)
         	return NULL;
 
-        heap_end++;
+       // heap_end++;
 
         printf("over here! \n");
         
