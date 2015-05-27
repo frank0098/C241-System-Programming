@@ -164,7 +164,8 @@ void *malloc(size_t size)
         return user_head;
         
     }
-    printf("over here\n",heap_end);
+
+    printf("over here\n");
 
 
 
