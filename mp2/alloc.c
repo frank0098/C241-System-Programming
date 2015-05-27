@@ -88,12 +88,13 @@ Dict *head_pointer = NULL;
 
 void *malloc(size_t size)
 {
+    printf("initialization success \n");
     
     size_t malloc_size;
     
     malloc_size=round_up(size);		//malloc_size is the multiple of 8
     
-    printf("initialization success \n");
+
     
     
     if(head_pointer == NULL)	//first time call,initialization
