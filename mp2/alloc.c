@@ -144,18 +144,15 @@ void *malloc(size_t size)
             }
             
         }
-        printf("over here\n");
-
+        
         //The new head
         Dict next_head;
         next_head->size = 2*malloc_size - malloc_size;
         next_head->prev = *head_pointer;
         next_head->next = NULL;
-        printf("over here\n");
         Dict* tmp_next_head;
         tmp_next_head = (Dict*) user_head;
         *tmp_next_head = next_head;
-        printf("over here\n");
         
 
 
@@ -176,7 +173,6 @@ void *malloc(size_t size)
         
     }
 
-    printf("over here\n");
 
 
 
@@ -196,7 +192,7 @@ void *malloc(size_t size)
 
     	Dict tmp_org_head;
     	tmp_org_head = *org_head;
-
+    	printf("over here\n");
         if(tmp_size >= malloc_size+12)
         {
         	//The fragment is enough to malloc
