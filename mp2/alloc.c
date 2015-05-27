@@ -161,11 +161,7 @@ void *malloc(size_t size)
         *tmp_head = head;
         head_pointer = tmp_head;
 
-        Dict usage;
-        usage = *head_pointer;
-        size_t* tmpptr;
-        tmpptr = (size_t*) head_pointer;
-        printf("the size is %zu\n",*tmpptr);
+        
 
 
 
@@ -174,6 +170,12 @@ void *malloc(size_t size)
         head->next = tmp_next_head;
         tmp_head = (Dict*) heap_end;
         *tmp_head = head; 
+
+        Dict usage;
+        usage = *head_pointer;
+        size_t* tmpptr;
+        tmpptr = (size_t*) head_pointer;
+        printf("the size is %zu\n",*tmpptr);
 
         return user_head;
         
