@@ -164,7 +164,10 @@ void *malloc(size_t size)
         return user_head;
         
     }
-    
+    printf("over here\n",heap_end);
+
+
+
     Dict* org_head;
     org_head = head_pointer;
 
