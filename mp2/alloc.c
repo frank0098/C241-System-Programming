@@ -149,7 +149,7 @@ void *malloc(size_t size)
         //The new head
         Dict next_head;
         next_head->size = 16384 - malloc_size;
-        next_head->prev = head_pointer;
+        next_head->prev = *head_pointer;
         next_head->next = NULL;
         printf("over here\n");
         Dict* tmp_next_head;
