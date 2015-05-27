@@ -114,6 +114,10 @@ void *malloc(size_t size)
 
         heap_end = heap_end+4;
 
+        Dict head;        
+        head->size = size;
+        head->prev = NULL;
+        head->next = NULL;
 		
 
         printf("the first address is %p\n",heap_end);
@@ -164,10 +168,7 @@ void *malloc(size_t size)
 
 
         // Assign the first
-        Dict head;        
-        head->size = size;
-        head->prev = NULL;
-        head->next = NULL;
+        
         head->next = tmp_next_head;
         tmp_head = (Dict*) heap_end;
         *tmp_head = head; 
