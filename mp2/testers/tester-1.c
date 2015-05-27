@@ -4,7 +4,6 @@
 int main()
 {
 
-	printf("Initiliaze...!\n");
 
 	int *ptr = malloc(sizeof(int));
 	
