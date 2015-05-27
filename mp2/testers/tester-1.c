@@ -5,7 +5,7 @@ int main()
 {
 
 	malloc(1);
-	int *ptr = malloc(200000*sizeof(int));
+	int *ptr = malloc(20000*sizeof(int));
 	
 	if (ptr == NULL)
 	{
