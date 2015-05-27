@@ -83,9 +83,8 @@ size_t round_up(size_t size)
     }
 }
 
-void *head;
+Dict *head_pointer;
 
-head = NULL;
 
 void *malloc(size_t size)
 {
@@ -96,22 +95,31 @@ void *malloc(size_t size)
     
     
     
-    if(head == NULL)	//first time call,initialization
+    if(head_pointer != NULL)	//first time call,initialization
     {
         void *heap_end;
         void *user_head;
         void *return_head;
-        
+
+        Dict head;
         Dict* tmp_head;
+
+        
+        head->size = size;
+        head->prev = NULL;
+        head->next = NULL;
+
+
         heap_end = sbrk(16384);
         heap_end++;
-        head = heap_end;
-        head.size = size;
-        head.prev = NULL;
-        head.next = NULL;
-        tmp_head = (Dict) head;
+
+        // Keep track of the head
+        head_pointer = tmp_head;
+
+
+        //Go to the user's first spot
         tmp_head++;
-        user_head = (void) tmp;
+        user_head = (void*) tmp_head;
         return_head = user_head;
         
         size_t i=0;
@@ -127,37 +135,58 @@ void *malloc(size_t size)
             
         }
         
-        Dict* next_head;
-        next_head = (Dict*) user_head;
-        next_head.size = 16384 - malloc_size;
-        next_head.prev = head;
-        next_head.next = NULL;
-        head.next = next_head;
+        //The new head
+        Dict next_head;
+        next_head->size = 16384 - malloc_size;
+        next_head->prev = head;
+        next_head->next = NULL;
+        Dict* tmp_next_head;
+        tmp_next_head = (Dict*) user_head;
+        *tmp_next_head = next_head;
         
+        // Assign the first
+        head->next = tmp_next_head;
+        tmp_head = (Dict*) heap_end;
+        *tmp_head = head; 
+
         return user_head;
         
     }
     
     Dict* org_head;
-    org_head = head;
-    while(org_head != NULL)
+    org_head = head_pointer;
+
+    //Trasverse the linked list 
+    while(1)
     {
-        if(org_head.size >= malloc_size+12)
+    	//why this not working? *org->size
+    	size_t tmp_size;
+    	Dict tmp_dict;
+    	tmp_dict = *org_head;
+    	tmp_size = tmp_dict->size;
+
+    	Dict tmp_org_head;
+    	tmp_org_head = *org_head;
+
+        if(tmp_size >= malloc_size+12)
         {
+        	//The fragment is enough to malloc
+        	//pointer org_head now points to the head of the spot to malloc
+
             Dict* find_user_head;
             void* user_head;
             void* return_head;
             void* find_next_head;
             
             size_t memory_left;
-            memory_left = org_head.size - malloc_size - 12; //Keep track of memory remained
+            memory_left = tmp_size - malloc_size - 12; //Keep track of memory remained
             
             find_user_head = org_head;
             find_user_head++;
             user_head = (void*) find_user_head;
             return_head = user_head;
             
-            if(org_head.size - malloc_size < 32)
+            if(tmp_size - malloc_size < 32)
             {
                 
                 return return_head;
@@ -165,6 +194,8 @@ void *malloc(size_t size)
             else
             {
                 size_t i=0;
+
+                //Find next head
                 while(1)
                 {
                     i=i+4;
@@ -175,27 +206,61 @@ void *malloc(size_t size)
                         break;
                     }
                     
-                    Dict* next_head;
-                    next_head = (Dict*) user_head;
-                    if(org_head.next = NULL)
+                    //Now user head points to the start point of next availabe block
+                    
+
+                    //If current node is the last node in the linked list
+                    if(tmp_dict->next == NULL)
                     {
-                        next_head.size = memory_left;
-                        next_head.prev = org_head;
-                        next_head.next = NULL
-                        org_head.size = malloc_size;
-                        org_head.next =  next_head;
+					
+						Dict next_head;
+                        next_head->size = memory_left;
+                        next_head->prev = org_head;
+                        next_head->next = NULL;
+
+                        Dict* tmp_next_head;
+                    	tmp_next_head = (Dict*) user_head;
+                        *tmp_next_head = next_head;
+
+
+                        tmp_org_head->size = malloc_size;
+                        tmp_org_head->prev = tmp_org_head->prev;
+                        tmp_org_head->next = next_head;
+                        *org_head = tmp_org_head;
+                        
                         
                     }
+                    //if it is not the last node
                     else
                     {
-                        Dict* the_following_head;
-                        the_following_head = org_head.next;
-                        the_following_head.prev = next_head;
-                        next_head.size = memory_left;
-                        next_head.prev = org_head;
-                        next_head.next = org_head.next;
-                        org_head.size = malloc_size;
-                        org_head.next =  next_head;
+                    	Dict next_head;
+                    	Dict following_head;
+
+                    	//Find the node after the new-node
+                    	Dict* following_head_pointer;
+                    	following_head_pointer = tmp_org_head->next;
+                        following_head = *following_head_pointer;
+
+                        //Assign the new_node
+                        next_head->size = memory_left;
+                        next_head->prev = org_head;
+                        next_head->next = following_head_pointer;
+
+                        Dict* tmp_next_head;
+                    	tmp_next_head = (Dict*) user_head;
+                        *tmp_next_head = next_head;
+
+                        //Assign the node after the new_node
+                        following_head->size = following_head->size;
+                        following_head->next = following_head->next;
+                        following_head->prev = tmp_next_head;
+
+                        //Assign the original node
+                        tmp_org_head->size = malloc_size;
+                        tmp_org_head->prev = tmp_org_head->prev;
+                        tmp_org_head->next = next_head;
+                        *org_head = tmp_org_head;
+
                         
                     }
                     
@@ -203,27 +268,26 @@ void *malloc(size_t size)
                 }  
             }  
         }
+        if(tmp_org_head->next == NULL)
+        	break;
 
-        org_head = org_head.next;
+        org_head = tmp_org_head->next;
     }
     //if no proper spots, expand the heap
     //org_head.size < malloc_size+12
 
-    Dict* find_last_head;
-    find_last_head = head;
-    while(find_last_head.next != NULL)	//need improvement?
-    	find_last_head = find_last_head.next;
+   
 
     sbrk(4*malloc_size);
 
     void* user_head;
     void* return_head;
     Dict* tmp_find_last_head;
-    tmp_find_last_head = find_last_head;
+    tmp_find_last_head = org_head;
     tmp_find_last_head++;
-    Dict* user_head;
     user_head = (void*) tmp_find_last_head;
     return_head = user_head;
+    size_t i=0;
     while(1)
         {
             i=i+4;
@@ -236,15 +300,20 @@ void *malloc(size_t size)
             
         }
 
-    Dict* next_head;
-    
-    find_last_head.size = 4*malloc_size + find_last_head.size;
-    find_last_head.next = next_head;
+    Dict* last_head;
+    last_head = (Dict*) user_head;
 
-    next_head = (Dict*) user_head;
-    next_head.size = find_last_head.size - malloc_size;
-    next_head.prev = find_last_head;
-    next_head.next = NULL;
+    Dict tmp_org_head;
+    tmp_org_head = *org_head;
+    tmp_org_head->size = 4*malloc_size + tmp_org_head->size;
+    tmp_org_head->prev = tmp_org_head->prev;
+    tmp_org_head->next = last_head;
+    *org_head = tmp_org_head;
+
+    Dict next_head;
+    next_head->size = tmp_org_head->size - malloc_size;
+    next_head->prev = org_head;
+    next_head->next = NULL;
 
     return return_head;
     
