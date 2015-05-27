@@ -155,6 +155,7 @@ void *malloc(size_t size)
         Dict* tmp_next_head;
         tmp_next_head = (Dict*) user_head;
         *tmp_next_head = next_head;
+        printf("over here\n");
         
         // Assign the first
         head->next = tmp_next_head;
