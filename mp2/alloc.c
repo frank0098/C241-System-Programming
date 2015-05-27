@@ -98,7 +98,7 @@ void *malloc(size_t size)
     
     if(head_pointer == NULL)	//first time call,initialization
     {
-    	
+
         void *heap_end;
         void *user_head;
         void *return_head;
@@ -108,9 +108,10 @@ void *malloc(size_t size)
 
         
         head->size = size;
+        printf("over here! \n");
         head->prev = NULL;
         head->next = NULL;
-        printf("over here! \n");
+
 
         heap_end = sbrk(16384);
 
