@@ -161,6 +161,10 @@ void *malloc(size_t size)
         *tmp_head = head;
         head_pointer = tmp_head;
 
+        Dict usage;
+        usage = *head_pointer;
+        printf("%d",head_pointer->size);
+
 
 
 
