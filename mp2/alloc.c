@@ -165,7 +165,7 @@ void *malloc(size_t size)
         usage = *head_pointer;
         size_t* tmpptr;
         tmpptr = (size_t*) head_pointer;
-        printf("%d",*tmpptr);
+        printf("the size is %zu\n",*tmpptr);
 
 
 
