@@ -63,7 +63,7 @@ void *calloc(size_t num, size_t size)
 */
 
 typedef struct dict {
-    int size;
+    size_t size;
     struct dict *prev;
     struct dict *next;
 } *Dict;
@@ -189,7 +189,7 @@ void *malloc(size_t size)
     	Dict tmp_dict;
     	tmp_dict = *org_head;
     	tmp_size = tmp_dict->size;
-    	
+
     	printf("over here\n");
 
     	Dict tmp_org_head;
