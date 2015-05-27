@@ -171,7 +171,8 @@ void *malloc(size_t size)
         
         head->next = tmp_next_head;
         tmp_head = (Dict*) heap_end;
-        *tmp_head = head; 
+        *tmp_head = head;
+        printf("the address is %p\n",tmp_head);
         printf("the size is %zu\n",head->size);
         Dict usage;
         usage = *head_pointer;
