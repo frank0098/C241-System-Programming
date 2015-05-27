@@ -106,19 +106,22 @@ void *malloc(size_t size)
         Dict head;
         Dict* tmp_head;
 
-        
-        head->size = size;
-        printf("over here! \n");
-        head->prev = NULL;
-        head->next = NULL;
-
-
         heap_end = sbrk(16384);
 
         if(heap_end == NULL)
         	return NULL;
 
         heap_end++;
+
+        printf("over here! \n");
+        
+        head->size = size;
+        
+        head->prev = NULL;
+        head->next = NULL;
+        printf("over here! \n");
+
+        
 
         printf("the first address is %p\n",heap_end);
 
