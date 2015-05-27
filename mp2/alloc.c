@@ -163,7 +163,9 @@ void *malloc(size_t size)
 
         Dict usage;
         usage = *head_pointer;
-        printf("%d",usage->size);
+        size_t* tmpptr;
+        tmpptr = (size_t*) head_pointer;
+        printf("%d",*tmpptr);
 
 
 
