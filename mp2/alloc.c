@@ -188,11 +188,12 @@ void *malloc(size_t size)
     	size_t tmp_size;
     	Dict tmp_dict;
     	tmp_dict = *org_head;
+    	printf("over here\n");
     	tmp_size = tmp_dict->size;
 
     	Dict tmp_org_head;
     	tmp_org_head = *org_head;
-    	printf("over here\n");
+
         if(tmp_size >= malloc_size+12)
         {
         	//The fragment is enough to malloc
