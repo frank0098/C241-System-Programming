@@ -107,7 +107,7 @@ void *malloc(size_t size)
         Dict head;
         Dict* tmp_head;
 
-        heap_end = sbrk(16384);
+        heap_end = sbrk(2*malloc_size);
 
         if(heap_end == NULL)
         	return NULL;
@@ -148,7 +148,7 @@ void *malloc(size_t size)
 
         //The new head
         Dict next_head;
-        next_head->size = 16384 - malloc_size;
+        next_head->size = 2*malloc_size - malloc_size;
         next_head->prev = *head_pointer;
         next_head->next = NULL;
         printf("over here\n");
@@ -157,6 +157,16 @@ void *malloc(size_t size)
         *tmp_next_head = next_head;
         printf("over here\n");
         
+
+
+
+        tmp_head = (Dict*) heap_end;
+        *tmp_head = head;
+        head_pointer = tmp_head;
+
+
+
+
         // Assign the first
         head->next = tmp_next_head;
         tmp_head = (Dict*) heap_end;
