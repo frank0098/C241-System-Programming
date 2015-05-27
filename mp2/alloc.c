@@ -72,7 +72,7 @@ typedef struct dict {
 
 size_t round_up(size_t size)
 {
-    size_t i;
+    size_t i=0;
     while(1)
     {
         if((size+i)%8==0)
@@ -80,6 +80,7 @@ size_t round_up(size_t size)
             return size+i;
             break;
         }
+        i++;
     }
 }
 
