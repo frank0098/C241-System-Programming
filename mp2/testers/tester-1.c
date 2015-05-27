@@ -3,25 +3,16 @@
 
 int main()
 {
-	int count=0;
-	while(1)
+	int *ptr = malloc(sizeof(int));
+	
+	if (ptr == NULL)
 	{
-		count++;
-		int *ptr = malloc(100000000000000*sizeof(int));
-			if (ptr == NULL)
-		{
-			printf("Memory failed to allocate!\n");
-			return 1;
-		}
-
-		//*ptr = 4;
-		printf("the count is %d,the address is %p\n",count,ptr);
-		free(ptr);
-
+		printf("Memory failed to allocate!\n");
+		return 1;
 	}
-	
-	
-	
+
+	*ptr = 4;
+	free(ptr);
 
 	printf("Memory was allocated, used, and freed!\n");	
 	return 0;

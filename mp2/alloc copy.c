@@ -93,7 +93,6 @@ void *malloc(size_t size)
     
     malloc_size=round_up(size);		//malloc_size is the multiple of 8
     
-    printf("initialization success \n");
     
     
     if(head_pointer == NULL)	//first time call,initialization
@@ -112,13 +111,8 @@ void *malloc(size_t size)
 
 
         heap_end = sbrk(16384);
-
-        if(heap_end == NULL)
-        	return NULL;
-
+        
         heap_end++;
-
-        printf("the first address is %p\n",heap_end);
 
         // Keep track of the head
         head_pointer = tmp_head;
@@ -166,7 +160,6 @@ void *malloc(size_t size)
     //Trasverse the linked list 
     while(1)
     {
-    	printf("current address is %p\n",org_head);
     	//why this not working? *org->size
     	size_t tmp_size;
     	Dict tmp_dict;
@@ -285,10 +278,8 @@ void *malloc(size_t size)
     //org_head.size < malloc_size+12
 
    
-    void* new_pointer;
-    new_pointer = sbrk(4*malloc_size);
-    if(new_pointer == NULL)
-    	return NULL;
+
+    sbrk(4*malloc_size);
 
     void* user_head;
     void* return_head;
