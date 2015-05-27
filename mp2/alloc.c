@@ -104,7 +104,7 @@ void *malloc(size_t size)
         void *user_head;
         void *return_head;
 
-        Dict head;
+       
         Dict* tmp_head;
 
         heap_end = sbrk(2*malloc_size);
@@ -114,10 +114,7 @@ void *malloc(size_t size)
 
         heap_end = heap_end+4;
 
-        
-        head->size = size;
-        head->prev = NULL;
-        head->next = NULL;
+		
 
         printf("the first address is %p\n",heap_end);
 
@@ -167,10 +164,14 @@ void *malloc(size_t size)
 
 
         // Assign the first
+        Dict head;        
+        head->size = size;
+        head->prev = NULL;
+        head->next = NULL;
         head->next = tmp_next_head;
         tmp_head = (Dict*) heap_end;
         *tmp_head = head; 
-
+        printf("the size is %zu\n",head->size);
         Dict usage;
         usage = *head_pointer;
         size_t* tmpptr;
