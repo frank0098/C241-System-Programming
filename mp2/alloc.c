@@ -95,7 +95,8 @@ void *malloc(size_t size)
     
     malloc_size=round_up(size);		//malloc_size is the multiple of 8
     
-    
+    printf("the head pointer is %p\n",head_pointer);
+
     if(head_pointer == NULL)	//first time call,initialization
     {
 
@@ -167,6 +168,7 @@ void *malloc(size_t size)
     Dict* org_head;
     org_head = head_pointer;
 
+    printf("the head pointer is is %p\n",head_pointer);
     //Trasverse the linked list 
     while(1)
     {
