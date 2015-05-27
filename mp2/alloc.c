@@ -146,7 +146,7 @@ void *malloc(size_t size)
             }
             
         }
-        
+        printf("over here\n");
         //The new head
         Dict next_head;
         next_head->size = 16384 - malloc_size;
