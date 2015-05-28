@@ -113,9 +113,7 @@ void *malloc(size_t size)
         heap_end = heap_end+4;
         
         dict head;  
-        head.size = size;
-        head.prev = NULL;
-        head.next = NULL;
+        
 		
         // Keep track of the head
         tmp_head = (dict*) heap_end;
@@ -149,35 +147,21 @@ void *malloc(size_t size)
         tmp_next_head = (dict*) user_head;
         *tmp_next_head = next_head;
         
-
-
+        // Assign the first dict
+        head.size = size;
+        head.prev = NULL;
+        head.next = tmp_next_head;
 
         tmp_head = (dict*) heap_end;
         *tmp_head = head;
-        head_pointer = tmp_head;
 
-        
-
-
-
-
-        // Assign the first
-        
-        head.next = &tmp_next_head;
-        tmp_head = (dict*) heap_end;
-        *tmp_head = head;
-        printf("the stack address is %p\n",&head);
-
-
-        printf("the address is %p\n",tmp_head);
-        printf("the size is %zu\n",head.size);
 
         dict usage;
         usage = *head_pointer;
-        size_t* tmpptr;
-        tmpptr = (size_t*) head_pointer;
         printf("the size is %zu\n",usage.size);
 
+        usage = *tmp_next_head;        
+        printf("the size is %zu\n",usage.size);
         return return_head;
         
     }
