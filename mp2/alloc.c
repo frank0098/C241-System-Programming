@@ -122,8 +122,9 @@ void *malloc(size_t size)
 
          
 
-        printf("dumped here!!!\n");      
+           
         head->size = size;
+        printf("dumped here!!!\n");   
         head->prev = NULL;
         head->next = NULL;
 		
