@@ -102,10 +102,10 @@ void *malloc(size_t size)
         sbrk(2*malloc_size);
         if(heap_end == NULL)
         return NULL;
-        printf("heap_end address is %p\n",heap_head);
+        printf("heap_end address is %p\n",heap_end);
         //Find the pointer to the new seg
         heap_end = heap_end+4;
-        printf("heap_end address is %p\n",heap_head);
+        printf("heap_end address is %p\n",heap_end);
         
         //malloc requested malloc_size + header for user
         size_t* tmp_head;
