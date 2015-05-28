@@ -5,6 +5,7 @@ int main()
 {
 
 	malloc(1);
+	printf("this shit\n");
 	int *ptr = malloc(20000*sizeof(int));
 	
 	if (ptr == NULL)
