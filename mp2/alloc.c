@@ -105,7 +105,7 @@ void *malloc(size_t size)
         
         //Find the pointer to the new seg
         heap_end = heap_end+4;
-        printf("segfault here\n");
+        
         //malloc requested malloc_size + header for user
         size_t* tmp_head;
         tmp_head = (size_t*) heap_end;
@@ -125,7 +125,7 @@ void *malloc(size_t size)
         //Then go to next free-block
         void *find_free_head;
         find_free_head = heap_end + malloc_size + 4;
-        
+        printf("segfault here\n");
         //Assign the header of the new free block
         dict header;
         header.size = 2*malloc_size - malloc_size - 4;
