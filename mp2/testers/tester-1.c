@@ -4,7 +4,7 @@
 int main()
 {
 
-	int *ptr = malloc(80000);
+	int *ptr = malloc(8000);
 	
 	if (ptr == NULL)
 	{
