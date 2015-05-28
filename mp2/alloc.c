@@ -111,7 +111,6 @@ void *malloc(size_t size)
         tmp_head = (size_t*) heap_end;
         *tmp_head = malloc_size + 4;
 
-        printf("tmp_head address is %p\n",tmp_head);
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
         
@@ -119,9 +118,8 @@ void *malloc(size_t size)
         void *return_pointer;
         void *go_ptr;
         go_ptr = (void*) tmp_head;
-        go_ptr = go_ptr +4;
+        go_ptr = go_ptr + 4;
         return_pointer = (void*) tmp_head;
-        printf("tmp_head address is %p\n",go_ptr);
 
         //keep track of the head
         head_pointer = heap_end;
@@ -142,7 +140,6 @@ void *malloc(size_t size)
         tmp_head_pointer = (dict*) go_ptr;
 
         *tmp_head_pointer = header;
-        printf("segfault here\n");
         head_pointer = tmp_head_pointer;
         
         return return_pointer;
@@ -167,6 +164,7 @@ void *malloc(size_t size)
         
         if(tmp_size >= malloc_size+4)
         {
+
             //The fragment is enough to malloc
             //pointer current_head now points to the head of the spot to malloc
             
@@ -195,11 +193,12 @@ void *malloc(size_t size)
             
             if(tmp_size - malloc_size < 24)
             {
+            	printf(" not gonna happen\n");
                 return return_pointer;
             }
             else
             {
-                
+                printf(" segf\n");
                 //Find the next free block
                 void* find_next_head;
                 find_next_head = find_user_head;
@@ -212,7 +211,7 @@ void *malloc(size_t size)
                 //If current node is already the last node in the linked list
                 if(tmp_dict.next == NULL)
                 {
-       
+       				printf(" segf\n");
                     //The header of the just-created free-block
                     dict header;
                     header.size = memory_left;
@@ -235,6 +234,7 @@ void *malloc(size_t size)
                 else
                 {
                 	//The header of the just-created free-block
+                	printf(" not gonna happen\n");
                     dict header;
                     header.size = memory_left;
                     header.prev = current_head;
