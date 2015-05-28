@@ -84,13 +84,11 @@ size_t round_up(size_t size)
     }
 }
 
-struct dict *head_pointer = NULL;
+dict *head_pointer = NULL;
 
 
 void *malloc(size_t size)
 {
-    printf("initialization success! \n");
-
     size_t malloc_size;
     
     malloc_size=round_up(size);		//malloc_size is the multiple of 8
@@ -113,18 +111,12 @@ void *malloc(size_t size)
         	return NULL;
 
         heap_end = heap_end+4;
-        struct dict head;  
-
-        printf("the space address is %p\n",&head);
+        
+        dict head;  
         head.size = size;
-        printf("dumped here!!!\n"); 
         head.prev = NULL;
         head.next = NULL;
 		
-
-        
-        printf("the first address is %p\n",heap_end);
-
         // Keep track of the head
         tmp_head = (dict*) heap_end;
         *tmp_head = head;
@@ -135,7 +127,6 @@ void *malloc(size_t size)
         tmp_head++;
         user_head = (void*) tmp_head;
         return_head = user_head;
-        printf("the user address is %p\n",return_head);
         size_t i=0;
         while(1)
         {
@@ -154,9 +145,9 @@ void *malloc(size_t size)
         next_head.size = 2*malloc_size - malloc_size;
         next_head.prev = head_pointer;
         next_head.next = NULL;
-        dict tmp_next_head;
-        //tmp_next_head = (dict*) user_head;
-        //*tmp_next_head = next_head;
+        dict* tmp_next_head;
+        tmp_next_head = (dict*) user_head;
+        *tmp_next_head = next_head;
         
 
 
@@ -187,7 +178,7 @@ void *malloc(size_t size)
         tmpptr = (size_t*) head_pointer;
         printf("the size is %zu\n",usage.size);
 
-        return user_head;
+        return return_head;
         
     }
 
