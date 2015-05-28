@@ -84,220 +84,198 @@ size_t round_up(size_t size)
     }
 }
 
-dict *head_pointer = NULL;
+void *head_pointer = NULL;
 
 
 void *malloc(size_t size)
 {
     size_t malloc_size;
     
-    malloc_size=round_up(size);		//malloc_size is the multiple of 8
+    //malloc_size is the multiple of 8
+    malloc_size=round_up(size);		
     
-
-    if(head_pointer == NULL)	//first time call,initialization
+    //first time call,the head pointer is null
+    if(head_pointer == NULL)	
     {
-
+        //Allocate Enough Space
         void *heap_end;
-        void *user_head;
-        void *return_head;
-
-       
-        dict* tmp_head;
-
         heap_end = sbrk(2*malloc_size);
-
         if(heap_end == NULL)
-        	return NULL;
-
+        return NULL;
+        
+        //Find the pointer to the new seg
         heap_end = heap_end+4;
         
-        dict head;  
+        //malloc requested malloc_size + header for user
+        size_t* tmp_head;
+        tmp_head = (size_t*) heap_end;
+        *tmp_head = malloc_size + 4;
         
-		
-        // Keep track of the head
-        tmp_head = (dict*) heap_end;
-        *tmp_head = head;
-        head_pointer = tmp_head;
-
-
-        //Go to the user's first spot
+        //Mask the last bit to keep track of a "used" seg
+        *tmp_head = *tmp_head | 1;
+        
+        //The returned pointer to user;
+        void *return_pointer;
         tmp_head++;
-        user_head = (void*) tmp_head;
-        return_head = user_head;
-        size_t i=0;
-        while(1)
-        {
-            i=i+4;
-            user_head++;
-            if(i == malloc_size)
-            {
-                user_head++;	//this is the start of the next block
-                break;
-            }
-            
-        }
+        return_pointer = (void*) tmp_head;
         
-        //The new head
-        dict next_head;
-        next_head.size = 2*malloc_size - malloc_size-12;
-        next_head.prev = head_pointer;
-        next_head.next = NULL;
-        dict* tmp_next_head;
-        tmp_next_head = (dict*) user_head;
-        *tmp_next_head = next_head;
+        //keep track of the head
+        head_pointer = heap_end;
         
-        // Assign the first dict
-        head.size = size;
-        head.prev = NULL;
-        head.next = tmp_next_head;
-
-        tmp_head = (dict*) heap_end;
-        *tmp_head = head;
-
-        printf("here here\n");
-        dict usage;
-        usage = *head_pointer;
-        printf("the size is %zu\n",usage.size);
-
-        usage = *tmp_next_head;        
-        printf("the size is %zu\n",usage.size);
-        return return_head;
+        //Then go to next free-block
+        void *find_free_head;
+        find_free_head = heap_end + malloc_size + 4;
+        
+        //Assign the header of the new free block
+        dict header;
+        header.size = 2*malloc_size - malloc_size - 4;
+        header.prev = NULL;
+        header.next = NULL;
+        tmp_head = tmp_head + malloc_size;
+        dict* tmp_head_pointer;
+        tmp_head_pointer = (dict*) tmp_head;
+        *tmp_head_pointer = header;
+        head_pointer = tmp_head_pointer;
+        
+        return return_pointer;
         
     }
-
-
-
-
-    dict* org_head;
-    org_head = head_pointer;
-
+    
+    //if it is not null
+    
+    dict* current_head;
+    current_head = head_pointer;
+    
     //Trasverse the linked list 
     while(1)
     {
-    	printf("current address is %p\n",org_head);
-    	//why this not working? *org->size
-    	size_t tmp_size;
-    	dict tmp_dict;
-    	tmp_dict = *org_head;
-    	tmp_size = tmp_dict.size;
-
-    	dict tmp_org_head;
-    	tmp_org_head = *org_head;
-
-        if(tmp_size >= malloc_size+12)
+        printf("current address is %p\n",current_head);
+        //why this not working? *org->size
+        size_t tmp_size;
+        dict tmp_dict;
+        tmp_dict = *current_head;
+        tmp_size = tmp_dict.size;
+        
+        
+        if(tmp_size >= malloc_size+4)
         {
-        	//The fragment is enough to malloc
-        	//pointer org_head now points to the head of the spot to malloc
+            //The fragment is enough to malloc
+            //pointer current_head now points to the head of the spot to malloc
+            
+            //find out the user_head
+            void* find_user_head;
+            find_user_head = (void*) current_head;
 
-            dict* find_user_head;
-            void* user_head;
-            void* return_head;
-            void* find_next_head;
+            //malloc requested malloc_size + header for user
+        	size_t* tmp_head;
+        	tmp_head = (size_t*) find_user_head;
+        	*tmp_head = malloc_size + 4;
+        
+        	//Mask the last bit to keep track of a "used" seg
+        	*tmp_head = *tmp_head | 1;
+
+            find_user_head = find_user_head + 4;
+            void* return_pointer;
+            return_pointer = find_user_head;
+            
             
             //Keep track of memory remained
             size_t memory_left;
-            memory_left = tmp_size - malloc_size - 12; 
+            memory_left = tmp_size - malloc_size - 4; 
+           
             
-            find_user_head = org_head;
-            find_user_head++;
-            user_head = (void*) find_user_head;
-            return_head = user_head;
             
-            if(tmp_size - malloc_size < 32)
+            if(tmp_size - malloc_size < 24)
             {
-                printf("this not gonna happen\n");
-                return return_head;
+                return return_pointer;
             }
             else
             {
-                size_t i=0;
-
-                //Find next head
-                while(1)
+                
+                //Find the next free block
+                void* find_next_head;
+                find_next_head = find_user_head;
+                find_next_head = find_next_head + malloc_size;
+                
+                //Now find_next_head points to the start point of next availabe block
+                dict* header_pointer;
+                header_pointer = find_next_head;
+                
+                //If current node is already the last node in the linked list
+                if(tmp_dict.next == NULL)
                 {
-                    i=i+4;
-                    user_head++;
-                    if(i == malloc_size)
-                    {
-                        user_head++;	//this is the start of the next block
-                        break;
-                    }
+       
+                    //The header of the just-created free-block
+                    dict header;
+                    header.size = memory_left;
+                    header.prev = current_head;
+                    header.next = NULL;
+                    *header_pointer = header;
+
+                    //The header of the previous free block
+        			dict previous_head;
+        			dict* previous_head_pointer;
+        			previous_head_pointer = tmp_dict.prev;
+        			previous_head = *previous_head_pointer;
+
+                    previous_head.size = previous_head.size;
+                    previous_head.prev = previous_head.prev;
+                    previous_head.next = header_pointer;
+                    *previous_head_pointer = previous_head;
+                }
+                //if it is not the last node
+                else
+                {
+                	//The header of the just-created free-block
+                    dict header;
+                    header.size = memory_left;
+                    header.prev = current_head;
+                    header.next = tmp_dict.next;
+                    *header_pointer = header;
+
+                    //The header of the previous free block
+        			dict previous_head;
+        			dict* previous_head_pointer;
+        			previous_head_pointer = tmp_dict.prev;
+        			previous_head = *previous_head_pointer;
+
+                    previous_head.size = previous_head.size;
+                    previous_head.prev = previous_head.prev;
+                    previous_head.next = header_pointer;
+                    *previous_head_pointer = previous_head;
+
+                    //The header of the next free block
+                    dict next_head;
+        			dict *next_head_pointer;
+        			next_head_pointer = tmp_dict.next;
+        			next_head = *next_head_pointer;
+
+                    next_head.size = next_head.size;
+                    next_head.prev = header_pointer;
+                    next_head.next = next_head.next;
+                    *next_head_pointer = next_head;
+
                     
-                    //Now user head points to the start point of next availabe block
                     
-
-                    //If current node is the last node in the linked list
-                    if(tmp_dict.next == NULL)
-                    {
-					
-						dict next_head;
-                        next_head.size = memory_left;
-                        next_head.prev = org_head;
-                        next_head.next = NULL;
-
-                        dict* tmp_next_head;
-                    	tmp_next_head = (dict*) user_head;
-                        *tmp_next_head = next_head;
-
-
-                        tmp_org_head.size = malloc_size;
-                        tmp_org_head.prev = tmp_org_head.prev;
-                        tmp_org_head.next = tmp_next_head;
-                        *org_head = tmp_org_head;
-                        
-                        
-                    }
-                    //if it is not the last node
-                    else
-                    {
-                    	
-                printf("this not gonna happen\n");
-                    	dict next_head;
-                    	dict following_head;
-
-                    	//Find the node after the new-node
-                    	dict* following_head_pointer;
-                    	following_head_pointer = tmp_org_head.next;
-                        following_head = *following_head_pointer;
-
-                        //Assign the new_node
-                        next_head.size = memory_left;
-                        next_head.prev = org_head;
-                        next_head.next = following_head_pointer;
-
-                        dict* tmp_next_head;
-                    	tmp_next_head = (dict*) user_head;
-                        *tmp_next_head = next_head;
-
-                        //Assign the node after the new_node
-                        following_head.size = following_head.size;
-                        following_head.next = following_head.next;
-                        following_head.prev = tmp_next_head;
-
-                        //Assign the original node
-                        tmp_org_head.size = malloc_size;
-                        tmp_org_head.prev = tmp_org_head.prev;
-                        tmp_org_head.next = tmp_next_head;
-                        *org_head = tmp_org_head;
-
-                        
-                    }
-                    
-                    return return_head; 
-                }  
+                }
+                
+                return return_pointer;
             }  
-        }
-        if(tmp_org_head.next == NULL)
-        	break;
+        }  
 
-        org_head = tmp_org_head.next;
+        if(current_head->next == NULL)
+    		break;
+    
+    	current_head = current_head->next;
     }
-
-
-    
-    
     
 }
+
+
+
+
+
+
 
 
 /**
@@ -320,32 +298,32 @@ void free(void *ptr)
 {
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
-    	return;
-
+    return;
+    
     void* tmp_ptr;
     tmp_ptr = tmp_ptr - 12;
     dict to_free;
     dict *to_free_ptr;
     to_free_ptr = (dict*) tmp_ptr;
     to_free = *to_free_ptr;
-
+    
     dict* prev_bloc_ptr;
     dict* next_bloc_ptr;
-
+    
     prev_bloc_ptr = to_free.prev;
     next_bloc_ptr = to_free.next;
-
+    
     dict prev_bloc;
-
+    
     prev_bloc = *prev_bloc_ptr;
-
+    
     prev_bloc.size = to_free.size + prev_bloc.size + 12;
     prev_bloc.prev = prev_bloc.prev;
     prev_bloc.next = next_bloc_ptr;
-
+    
     *prev_bloc_ptr = prev_bloc;
-
-
+    
+    
     
     return;
 }
