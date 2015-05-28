@@ -100,12 +100,11 @@ void *malloc(size_t size)
         void *heap_end;
         heap_end = sbrk(0);
         sbrk(2*malloc_size);
+
         if(heap_end == NULL)
         return NULL;
-        printf("heap_end address is %p\n",heap_end);
         //Find the pointer to the new seg
         heap_end = heap_end+4;
-        printf("heap_end address is %p\n",heap_end);
         
         //malloc requested malloc_size + header for user
         size_t* tmp_head;
@@ -118,9 +117,11 @@ void *malloc(size_t size)
         
         //The returned pointer to user;
         void *return_pointer;
-        tmp_head = tmp_head + 4;
+        void *go_ptr;
+        go_ptr = (void*) tmp_head;
+        go_ptr = go_ptr +4;
         return_pointer = (void*) tmp_head;
-        printf("tmp_head address is %p\n",tmp_head);
+        printf("tmp_head address is %p\n",go_ptr);
 
         //keep track of the head
         head_pointer = heap_end;
@@ -134,13 +135,11 @@ void *malloc(size_t size)
         header.size = 2*malloc_size - malloc_size - 4;
         header.prev = NULL;
         header.next = NULL;
-        printf("tmp_head address is %p\n",tmp_head);
 
         tmp_head = tmp_head + malloc_size;
         printf("malloc size is %zu\n",malloc_size);
-        printf("tmp_head address is %p\n",tmp_head);
         dict* tmp_head_pointer;
-        tmp_head_pointer = (dict*) tmp_head;
+        tmp_head_pointer = (dict*) go_ptr;
 
         *tmp_head_pointer = header;
         printf("segfault here\n");
