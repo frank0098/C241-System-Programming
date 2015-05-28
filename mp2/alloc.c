@@ -90,7 +90,6 @@ void *head_pointer = NULL;
 void *malloc(size_t size)
 {
     size_t malloc_size;
-    printf("%zu\n", size);
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);		
     

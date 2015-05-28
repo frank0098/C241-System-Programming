@@ -4,8 +4,7 @@
 int main()
 {
 
-	printf("this shit\n");
-	int *ptr = malloc(20000*sizeof(int));
+	int *ptr = malloc(80);
 	
 	if (ptr == NULL)
 	{
