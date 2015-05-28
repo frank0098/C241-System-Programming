@@ -131,10 +131,12 @@ void *malloc(size_t size)
         header.size = 2*malloc_size - malloc_size - 4;
         header.prev = NULL;
         header.next = NULL;
+        printf("tmp_head address is %p\n",tmp_head);
         tmp_head = tmp_head + malloc_size;
+        printf("tmp_head address is %p\n",tmp_head);
         dict* tmp_head_pointer;
         tmp_head_pointer = (dict*) tmp_head;
-        printf("tmp_head address is %p\n",tmp_head);
+
         *tmp_head_pointer = header;
         printf("segfault here\n");
         head_pointer = tmp_head_pointer;
