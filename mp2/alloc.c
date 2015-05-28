@@ -84,7 +84,7 @@ size_t round_up(size_t size)
     }
 }
 
-Dict *head_pointer = NULL;
+struct dict *head_pointer = NULL;
 
 
 void *malloc(size_t size)
@@ -152,7 +152,7 @@ void *malloc(size_t size)
         //The new head
         Dict next_head;
         next_head->size = 2*malloc_size - malloc_size;
-        next_head->prev = *head_pointer;
+        next_head->prev = head_pointer;
         next_head->next = NULL;
         Dict* tmp_next_head;
         tmp_next_head = (Dict*) user_head;
@@ -180,7 +180,8 @@ void *malloc(size_t size)
 
         printf("the address is %p\n",tmp_head);
         printf("the size is %zu\n",head.size);
-        Dict usage;
+
+        struct dict usage;
         usage = *head_pointer;
         size_t* tmpptr;
         tmpptr = (size_t*) head_pointer;
