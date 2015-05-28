@@ -112,10 +112,11 @@ void *malloc(size_t size)
 
         printf("tmp_head address is %p\n",tmp_head);
         //Mask the last bit to keep track of a "used" seg
-        //*tmp_head = *tmp_head | 1;
+        *tmp_head = *tmp_head | 1;
         
         //The returned pointer to user;
         void *return_pointer;
+        printf("tmp_head address is %p\n",tmp_head);
         tmp_head++;
         return_pointer = (void*) tmp_head;
         printf("tmp_head address is %p\n",tmp_head);
