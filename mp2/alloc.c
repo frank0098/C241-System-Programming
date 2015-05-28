@@ -140,7 +140,7 @@ void *malloc(size_t size)
         
         //The new head
         dict next_head;
-        next_head.size = 2*malloc_size - malloc_size;
+        next_head.size = 2*malloc_size - malloc_size-12;
         next_head.prev = head_pointer;
         next_head.next = NULL;
         dict* tmp_next_head;
