@@ -98,12 +98,14 @@ void *malloc(size_t size)
     {
         //Allocate Enough Space
         void *heap_end;
-        heap_end = sbrk(2*malloc_size);
+        heap_end = sbrk(0);
+        sbrk(2*malloc_size);
         if(heap_end == NULL)
         return NULL;
-        
+        printf("heap_end address is %p\n",heap_head);
         //Find the pointer to the new seg
         heap_end = heap_end+4;
+        printf("heap_end address is %p\n",heap_head);
         
         //malloc requested malloc_size + header for user
         size_t* tmp_head;
@@ -116,7 +118,6 @@ void *malloc(size_t size)
         
         //The returned pointer to user;
         void *return_pointer;
-        printf("tmp_head address is %p\n",tmp_head);
         tmp_head++;
         return_pointer = (void*) tmp_head;
         printf("tmp_head address is %p\n",tmp_head);
