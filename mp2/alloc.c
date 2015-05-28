@@ -115,7 +115,7 @@ void *malloc(size_t size)
         heap_end = heap_end+4;
         Dict head;  
 
-             
+        printf("the space address is %p\n",&head);
         head->size = size;
         printf("dumped here!!!\n"); 
         head->prev = NULL;
