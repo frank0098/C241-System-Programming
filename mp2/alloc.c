@@ -155,7 +155,7 @@ void *malloc(size_t size)
         tmp_head = (dict*) heap_end;
         *tmp_head = head;
 
-
+        printf("here here\n");
         dict usage;
         usage = *head_pointer;
         printf("the size is %zu\n",usage.size);
