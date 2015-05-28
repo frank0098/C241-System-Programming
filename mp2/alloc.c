@@ -132,7 +132,9 @@ void *malloc(size_t size)
         header.prev = NULL;
         header.next = NULL;
         printf("tmp_head address is %p\n",tmp_head);
+
         tmp_head = tmp_head + malloc_size;
+        printf("malloc size is %zu\n",malloc_size);
         printf("tmp_head address is %p\n",tmp_head);
         dict* tmp_head_pointer;
         tmp_head_pointer = (dict*) tmp_head;
