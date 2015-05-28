@@ -110,7 +110,7 @@ void *malloc(size_t size)
         size_t* tmp_head;
         tmp_head = (size_t*) heap_end;
         *tmp_head = malloc_size + 4;
-        
+        printf("tmp_head address is %p\n",tmp_head);
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
         
@@ -118,7 +118,7 @@ void *malloc(size_t size)
         void *return_pointer;
         tmp_head++;
         return_pointer = (void*) tmp_head;
-        
+        printf("tmp_head address is %p\n",tmp_head);
         //keep track of the head
         head_pointer = heap_end;
         
@@ -134,7 +134,7 @@ void *malloc(size_t size)
         tmp_head = tmp_head + malloc_size;
         dict* tmp_head_pointer;
         tmp_head_pointer = (dict*) tmp_head;
-        printf("segfault here\n");
+        printf("tmp_head address is %p\n",tmp_head);
         *tmp_head_pointer = header;
         printf("segfault here\n");
         head_pointer = tmp_head_pointer;
