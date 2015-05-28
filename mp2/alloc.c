@@ -183,8 +183,6 @@ void *malloc(size_t size)
     	tmp_dict = *org_head;
     	tmp_size = tmp_dict.size;
 
-    	printf("over here\n");
-
     	dict tmp_org_head;
     	tmp_org_head = *org_head;
 
@@ -198,8 +196,9 @@ void *malloc(size_t size)
             void* return_head;
             void* find_next_head;
             
+            //Keep track of memory remained
             size_t memory_left;
-            memory_left = tmp_size - malloc_size - 12; //Keep track of memory remained
+            memory_left = tmp_size - malloc_size - 12; 
             
             find_user_head = org_head;
             find_user_head++;
@@ -208,7 +207,7 @@ void *malloc(size_t size)
             
             if(tmp_size - malloc_size < 32)
             {
-                
+                printf("this not gonna happen\n");
                 return return_head;
             }
             else
