@@ -113,7 +113,15 @@ void *malloc(size_t size)
         	return NULL;
 
         heap_end = heap_end+4;
-        Dict head;  
+
+        // Keep track of the head
+        tmp_head = (Dict*) heap_end;
+        Dict head; 
+        *tmp_head = head;
+        head_pointer = tmp_head;
+
+         
+
         printf("dumped here!!!\n");      
         head->size = size;
         head->prev = NULL;
@@ -123,11 +131,7 @@ void *malloc(size_t size)
         
         printf("the first address is %p\n",heap_end);
 
-        // Keep track of the head
-        tmp_head = (Dict*) heap_end;
-        *tmp_head = head;
-        head_pointer = tmp_head;
-
+        
 
         //Go to the user's first spot
         tmp_head++;
