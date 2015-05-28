@@ -132,10 +132,11 @@ void *malloc(size_t size)
         header.prev = NULL;
         header.next = NULL;
         tmp_head = tmp_head + malloc_size;
-        printf("segfault here\n");
         dict* tmp_head_pointer;
         tmp_head_pointer = (dict*) tmp_head;
+        printf("segfault here\n");
         *tmp_head_pointer = header;
+        printf("segfault here\n");
         head_pointer = tmp_head_pointer;
         
         return return_pointer;
