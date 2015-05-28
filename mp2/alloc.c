@@ -198,7 +198,6 @@ void *malloc(size_t size)
             }
             else
             {
-                printf(" segf\n");
                 //Find the next free block
                 void* find_next_head;
                 find_next_head = find_user_head;
@@ -211,14 +210,14 @@ void *malloc(size_t size)
                 //If current node is already the last node in the linked list
                 if(tmp_dict.next == NULL)
                 {
-       				printf(" segf\n");
+       				
                     //The header of the just-created free-block
                     dict header;
                     header.size = memory_left;
                     header.prev = current_head;
                     header.next = NULL;
                     *header_pointer = header;
-
+                    printf(" segf\n");
                     //The header of the previous free block
         			dict previous_head;
         			dict* previous_head_pointer;
