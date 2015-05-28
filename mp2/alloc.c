@@ -121,13 +121,13 @@ void *malloc(size_t size)
         head_pointer = tmp_head;
 
          
-   
+
+        printf("dumped here!!!\n");      
         head->size = size;
         head->prev = NULL;
         head->next = NULL;
 		
-        
-        printf("dumped here!!!\n");   
+
         
         printf("the first address is %p\n",heap_end);
 
