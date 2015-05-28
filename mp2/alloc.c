@@ -113,13 +113,13 @@ void *malloc(size_t size)
         	return NULL;
 
         heap_end = heap_end+4;
-        printf("dumped here!!!\n");
         Dict head;        
         head->size = size;
         head->prev = NULL;
         head->next = NULL;
 		
-
+        
+        printf("dumped here!!!\n");
         printf("the first address is %p\n",heap_end);
 
         // Keep track of the head
