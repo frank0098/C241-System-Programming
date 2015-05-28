@@ -113,13 +113,13 @@ void *malloc(size_t size)
         	return NULL;
 
         heap_end = heap_end+4;
-        Dict head;  
+        struct dict head;  
 
         printf("the space address is %p\n",&head);
-        head->size = size;
+        head.size = size;
         printf("dumped here!!!\n"); 
-        head->prev = NULL;
-        head->next = NULL;
+        head.prev = NULL;
+        head.next = NULL;
 		
 
         
@@ -127,7 +127,7 @@ void *malloc(size_t size)
 
         // Keep track of the head
         tmp_head = (Dict*) heap_end;
-        *tmp_head = head;
+        *tmp_head = &head;
         head_pointer = tmp_head;
 
 
@@ -162,7 +162,7 @@ void *malloc(size_t size)
 
 
         tmp_head = (Dict*) heap_end;
-        *tmp_head = head;
+        *tmp_head = &head;
         head_pointer = tmp_head;
 
         
@@ -172,14 +172,14 @@ void *malloc(size_t size)
 
         // Assign the first
         
-        head->next = tmp_next_head;
+        head.next = tmp_next_head;
         tmp_head = (Dict*) heap_end;
-        *tmp_head = head;
+        *tmp_head = &head;
         printf("the stack address is %p\n",&head);
 
 
         printf("the address is %p\n",tmp_head);
-        printf("the size is %zu\n",head->size);
+        printf("the size is %zu\n",head.size);
         Dict usage;
         usage = *head_pointer;
         size_t* tmpptr;
