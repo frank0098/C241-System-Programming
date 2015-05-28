@@ -63,7 +63,7 @@ void *calloc(size_t num, size_t size)
 */
 
 typedef struct dict {
-    int size;
+    size_t size;
     struct dict *prev;
     struct dict *next;
 } *Dict;
@@ -72,7 +72,7 @@ typedef struct dict {
 
 size_t round_up(size_t size)
 {
-    size_t i;
+    size_t i=0;
     while(1)
     {
         if((size+i)%8==0)
@@ -80,41 +80,54 @@ size_t round_up(size_t size)
             return size+i;
             break;
         }
+        i++;
     }
 }
 
-Dict *head_pointer = NULL;
+struct dict *head_pointer = NULL;
 
 
 void *malloc(size_t size)
 {
-    
+    printf("initialization success! \n");
+
     size_t malloc_size;
     
     malloc_size=round_up(size);		//malloc_size is the multiple of 8
     
-    
-    
+    printf("the head pointer is %p\n",head_pointer);
+
     if(head_pointer == NULL)	//first time call,initialization
     {
+
         void *heap_end;
         void *user_head;
         void *return_head;
 
-        Dict head;
+       
         Dict* tmp_head;
 
-        
-        head->size = size;
-        head->prev = NULL;
-        head->next = NULL;
+        heap_end = sbrk(2*malloc_size);
 
+        if(heap_end == NULL)
+        	return NULL;
 
-        heap_end = sbrk(16384);
+        heap_end = heap_end+4;
+        struct dict head;  
+
+        printf("the space address is %p\n",&head);
+        head.size = size;
+        printf("dumped here!!!\n"); 
+        head.prev = NULL;
+        head.next = NULL;
+		
+
         
-        heap_end++;
+        printf("the first address is %p\n",heap_end);
 
         // Keep track of the head
+        tmp_head = (Dict*) heap_end;
+        *tmp_head = &head;
         head_pointer = tmp_head;
 
 
@@ -122,7 +135,7 @@ void *malloc(size_t size)
         tmp_head++;
         user_head = (void*) tmp_head;
         return_head = user_head;
-        
+        printf("the user address is %p\n",return_head);
         size_t i=0;
         while(1)
         {
@@ -138,33 +151,64 @@ void *malloc(size_t size)
         
         //The new head
         Dict next_head;
-        next_head->size = 16384 - malloc_size;
-        next_head->prev = head;
+        next_head->size = 2*malloc_size - malloc_size;
+        next_head->prev = head_pointer;
         next_head->next = NULL;
         Dict* tmp_next_head;
         tmp_next_head = (Dict*) user_head;
         *tmp_next_head = next_head;
         
-        // Assign the first
-        head->next = tmp_next_head;
+
+
+
         tmp_head = (Dict*) heap_end;
-        *tmp_head = head; 
+        *tmp_head = &head;
+        head_pointer = tmp_head;
+
+        
+
+
+
+
+        // Assign the first
+        
+        head.next = tmp_next_head;
+        tmp_head = (Dict*) heap_end;
+        *tmp_head = &head;
+        printf("the stack address is %p\n",&head);
+
+
+        printf("the address is %p\n",tmp_head);
+        printf("the size is %zu\n",head.size);
+
+        struct dict usage;
+        usage = *head_pointer;
+        size_t* tmpptr;
+        tmpptr = (size_t*) head_pointer;
+        printf("the size is %zu\n",(*usage).size);
 
         return user_head;
         
     }
-    
+
+
+
+
     Dict* org_head;
     org_head = head_pointer;
 
+    printf("the head pointer is is %p\n",head_pointer);
     //Trasverse the linked list 
     while(1)
     {
+    	printf("current address is %p\n",org_head);
     	//why this not working? *org->size
     	size_t tmp_size;
     	Dict tmp_dict;
     	tmp_dict = *org_head;
     	tmp_size = tmp_dict->size;
+
+    	printf("over here\n");
 
     	Dict tmp_org_head;
     	tmp_org_head = *org_head;
@@ -278,8 +322,10 @@ void *malloc(size_t size)
     //org_head.size < malloc_size+12
 
    
-
-    sbrk(4*malloc_size);
+    void* new_pointer;
+    new_pointer = sbrk(4*malloc_size);
+    if(new_pointer == NULL)
+    	return NULL;
 
     void* user_head;
     void* return_head;
@@ -341,11 +387,36 @@ void *malloc(size_t size)
 */
 void free(void *ptr)
 {
-    // "If a null pointer is passed as argument, no action occurs."
-    // if (!ptr)
-    // 	return;
+    //"If a null pointer is passed as argument, no action occurs."
+    if (!ptr)
+    	return;
+
+    void* tmp_ptr;
+    tmp_ptr = tmp_ptr - 12;
+    Dict to_free;
+    Dict *to_free_ptr;
+    to_free_ptr = (Dict*) tmp_ptr;
+    to_free = *to_free_ptr;
+
+    Dict* prev_bloc_ptr;
+    Dict* next_bloc_ptr;
+
+    prev_bloc_ptr = to_free->prev;
+    next_bloc_ptr = to_free->next;
+
+    Dict prev_bloc;
+
+    prev_bloc = *prev_bloc_ptr;
+
+    prev_bloc->size = to_free->size + prev_bloc->size + 12;
+    prev_bloc->prev = prev_bloc->prev;
+    prev_bloc->next = next_bloc_ptr;
+
+    *prev_bloc_ptr = prev_bloc;
+
+
     
-    // return;
+    return;
 }
 
 
