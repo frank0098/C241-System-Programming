@@ -394,7 +394,7 @@ void free(void *ptr)
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
-        tmp_current_size = *next_ptr ;
+        tmp_current_size = *next_ptr & ~1;
         printf("tmp_current_size is %zu\n",tmp_current_size );
         
         if(*next_ptr & 0)
