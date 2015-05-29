@@ -5,7 +5,7 @@
 
 int main()
 {
-	//malloc(1);
+	malloc(1);
 
 	int i;
 	int **arr = malloc(TOTAL_ALLOCS * sizeof(int *));
