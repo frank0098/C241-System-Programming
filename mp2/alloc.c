@@ -362,123 +362,82 @@ void free(void *ptr)
     if (!ptr)
     return;
     
-    
+    //Unmask the current pointer;
+	size_t current_size;
+	size_t *curr;
+	curr = (size_t*) curr;
+	*curr = *curr & ~1;
+	current_size = *curr;
     
     //Find next free block
     void* find_next;
     find_next = ptr;
-    int next_flag = 0;
-    // while(1)
-    // {
-    //     size_t tmp_find_next;
-    //     tmp_find_next = (size_t*) find_next & ~1;
+    while(1)
+    {
+        size_t tmp_current_size;
+        size_t* next_ptr;
+        next_ptr = (size_t*) find_next;
+        tmp_current_size = *next_ptr & ~1;
         
-    //     if(find_next == tail_pointer)
-    //     {
-    //         next_flag = 1;
-    //         break;
-    //     }
-        
-    //     if(*find_next & 0)
-    //     {
-    //         next_flag = 2;
-    //         break;
-    //     }
-    //     find_next = find_next + tmp_find_next + 4;
-    // }
-    
-    // //if there is no free block after
-    // if(next_flag == 1)
-    // {
-    //     void* find_prev;
-    //     find_prev = head_pointer;
-        
-        
-    // }
-    // else if(next_flag == 2)
-    // {
-    //     dict found_next_head;
-    //     found_next_head = (dict*) find_next;
-        
-    //     dict* prev_ptr;
-        
-    //     dict found_previous_head;
-    // }
-    
-    
-    
-    // //find previous free block
-    // void* find_prev;
-    // find_prev = ptr;
-    // int prev_flag = 0;
-    // while(1)
-    // {
-    //     if(find_prev == head_pointer)
-    //     {
-    //         prev_flag = 1;
-    //         *find_prev = *find_prev & ~1;
-    //         break;
-    //     }
-        
-    //     if(*find_prev & 0)
-    //     {
-    //         prev_flag = 2;
-    //         break;
-    //     }
-    //     find_prev--;
-    // }
-    // //if no free block in front
-    // if(prev_flag ==1 && next_flag ==1)
-    // {
-    //     dict new_header;
-    //     new_header.size = *find_prev + 4;
-    //     new_header.prev = NULL;
-    //     new_header.next =
-        
-    // }
-    // else if(prev_flag ==1 && next_flag ==2)
-    // {
-        
-    // }
-    // else if(prev_flag ==2 && next_flag ==1)
-    // {
-        
-    // }
-    // else if(prev_flag ==2 && next_flag ==2)
-    // {
-        
-    // }
-    
-    
-    
-    
-    
-    // void* tmp_ptr;
-    // tmp_ptr = tmp_ptr - 12;
-    // dict to_free;
-    // dict *to_free_ptr;
-    // to_free_ptr = (dict*) tmp_ptr;
-    // to_free = *to_free_ptr;
-    
-    // dict* prev_bloc_ptr;
-    // dict* next_bloc_ptr;
-    
-    // prev_bloc_ptr = to_free.prev;
-    // next_bloc_ptr = to_free.next;
-    
-    // dict prev_bloc;
-    
-    // prev_bloc = *prev_bloc_ptr;
-    
-    // prev_bloc.size = to_free.size + prev_bloc.size + 12;
-    // prev_bloc.prev = prev_bloc.prev;
-    // prev_bloc.next = next_bloc_ptr;
-    
-    // *prev_bloc_ptr = prev_bloc;
-    
-    
-    
-    return;
+        if(tmp_current_size & 0)
+        {
+        	printf("next spot found! \n");
+            break;
+        }
+        find_next = find_next + tmp_current_size + 4;
+    }
+
+    //next free head
+    dict next_head;
+    dict* next_head_pointer;
+    next_head_pointer = (dict*) find_next;
+    next_head = *next_head_pointer;
+
+
+    //current head
+    dict current_head;
+    dict* current_head_ptr;
+    current_head_ptr = (dict*) ptr;
+    current_head.size = current_size + 4;
+    current_head.prev = next_head.prev;
+    current_head.next = (dict*) find_next;
+
+    //coalescene possible
+    if(find_next - ptr - 4 == current_size)
+    	{
+    		current_head.size = current_size + 4 +next_head.size;
+    		current_head.next = next_head.next;
+    	}
+    *current_head_ptr = current_head;
+
+    //prev head
+    void* find_prev;
+    find_prev = next_head.prev;
+
+    dict prev_head;
+    dict* prev_head_ptr;
+    prev_head_ptr = find_prev;
+    if(find_prev != NULL)
+    {
+    	prev_head = *prev_head_ptr;
+    	prev_head.size = prev_head.size;
+    	prev_head.prev = prev_head.prev;
+    	prev_head.next = (dict*) ptr;
+
+    	//coalescene
+    	if(find_prev + prev_head.size == ptr)
+    	{
+    		prev_head.size = prev_head.size + current_head.size;
+    		prev_head.next = current_head.next;
+    	}
+    	*prev_head_ptr = prev_head;
+    }
+    else
+    {
+    	head_pointer = (dict*) ptr;
+    }
+
+
 }
 
 
