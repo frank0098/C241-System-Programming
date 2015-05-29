@@ -85,6 +85,7 @@ size_t round_up(size_t size)
 }
 
 void *head_pointer = NULL;
+void *tail_pointer = NULL;
 
 
 void *malloc(size_t size)
@@ -102,6 +103,7 @@ void *malloc(size_t size)
         void *heap_end;
         heap_end = sbrk(0);
         sbrk(2*malloc_size);
+        tail_pointer = sbrk(0);
         
         if(heap_end == NULL)
         return NULL;
@@ -159,7 +161,7 @@ void *malloc(size_t size)
         tmp_size = tmp_dict.size;
         
         
-        if(tmp_size >= malloc_size + 24)
+        if(tmp_size >= malloc_size + 4)
         {
             
             //The fragment is enough to malloc
@@ -192,7 +194,53 @@ void *malloc(size_t size)
             {
                 
                 printf(" not gonna happen not enough space to \n");
+                if(tmp_dict.next!=NULL)
                 return return_pointer;
+                else
+                {
+                    //Allocate New memory
+                    size_t new_allocated_memory;
+                    new_allocated_memory = 512 * size;
+                    sbrk(new_allocated_memory);
+                    tail_pointer = sbrk(0);
+                    
+                    //find out the next head
+                    void* find_next_head;
+                    find_next_head = find_user_head;
+                    find_next_head = find_next_head + malloc_size;
+                    
+                    //Now find_next_head points to the start point of next availabe block
+                    dict* header_pointer;
+                    header_pointer = find_next_head;
+                    
+                    //The header of the just-created free-block
+                    dict header;
+                    header.size = tmp_dict.size + new_allocated_memory - malloc_size - 4;
+                    header.prev = tmp_dict.prev; //question?
+                    header.next = NULL;
+                    *header_pointer = header;
+                    
+                    
+                    //The header of the previous free block
+                    dict previous_head;
+                    dict* previous_head_pointer;
+                    previous_head_pointer = tmp_dict.prev;
+                    if(previous_head_pointer != NULL)
+                    {
+                        previous_head = *previous_head_pointer;
+                        previous_head.size = previous_head.size;
+                        previous_head.prev = previous_head.prev;
+                        previous_head.next = header_pointer;
+                        *previous_head_pointer = previous_head;
+                    }
+                    else
+                    {
+                        head_pointer = find_next_head;
+                    }
+                    return return_pointer;
+                    
+                    
+                }
             }
             else
             {
@@ -280,68 +328,7 @@ void *malloc(size_t size)
         current_head = current_head->next;
     }
     
-    //Allocate New memory
-    size_t new_allocated_memory;
-    new_allocated_memory = 512 * size;
-    sbrk(new_allocated_memory);
-    
-    //The structure of current header
-    dict tmp_dict;
-    tmp_dict = *current_head;
-    
-    //find out the user_head
-    void* find_user_head;
-    find_user_head = (void*) current_head;
-    
-    //malloc requested malloc_size + header for user
-    size_t* tmp_head;
-    tmp_head = (size_t*) find_user_head;
-    *tmp_head = malloc_size + 4;
-    
-    //Mask the last bit to keep track of a "used" seg
-    *tmp_head = *tmp_head | 1;
-    
-    //find out the return pointer
-    find_user_head = find_user_head + 4;
-    void* return_pointer;
-    return_pointer = find_user_head;
-    
-    //find out the next head
-    void* find_next_head;
-    find_next_head = find_user_head;
-    find_next_head = find_next_head + malloc_size;
-    
-    //Now find_next_head points to the start point of next availabe block
-    dict* header_pointer;
-    header_pointer = find_next_head;
-    
-    //The header of the just-created free-block
-    dict header;
-    header.size = tmp_dict.size + new_allocated_memory - malloc_size - 4;
-    header.prev = tmp_dict.prev; //question?
-    header.next = NULL;
-    *header_pointer = header;
-    
-    
-    //The header of the previous free block
-    dict previous_head;
-    dict* previous_head_pointer;
-    previous_head_pointer = tmp_dict.prev;
-    if(previous_head_pointer != NULL)
-    {
-        previous_head = *previous_head_pointer;
-        previous_head.size = previous_head.size;
-        previous_head.prev = previous_head.prev;
-        previous_head.next = header_pointer;
-        *previous_head_pointer = previous_head;
-    }
-    else
-    {
-        head_pointer = find_next_head;
-    }
-    
-    
-    return return_pointer;
+    return NULL;
     
     
 }
@@ -375,72 +362,97 @@ void free(void *ptr)
     if (!ptr)
     return;
     
-    //find previous free block
-    void* find_prev;
-    find_prev = *ptr;
-    int flag = 0;
-    while(1)
-    	{
-    		if(find_prev == head_pointer)
-    			{
-    				flag = 1;
-    				*find_prev = *find_prev & ~1;
-    				break;
-    			}
-
-    		if(*find_prev & 0)
-    		{
-    			flag = 2;
-    			break;
-    		}
-    		find_prev--;
-    	}
-
-    if(flag==1)
-    {
-    	dict new_header;
-
-    }
-    else if(flag ==2)
-    {
-
-    }
-    else 
-    	return NULL;
+    
+    
     //Find next free block
-    flag=0;
     void* find_next;
-    find_next = *ptr;
-    int flag = 0;
-    while(1)
-    	{
-    		if(find_next == head_pointer)
-    			{
-    				flag = 1;
-    				*find_next = *find_next & ~1;
-    				break;
-    			}
-
-    		if(*find_next & 0)
-    		{
-    			flag = 2;
-    			break;
-    		}
-    		find_next++;
-    	}
-    if(flag==1)
-    {
-
-    }
-    else if(flag ==2)
-    {
-
-    }
-    else 
-    	return NULL;
-	
-
-
+    find_next = ptr;
+    int next_flag = 0;
+    // while(1)
+    // {
+    //     size_t tmp_find_next;
+    //     tmp_find_next = (size_t*) find_next & ~1;
+        
+    //     if(find_next == tail_pointer)
+    //     {
+    //         next_flag = 1;
+    //         break;
+    //     }
+        
+    //     if(*find_next & 0)
+    //     {
+    //         next_flag = 2;
+    //         break;
+    //     }
+    //     find_next = find_next + tmp_find_next + 4;
+    // }
+    
+    // //if there is no free block after
+    // if(next_flag == 1)
+    // {
+    //     void* find_prev;
+    //     find_prev = head_pointer;
+        
+        
+    // }
+    // else if(next_flag == 2)
+    // {
+    //     dict found_next_head;
+    //     found_next_head = (dict*) find_next;
+        
+    //     dict* prev_ptr;
+        
+    //     dict found_previous_head;
+    // }
+    
+    
+    
+    // //find previous free block
+    // void* find_prev;
+    // find_prev = ptr;
+    // int prev_flag = 0;
+    // while(1)
+    // {
+    //     if(find_prev == head_pointer)
+    //     {
+    //         prev_flag = 1;
+    //         *find_prev = *find_prev & ~1;
+    //         break;
+    //     }
+        
+    //     if(*find_prev & 0)
+    //     {
+    //         prev_flag = 2;
+    //         break;
+    //     }
+    //     find_prev--;
+    // }
+    // //if no free block in front
+    // if(prev_flag ==1 && next_flag ==1)
+    // {
+    //     dict new_header;
+    //     new_header.size = *find_prev + 4;
+    //     new_header.prev = NULL;
+    //     new_header.next =
+        
+    // }
+    // else if(prev_flag ==1 && next_flag ==2)
+    // {
+        
+    // }
+    // else if(prev_flag ==2 && next_flag ==1)
+    // {
+        
+    // }
+    // else if(prev_flag ==2 && next_flag ==2)
+    // {
+        
+    // }
+    
+    
+    
+    
+    
     // void* tmp_ptr;
     // tmp_ptr = tmp_ptr - 12;
     // dict to_free;
