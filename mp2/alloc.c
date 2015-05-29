@@ -189,7 +189,7 @@ void *malloc(size_t size)
             
             if(tmp_size - malloc_size < 24)
             {
-            	printf(" not gonna happen\n");
+            	printf(" not gonna happen not enough space to \n");
                 return return_pointer;
             }
             else
@@ -231,7 +231,7 @@ void *malloc(size_t size)
                 else
                 {
                 	//The header of the just-created free-block
-                	printf(" not gonna happen\n");
+                	printf(" next pointer is not null\n");
                     dict header;
                     header.size = memory_left;
                     header.prev = current_head;
