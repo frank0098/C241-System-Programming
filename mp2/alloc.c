@@ -132,7 +132,6 @@ void *malloc(size_t size)
         header.prev = NULL;
         header.next = NULL;
 
-        printf("size of free list %zu\n",header.size );
         dict* tmp_head_pointer;
         tmp_head_pointer = (dict*) find_free_head;
 
@@ -279,6 +278,11 @@ void *malloc(size_t size)
     
     	current_head = current_head->next;
     }
+
+    sbrk(256*size);
+    malloc(size);
+
+
     
 }
 
