@@ -158,7 +158,7 @@ void *malloc(size_t size)
         tmp_size = tmp_dict.size;
         
         
-        if(tmp_size < malloc_size + 24)
+        if(tmp_size <= malloc_size + 32)
 
     		sbrk(256*size);
         
