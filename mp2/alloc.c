@@ -365,102 +365,102 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 
- //    //"If a null pointer is passed as argument, no action occurs."
- //    if (!ptr)
- //    return;
+    //"If a null pointer is passed as argument, no action occurs."
+    if (!ptr)
+    return;
 
-	// void *u_ptr;
- //        u_ptr = ptr - 4;
- //        int* size_ptr;
- //        size_ptr = (int*) u_ptr;
+	void *u_ptr;
+        u_ptr = ptr - 4;
+        int* size_ptr;
+        size_ptr = (int*) u_ptr;
     
- //    void* h_ptr;
- //    h_ptr = ptr - 4;
+    void* h_ptr;
+    h_ptr = ptr - 4;
 
     
 
- //    //Find next free block
- //    void* find_next;
- //    find_next = h_ptr;
- //    while(1)
- //    {
- //        int tmp_current_size;
- //        int* next_ptr;
- //        next_ptr = (int*) find_next;
- //        tmp_current_size = *next_ptr & ~1;
+    //Find next free block
+    void* find_next;
+    find_next = h_ptr;
+    while(1)
+    {
+        int tmp_current_size;
+        int* next_ptr;
+        next_ptr = (int*) find_next;
+        tmp_current_size = *next_ptr & ~1;
         
- //        if(!(*next_ptr & 0x1))
- //        {
- //            break;
- //        }
- //        find_next = find_next + tmp_current_size;
- //    }
+        if(!(*next_ptr & 0x1))
+        {
+            break;
+        }
+        find_next = find_next + tmp_current_size;
+    }
 
- //    //Unmask the current pointer;
-	// int current_size;
-	// int *curr;
-	// curr = (int*) h_ptr;
-	// *curr = *curr & ~1;
-	// current_size = *curr;
+    //Unmask the current pointer;
+	int current_size;
+	int *curr;
+	curr = (int*) h_ptr;
+	*curr = *curr & ~1;
+	current_size = *curr;
 
- //    //next free head
- //    dict next_head;
- //    dict* next_head_pointer;
- //    next_head_pointer = (dict*) find_next;
- //    next_head = *next_head_pointer;
-
-
- //    //current head
- //    dict current_head;
- //    dict* current_head_ptr;
- //    current_head_ptr = (dict*) h_ptr;
- //    current_head.size = current_size;
- //    current_head.prev = next_head.prev;
- //    current_head.next = (dict*) find_next;
-
- //    //next head
- //    next_head.prev = current_head_ptr;
- //    *next_head_pointer = next_head;
+    //next free head
+    dict next_head;
+    dict* next_head_pointer;
+    next_head_pointer = (dict*) find_next;
+    next_head = *next_head_pointer;
 
 
- //    //coalescene possible
- //    if(find_next - h_ptr == current_size)
- //    	{
- //    		current_head.size = current_size +next_head.size;
- //    		current_head.next = next_head.next;
- //    	}
- //    *current_head_ptr = current_head;
+    //current head
+    dict current_head;
+    dict* current_head_ptr;
+    current_head_ptr = (dict*) h_ptr;
+    current_head.size = current_size;
+    current_head.prev = next_head.prev;
+    current_head.next = (dict*) find_next;
 
- //    //prev head
- //    dict* find_prev;
- //    find_prev = next_head.prev;
+    //next head
+    next_head.prev = current_head_ptr;
+    *next_head_pointer = next_head;
 
- //    dict prev_head;
- //    dict* prev_head_ptr;
- //    prev_head_ptr = next_head.prev;
+
+    //coalescene possible
+    if(find_next - h_ptr == current_size)
+    	{
+    		current_head.size = current_size +next_head.size;
+    		current_head.next = next_head.next;
+    	}
+    *current_head_ptr = current_head;
+
+    //prev head
+    dict* find_prev;
+    find_prev = next_head.prev;
+
+    dict prev_head;
+    dict* prev_head_ptr;
+    prev_head_ptr = next_head.prev;
 
     
- //    if(find_prev != NULL)
- //    {
- //    	prev_head = *prev_head_ptr;
- //    	prev_head.size = prev_head.size;
- //    	prev_head.prev = prev_head.prev;
- //    	prev_head.next = (dict*) h_ptr;
+    if(find_prev != NULL)
+    {
+    	prev_head = *prev_head_ptr;
+    	prev_head.size = prev_head.size;
+    	prev_head.prev = prev_head.prev;
+    	prev_head.next = (dict*) h_ptr;
     	
 
- //    	//coalescene
- //    	if(find_prev + prev_head.size == h_ptr)
- //    	{
- //    		prev_head.size = prev_head.size + current_head.size;
- //    		prev_head.next = current_head.next;
- //    	}
- //    	*prev_head_ptr = prev_head;
- //    }
- //    else
- //    {
- //    	printf("previous is null\n");
- //    	head_pointer = (dict*) h_ptr;
- //    }
+    	//coalescene
+    	if(find_prev + prev_head.size == h_ptr)
+    	{
+    		prev_head.size = prev_head.size + current_head.size;
+    		prev_head.next = current_head.next;
+    	}
+    	*prev_head_ptr = prev_head;
+    }
+    else
+    {
+    	printf("previous is null\n");
+    	head_pointer = (dict*) h_ptr;
+    }
 
 
 }
