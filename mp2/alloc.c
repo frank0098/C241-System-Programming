@@ -372,7 +372,7 @@ void free(void *ptr)
 	size_t current_size;
 	size_t *curr;
 	curr = (size_t*) h_ptr;
-	printf("current_size is %zu\n",*current_size );
+	printf("current_size is %zu\n",*curr );
 	*curr = *curr & ~1;
 	current_size = *curr;
 	printf("current_size is %zu\n",current_size );
