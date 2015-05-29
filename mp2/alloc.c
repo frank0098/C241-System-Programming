@@ -396,7 +396,7 @@ void free(void *ptr)
         }
         find_next = find_next + tmp_current_size;
     }
-    printf("segfault here\n");
+
     //Unmask the current pointer;
 	int current_size;
 	int *curr;
@@ -419,6 +419,7 @@ void free(void *ptr)
     current_head.prev = next_head.prev;
     current_head.next = (dict*) find_next;
 
+    printf("segfault here\n");
     //coalescene possible
     if(find_next - h_ptr == current_size)
     	{
@@ -434,6 +435,8 @@ void free(void *ptr)
     dict prev_head;
     dict* prev_head_ptr;
     prev_head_ptr = find_prev;
+    
+    printf("segfault here\n");
     if(find_prev != NULL)
     {
     	prev_head = *prev_head_ptr;
