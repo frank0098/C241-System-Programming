@@ -123,6 +123,7 @@ void *malloc(size_t size)
         void *return_pointer;
         void *user_ptr;
         user_ptr = (void*) tmp_head;
+        printf("the size address is %p\n",user_ptr);
         user_ptr = user_ptr + 4;
         return_pointer = user_ptr;
         printf("the return address is %p\n",return_pointer );
@@ -370,7 +371,7 @@ void free(void *ptr)
     void* h_ptr;
     h_ptr = ptr - 4;
 
-
+    printf("the size address is %p\n",h_ptr);
     //Unmask the current pointer;
 	size_t current_size;
 	size_t *curr;
