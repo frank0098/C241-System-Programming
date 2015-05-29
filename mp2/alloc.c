@@ -390,11 +390,9 @@ void free(void *ptr)
         int* next_ptr;
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
-        printf("tmp_current_size is %zu\n",*next_ptr );
         
         if(!(*next_ptr & 0x1))
         {
-        	printf("next spot found! \n");
             break;
         }
         find_next = find_next + tmp_current_size;
