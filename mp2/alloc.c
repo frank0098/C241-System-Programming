@@ -379,12 +379,7 @@ void free(void *ptr)
     void* h_ptr;
     h_ptr = ptr - 4;
 
-    //Unmask the current pointer;
-	int current_size;
-	int *curr;
-	curr = (int*) h_ptr;
-	*curr = *curr & ~1;
-	current_size = *curr;
+    
 
     //Find next free block
     void* find_next;
@@ -407,6 +402,12 @@ void free(void *ptr)
         find_next = find_next + tmp_current_size;
     }
 
+    //Unmask the current pointer;
+	int current_size;
+	int *curr;
+	curr = (int*) h_ptr;
+	*curr = *curr & ~1;
+	current_size = *curr;
 
     //next free head
     dict next_head;
