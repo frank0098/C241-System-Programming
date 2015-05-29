@@ -116,17 +116,14 @@ void *malloc(size_t size)
         
         //The returned pointer to user;
         void *return_pointer;
-        void *go_ptr;
-        go_ptr = (void*) tmp_head;
-        go_ptr = go_ptr + 4;
-        return_pointer = (void*) tmp_head;
-
-        //keep track of the head
-        head_pointer = heap_end;
+        void *user_ptr;
+        user_ptr = (void*) tmp_head;
+        user_ptr = user_ptr + 4;
+        return_pointer = user_ptr;
         
         //Then go to next free-block
         void *find_free_head;
-        find_free_head = heap_end + malloc_size + 4;
+        find_free_head = user_ptr + malloc_size;
         
         //Assign the header of the new free block
         dict header;
@@ -134,10 +131,9 @@ void *malloc(size_t size)
         header.prev = NULL;
         header.next = NULL;
 
-        tmp_head = tmp_head + malloc_size;
-        printf("malloc size is %zu\n",malloc_size);
+        
         dict* tmp_head_pointer;
-        tmp_head_pointer = (dict*) go_ptr;
+        tmp_head_pointer = (dict*) find_free_head;
 
         *tmp_head_pointer = header;
         head_pointer = tmp_head_pointer;
@@ -214,10 +210,9 @@ void *malloc(size_t size)
                     //The header of the just-created free-block
                     dict header;
                     header.size = memory_left;
-                    header.prev = current_head;
+                    header.prev = dict.prev; //question?
                     header.next = NULL;
                     *header_pointer = header;
-                    printf(" segf\n");
                     //The header of the previous free block
         			dict previous_head;
         			dict* previous_head_pointer;
