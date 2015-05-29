@@ -28,7 +28,7 @@
 * *
 * * @see http://www.cplusplus.com/reference/clibrary/cstdlib/calloc/
 * */
-void *calloc(int num, int size)
+void *calloc(size_t num, size_t size)
 {
     /* Note: This function is complete. You do not need to modify it. */
     void *ptr = malloc(num * size);
@@ -70,7 +70,7 @@ typedef struct dict {
 
 
 
-int round_up(int size)
+int round_up(size_t size)
 {
     int i=0;
     while(1)
@@ -88,7 +88,7 @@ void *head_pointer = NULL;
 void *tail_pointer = NULL;
 
 
-void *malloc(int size)
+void *malloc(size_t size)
 {
     printf("\n");
     printf("malloc size is  %zu \n", size);
@@ -512,7 +512,7 @@ void free(void *ptr)
 * *
 * * @see http://www.cplusplus.com/reference/clibrary/cstdlib/realloc/
 * */
-void *realloc(void *ptr, int size)
+void *realloc(void *ptr, size_t size)
 {
     // "In case that ptr is NULL, the function behaves exactly as malloc()"
     if (!ptr)
