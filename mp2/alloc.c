@@ -375,28 +375,94 @@ void free(void *ptr)
     if (!ptr)
     return;
     
-    void* tmp_ptr;
-    tmp_ptr = tmp_ptr - 12;
-    dict to_free;
-    dict *to_free_ptr;
-    to_free_ptr = (dict*) tmp_ptr;
-    to_free = *to_free_ptr;
+    //find previous free block
+    void* find_prev;
+    find_prev = *ptr;
+    int flag = 0;
+    while(1)
+    	{
+    		if(find_prev == head_pointer)
+    			{
+    				flag = 1;
+    				*find_prev = *find_prev & ~1;
+    				break;
+    			}
+
+    		if(*find_prev & 0)
+    		{
+    			flag = 2;
+    			break;
+    		}
+    		find_prev--;
+    	}
+
+    if(flag==1)
+    {
+    	dict new_header;
+
+    }
+    else if(flag ==2)
+    {
+
+    }
+    else 
+    	return NULL;
+    //Find next free block
+    flag=0;
+    void* find_next;
+    find_next = *ptr;
+    int flag = 0;
+    while(1)
+    	{
+    		if(find_next == head_pointer)
+    			{
+    				flag = 1;
+    				*find_next = *find_next & ~1;
+    				break;
+    			}
+
+    		if(*find_next & 0)
+    		{
+    			flag = 2;
+    			break;
+    		}
+    		find_next++;
+    	}
+    if(flag==1)
+    {
+
+    }
+    else if(flag ==2)
+    {
+
+    }
+    else 
+    	return NULL;
+	
+
+
+    // void* tmp_ptr;
+    // tmp_ptr = tmp_ptr - 12;
+    // dict to_free;
+    // dict *to_free_ptr;
+    // to_free_ptr = (dict*) tmp_ptr;
+    // to_free = *to_free_ptr;
     
-    dict* prev_bloc_ptr;
-    dict* next_bloc_ptr;
+    // dict* prev_bloc_ptr;
+    // dict* next_bloc_ptr;
     
-    prev_bloc_ptr = to_free.prev;
-    next_bloc_ptr = to_free.next;
+    // prev_bloc_ptr = to_free.prev;
+    // next_bloc_ptr = to_free.next;
     
-    dict prev_bloc;
+    // dict prev_bloc;
     
-    prev_bloc = *prev_bloc_ptr;
+    // prev_bloc = *prev_bloc_ptr;
     
-    prev_bloc.size = to_free.size + prev_bloc.size + 12;
-    prev_bloc.prev = prev_bloc.prev;
-    prev_bloc.next = next_bloc_ptr;
+    // prev_bloc.size = to_free.size + prev_bloc.size + 12;
+    // prev_bloc.prev = prev_bloc.prev;
+    // prev_bloc.next = next_bloc_ptr;
     
-    *prev_bloc_ptr = prev_bloc;
+    // *prev_bloc_ptr = prev_bloc;
     
     
     
