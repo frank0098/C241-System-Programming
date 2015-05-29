@@ -210,9 +210,10 @@ void *malloc(size_t size)
                     //The header of the just-created free-block
                     dict header;
                     header.size = memory_left;
-                    header.prev = dict.prev; //question?
+                    header.prev = tmp_dict.prev; //question?
                     header.next = NULL;
                     *header_pointer = header;
+
                     //The header of the previous free block
         			dict previous_head;
         			dict* previous_head_pointer;
