@@ -419,6 +419,11 @@ void free(void *ptr)
     current_head.prev = next_head.prev;
     current_head.next = (dict*) find_next;
 
+    //next head
+    next_head.prev = current_head_ptr;
+    *next_head_pointer = next_head;
+
+
     //coalescene possible
     if(find_next - h_ptr == current_size)
     	{
@@ -428,7 +433,7 @@ void free(void *ptr)
     *current_head_ptr = current_head;
 
     //prev head
-    void* find_prev;
+    dict* find_prev;
     find_prev = next_head.prev;
 
     dict prev_head;
