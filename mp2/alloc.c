@@ -433,7 +433,7 @@ void free(void *ptr)
 
     dict prev_head;
     dict* prev_head_ptr;
-    prev_head_ptr = (dict*) find_prev;
+    prev_head_ptr = next_head.prev;
 
     
     if(find_prev != NULL)
