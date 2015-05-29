@@ -365,6 +365,7 @@ void free(void *ptr)
     return;
     
     void* h_ptr;
+    h_ptr = ptr - 4;
 
     //Unmask the current pointer;
 	size_t current_size;
