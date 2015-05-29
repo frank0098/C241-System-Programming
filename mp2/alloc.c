@@ -405,7 +405,6 @@ void free(void *ptr)
             break;
         }
         find_next = find_next + tmp_current_size;
-        break;
     }
 
 
