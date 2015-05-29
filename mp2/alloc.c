@@ -143,7 +143,13 @@ void *malloc(size_t size)
         
         *tmp_head_pointer = header;
         head_pointer = tmp_head_pointer;
-        
+
+        void *u_ptr;
+        u_ptr = return_pointer;
+        u_ptr = return_pointer - 4;
+        size_t* size_ptr;
+        size_ptr = (size_t*) u_ptr;
+        printf("current_size is %zu\n",*size_ptr );
         return return_pointer;
         
     }
