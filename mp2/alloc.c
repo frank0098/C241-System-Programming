@@ -433,17 +433,18 @@ void free(void *ptr)
 
     dict prev_head;
     dict* prev_head_ptr;
-    prev_head_ptr = find_prev;
+    prev_head_ptr = (dict*) find_prev;
 
     
     if(find_prev != NULL)
     {
     	printf("prev is not null\n");
     	prev_head = *prev_head_ptr;
+    	printf("segfault here\n");
     	prev_head.size = prev_head.size;
     	prev_head.prev = prev_head.prev;
     	prev_head.next = (dict*) h_ptr;
-    	printf("segfault here\n");
+    	
 
     	//coalescene
     	if(find_prev + prev_head.size == h_ptr)
