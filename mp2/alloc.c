@@ -158,8 +158,10 @@ void *malloc(size_t size)
         tmp_size = tmp_dict.size;
         
         
-        if(tmp_size >= malloc_size + 24)
-        {
+        if(tmp_size < malloc_size + 24)
+
+    		sbrk(256*size);
+        
 
             //The fragment is enough to malloc
             //pointer current_head now points to the head of the spot to malloc
@@ -272,7 +274,7 @@ void *malloc(size_t size)
                 
                 return return_pointer;
             }  
-        }  
+         
 
         if(current_head->next == NULL)
     		break;
@@ -280,8 +282,6 @@ void *malloc(size_t size)
     	current_head = current_head->next;
     }
 
-    sbrk(256*size);
-    malloc(size);
 
 
     
