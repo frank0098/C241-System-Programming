@@ -373,6 +373,12 @@ void free(void *ptr)
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
+
+	void *u_ptr;
+        u_ptr = ptr - 4;
+        size_t* size_ptr;
+        size_ptr = (size_t*) u_ptr;
+        printf("current_size is %zu\n",*size_ptr );
     
     void* h_ptr;
     h_ptr = ptr - 4;
