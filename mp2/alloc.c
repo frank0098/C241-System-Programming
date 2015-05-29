@@ -378,7 +378,7 @@ void free(void *ptr)
         size_t tmp_current_size;
         size_t* next_ptr;
         next_ptr = (size_t*) find_next;
-        //tmp_current_size = *next_ptr & ~1;
+        tmp_current_size = *next_ptr;
         
         if(tmp_current_size & 0)
         {
