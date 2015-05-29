@@ -199,7 +199,7 @@ void *malloc(size_t size)
             if(tmp_size - malloc_size < 24)
             {
                 
-                printf(" not gonna happen not enough space to \n");
+                //printf(" not gonna happen not enough space to \n");
                 if(tmp_dict.next!=NULL)
                 return return_pointer;
                 else
