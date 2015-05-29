@@ -376,7 +376,7 @@ void free(void *ptr)
         tmp_current_size = *next_ptr & ~1;
         printf("tmp_current_size is %zu\n",tmp_current_size );
         
-        if(tmp_current_size & 0)
+        if(*next_ptr & 0)
         {
         	printf("next spot found! \n");
             break;
@@ -384,7 +384,7 @@ void free(void *ptr)
         find_next = find_next + tmp_current_size + 4;
     }
 
-    
+
     //Unmask the current pointer;
 	size_t current_size;
 	size_t *curr;
