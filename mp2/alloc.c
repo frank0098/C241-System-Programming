@@ -89,7 +89,6 @@ void *head_pointer = NULL;
 
 void *malloc(size_t size)
 {
-	printf("malloc size is  %zu \n", size);
     size_t malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);		
@@ -186,11 +185,11 @@ void *malloc(size_t size)
             size_t memory_left;
             memory_left = tmp_size - malloc_size - 4; 
            
-            
+            printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
             
             if(tmp_size - malloc_size < 24)
             {
-            	printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
+            	
             	printf(" not gonna happen not enough space to \n");
                 return return_pointer;
             }
@@ -227,6 +226,10 @@ void *malloc(size_t size)
                     previous_head.prev = previous_head.prev;
                     previous_head.next = header_pointer;
                     *previous_head_pointer = previous_head;
+                	}
+                	else
+                	{
+                		header_pointer = find_next_head;
                 	}
                 }
                 //if it is not the last node
