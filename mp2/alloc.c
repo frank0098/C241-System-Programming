@@ -381,7 +381,7 @@ void free(void *ptr)
         	printf("next spot found! \n");
             break;
         }
-        find_next = find_next + tmp_current_size + 4;
+        find_next = find_next + tmp_current_size;
     }
 
 
@@ -403,14 +403,14 @@ void free(void *ptr)
     dict current_head;
     dict* current_head_ptr;
     current_head_ptr = (dict*) ptr;
-    current_head.size = current_size + 4;
+    current_head.size = current_size;
     current_head.prev = next_head.prev;
     current_head.next = (dict*) find_next;
 
     //coalescene possible
-    if(find_next - ptr - 4 == current_size)
+    if(find_next - ptr == current_size)
     	{
-    		current_head.size = current_size + 4 +next_head.size + 4;
+    		current_head.size = current_size +next_head.size;
     		current_head.next = next_head.next;
     	}
     *current_head_ptr = current_head;
@@ -432,7 +432,7 @@ void free(void *ptr)
     	//coalescene
     	if(find_prev + prev_head.size == ptr)
     	{
-    		prev_head.size = prev_head.size + current_head.size + 4;
+    		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
     	}
     	*prev_head_ptr = prev_head;
