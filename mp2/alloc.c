@@ -396,7 +396,7 @@ void free(void *ptr)
         }
         find_next = find_next + tmp_current_size;
     }
-
+    printf("segfault here\n");
     //Unmask the current pointer;
 	int current_size;
 	int *curr;
