@@ -114,6 +114,7 @@ void *malloc(size_t size)
         size_t* tmp_head;
         tmp_head = (size_t*) heap_end;
         *tmp_head = malloc_size + 4;
+        printf("the size is %zu\n",*tmp_head );
         
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
@@ -187,8 +188,9 @@ void *malloc(size_t size)
             //Keep track of memory remained
             size_t memory_left;
             memory_left = tmp_size - malloc_size - 4;
-            
+
             printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
+            
             
             if(tmp_size - malloc_size < 24)
             {
