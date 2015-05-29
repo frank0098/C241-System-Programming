@@ -363,6 +363,14 @@ void free(void *ptr)
     return;
     
     
+
+    //Unmask the current pointer;
+	size_t current_size;
+	size_t *curr;
+	curr = (size_t*) curr;
+	*curr = *curr & ~1;
+	current_size = *curr;
+
     //Find next free block
     void* find_next;
     find_next = ptr;
@@ -371,7 +379,7 @@ void free(void *ptr)
         size_t tmp_current_size;
         size_t* next_ptr;
         next_ptr = (size_t*) find_next;
-        tmp_current_size = *next_ptr & ~1;
+        tmp_current_size = *next_ptr ;
         printf("tmp_current_size is %zu\n",tmp_current_size );
         
         if(*next_ptr & 0)
@@ -382,13 +390,6 @@ void free(void *ptr)
         find_next = find_next + tmp_current_size;
     }
 
-
-    //Unmask the current pointer;
-	size_t current_size;
-	size_t *curr;
-	curr = (size_t*) curr;
-	*curr = *curr & ~1;
-	current_size = *curr;
 
     //next free head
     dict next_head;
