@@ -367,10 +367,12 @@ void free(void *ptr)
     void* h_ptr;
     h_ptr = ptr - 4;
 
+
     //Unmask the current pointer;
 	size_t current_size;
 	size_t *curr;
 	curr = (size_t*) h_ptr;
+	printf("current_size is %zu\n",*current_size );
 	*curr = *curr & ~1;
 	current_size = *curr;
 	printf("current_size is %zu\n",current_size );
