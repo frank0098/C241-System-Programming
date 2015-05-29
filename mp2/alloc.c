@@ -125,6 +125,7 @@ void *malloc(size_t size)
         user_ptr = (void*) tmp_head;
         user_ptr = user_ptr + 4;
         return_pointer = user_ptr;
+        printf("the return address is %p\n",return_pointer );
         
         //Then go to next free-block
         void *find_free_head;
@@ -360,6 +361,8 @@ void *malloc(size_t size)
 * */
 void free(void *ptr)
 {
+
+	printf("the return address is %p\n",ptr );
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
