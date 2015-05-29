@@ -367,9 +367,8 @@ void free(void *ptr)
     void* find_next;
     find_next = ptr;
     int count=0;
-    while(count<10)
+    //while(1)
     {
-    	count++;
         size_t tmp_current_size;
         size_t* next_ptr;
         next_ptr = (size_t*) find_next;
