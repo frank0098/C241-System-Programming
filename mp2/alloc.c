@@ -374,6 +374,7 @@ void free(void *ptr)
     find_next = ptr;
     while(1)
     {
+    	printf("loop");
         size_t tmp_current_size;
         size_t* next_ptr;
         next_ptr = (size_t*) find_next;
