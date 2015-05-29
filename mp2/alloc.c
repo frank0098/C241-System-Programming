@@ -364,19 +364,19 @@ void free(void *ptr)
     if (!ptr)
     return;
     
-    
+    void* h_ptr;
 
     //Unmask the current pointer;
 	size_t current_size;
 	size_t *curr;
-	curr = (size_t*) ptr;
+	curr = (size_t*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
 	printf("current_size is %zu\n",current_size );
 
     //Find next free block
     void* find_next;
-    find_next = ptr;
+    find_next = h_ptr;
     // while(1)
     // {
     //     size_t tmp_current_size;
