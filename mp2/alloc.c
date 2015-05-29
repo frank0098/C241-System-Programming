@@ -159,7 +159,7 @@ void *malloc(size_t size)
         tmp_size = tmp_dict.size;
         
         
-        if(tmp_size >= malloc_size+4)
+        if(tmp_size >= malloc_size + `4)
         {
 
             //The fragment is enough to malloc
@@ -230,7 +230,7 @@ void *malloc(size_t size)
                 	}
                 	else
                 	{
-                		header_pointer = find_next_head;
+                		head_pointer = find_next_head;
                 	}
                 }
                 //if it is not the last node
