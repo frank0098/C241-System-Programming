@@ -189,6 +189,7 @@ void *malloc(size_t size)
             
             if(tmp_size - malloc_size < 24)
             {
+            	printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
             	printf(" not gonna happen not enough space to \n");
                 return return_pointer;
             }
