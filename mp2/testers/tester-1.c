@@ -12,7 +12,7 @@ int main()
 		return 1;
 	}
 
-	*ptr = 5;
+	//*ptr = 5;
 	free(ptr);
 
 	printf("Memory was allocated, used, and freed!\n");	
