@@ -366,8 +366,7 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = ptr;
-    int count=0;
-    //while(1)
+    while(1)
     {
         size_t tmp_current_size;
         size_t* next_ptr;
