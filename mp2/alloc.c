@@ -114,7 +114,6 @@ void *malloc(size_t size)
         int* tmp_head;
         tmp_head = (int*) heap_end;
         *tmp_head = malloc_size + 4;
-        printf("the size is %zu\n",*tmp_head );
         
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
@@ -159,7 +158,7 @@ void *malloc(size_t size)
     //Trasverse the linked list
     while(1)
     {
-        printf("current address is %p\n",current_head);
+        //printf("current address is %p\n",current_head);
         //why this not working? *org->size
         int tmp_size;
         dict tmp_dict;
@@ -194,7 +193,7 @@ void *malloc(size_t size)
             int memory_left;
             memory_left = tmp_size - malloc_size - 4;
 
-            printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
+            //printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
             
             
             if(tmp_size - malloc_size < 24)
