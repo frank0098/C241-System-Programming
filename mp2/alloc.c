@@ -159,7 +159,7 @@ void *malloc(size_t size)
         tmp_size = tmp_dict.size;
         
         
-        if(tmp_size >= malloc_size + `4)
+        if(tmp_size >= malloc_size + 4)
         {
 
             //The fragment is enough to malloc
