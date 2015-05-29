@@ -362,12 +362,6 @@ void free(void *ptr)
     if (!ptr)
     return;
     
-    //Unmask the current pointer;
-	size_t current_size;
-	size_t *curr;
-	curr = (size_t*) curr;
-	*curr = *curr & ~1;
-	current_size = *curr;
     
     //Find next free block
     void* find_next;
@@ -389,6 +383,14 @@ void free(void *ptr)
         }
         find_next = find_next + tmp_current_size + 4;
     }
+
+    
+    //Unmask the current pointer;
+	size_t current_size;
+	size_t *curr;
+	curr = (size_t*) curr;
+	*curr = *curr & ~1;
+	current_size = *curr;
 
     //next free head
     dict next_head;
