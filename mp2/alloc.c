@@ -410,7 +410,7 @@ void free(void *ptr)
     //coalescene possible
     if(find_next - ptr - 4 == current_size)
     	{
-    		current_head.size = current_size + 4 +next_head.size;
+    		current_head.size = current_size + 4 +next_head.size + 4;
     		current_head.next = next_head.next;
     	}
     *current_head_ptr = current_head;
@@ -432,7 +432,7 @@ void free(void *ptr)
     	//coalescene
     	if(find_prev + prev_head.size == ptr)
     	{
-    		prev_head.size = prev_head.size + current_head.size;
+    		prev_head.size = prev_head.size + current_head.size + 4;
     		prev_head.next = current_head.next;
     	}
     	*prev_head_ptr = prev_head;
