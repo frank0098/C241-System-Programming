@@ -443,9 +443,7 @@ void free(void *ptr)
     
     if(find_prev != NULL)
     {
-    	printf("prev is not null\n");
     	prev_head = *prev_head_ptr;
-    	printf("segfault here\n");
     	prev_head.size = prev_head.size;
     	prev_head.prev = prev_head.prev;
     	prev_head.next = (dict*) h_ptr;
