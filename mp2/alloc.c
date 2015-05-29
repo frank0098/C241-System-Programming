@@ -365,7 +365,6 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 
-	printf("the return address is %p\n",ptr );
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
