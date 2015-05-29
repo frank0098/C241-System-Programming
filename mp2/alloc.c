@@ -28,7 +28,7 @@
 * *
 * * @see http://www.cplusplus.com/reference/clibrary/cstdlib/calloc/
 * */
-void *calloc(size_t num, size_t size)
+void *calloc(int num, int size)
 {
     /* Note: This function is complete. You do not need to modify it. */
     void *ptr = malloc(num * size);
@@ -63,16 +63,16 @@ void *calloc(size_t num, size_t size)
 * */
 
 typedef struct dict {
-    size_t size;
+    int size;
     struct dict *prev;
     struct dict *next;
 }dict;
 
 
 
-size_t round_up(size_t size)
+int round_up(int size)
 {
-    size_t i=0;
+    int i=0;
     while(1)
     {
         if((size+i)%8==0)
@@ -88,11 +88,11 @@ void *head_pointer = NULL;
 void *tail_pointer = NULL;
 
 
-void *malloc(size_t size)
+void *malloc(int size)
 {
     printf("\n");
     printf("malloc size is  %zu \n", size);
-    size_t malloc_size;
+    int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
     
@@ -111,8 +111,8 @@ void *malloc(size_t size)
         heap_end = heap_end+4;
         
         //malloc requested malloc_size + header for user
-        size_t* tmp_head;
-        tmp_head = (size_t*) heap_end;
+        int* tmp_head;
+        tmp_head = (int*) heap_end;
         *tmp_head = malloc_size + 4;
         printf("the size is %zu\n",*tmp_head );
         
@@ -147,8 +147,8 @@ void *malloc(size_t size)
         void *u_ptr;
         u_ptr = return_pointer;
         u_ptr = return_pointer - 4;
-        size_t* size_ptr;
-        size_ptr = (size_t*) u_ptr;
+        int* size_ptr;
+        size_ptr = (int*) u_ptr;
         printf("current_size is %zu\n",*size_ptr );
         return return_pointer;
         
@@ -164,7 +164,7 @@ void *malloc(size_t size)
     {
         printf("current address is %p\n",current_head);
         //why this not working? *org->size
-        size_t tmp_size;
+        int tmp_size;
         dict tmp_dict;
         tmp_dict = *current_head;
         tmp_size = tmp_dict.size;
@@ -181,8 +181,8 @@ void *malloc(size_t size)
             find_user_head = (void*) current_head;
             
             //malloc requested malloc_size + header for user
-            size_t* tmp_head;
-            tmp_head = (size_t*) find_user_head;
+            int* tmp_head;
+            tmp_head = (int*) find_user_head;
             *tmp_head = malloc_size + 4;
             
             //Mask the last bit to keep track of a "used" seg
@@ -194,7 +194,7 @@ void *malloc(size_t size)
             
             
             //Keep track of memory remained
-            size_t memory_left;
+            int memory_left;
             memory_left = tmp_size - malloc_size - 4;
 
             printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
@@ -209,7 +209,7 @@ void *malloc(size_t size)
                 else
                 {
                     //Allocate New memory
-                    size_t new_allocated_memory;
+                    int new_allocated_memory;
                     new_allocated_memory = 512 * size;
                     sbrk(new_allocated_memory);
                     tail_pointer = sbrk(0);
@@ -376,8 +376,8 @@ void free(void *ptr)
 
 	void *u_ptr;
         u_ptr = ptr - 4;
-        size_t* size_ptr;
-        size_ptr = (size_t*) u_ptr;
+        int* size_ptr;
+        size_ptr = (int*) u_ptr;
         printf("current_size is %zu\n",*size_ptr );
     
     void* h_ptr;
@@ -385,9 +385,9 @@ void free(void *ptr)
 
     printf("the size address is %p\n",h_ptr);
     //Unmask the current pointer;
-	size_t current_size;
-	size_t *curr;
-	curr = (size_t*) h_ptr;
+	int current_size;
+	int *curr;
+	curr = (int*) h_ptr;
 	printf("current_size is %zu\n",*curr );
 	*curr = *curr & ~1;
 	current_size = *curr;
@@ -398,9 +398,9 @@ void free(void *ptr)
     find_next = h_ptr;
     // while(1)
     // {
-    //     size_t tmp_current_size;
-    //     size_t* next_ptr;
-    //     next_ptr = (size_t*) find_next;
+    //     int tmp_current_size;
+    //     int* next_ptr;
+    //     next_ptr = (int*) find_next;
     //     tmp_current_size = *next_ptr ;
     //     printf("tmp_current_size is %zu\n",tmp_current_size );
         
@@ -512,7 +512,7 @@ void free(void *ptr)
 * *
 * * @see http://www.cplusplus.com/reference/clibrary/cstdlib/realloc/
 * */
-void *realloc(void *ptr, size_t size)
+void *realloc(void *ptr, int size)
 {
     // "In case that ptr is NULL, the function behaves exactly as malloc()"
     if (!ptr)
