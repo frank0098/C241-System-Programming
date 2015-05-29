@@ -367,7 +367,7 @@ void free(void *ptr)
     //Unmask the current pointer;
 	size_t current_size;
 	size_t *curr;
-	curr = (size_t*) curr;
+	curr = (size_t*) ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
 	printf("current_size is %zu\n",current_size );
