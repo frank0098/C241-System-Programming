@@ -144,7 +144,7 @@ void *malloc(size_t size)
 
     	printf("previous address is  %p\n",header.prev);
 
-    	printf("next address is  %p\n",header,next);		
+    	printf("next address is  %p\n",header.next);		
         return return_pointer;
         
     }
