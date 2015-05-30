@@ -91,7 +91,7 @@ void *tail_pointer = NULL;
 void *malloc(size_t size)
 {
     // //printf("\n");
-    getchar();
+    //getchar();
     printf("malloc size is  %zu \n", size);
     int malloc_size;
     //malloc_size is the multiple of 8
@@ -161,9 +161,13 @@ void *malloc(size_t size)
     current_head = head_pointer;
     
     //Trasverse the linked list
+    int count=0;
     while(1)
     {	//printf("mallocloop\n");
         //why this not working? *org->size
+count++;
+if(count>10)
+	break;
         int tmp_size;
         dict tmp_dict;
         tmp_dict = *current_head;
