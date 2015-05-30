@@ -163,7 +163,7 @@ void *malloc(size_t size)
     
     //Trasverse the linked list
     while(1)
-    {	printf("mallocloop\n");
+    {	//printf("mallocloop\n");
         ////printf("current address is %p\n",current_head);
         //why this not working? *org->size
         int tmp_size;
@@ -393,7 +393,7 @@ void free(void *ptr)
     //printf("the head pointer is   %p\n",head_pointer);
     while(1)
     {
-    	printf("freeloop\n");
+    	//printf("freeloop\n");
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
