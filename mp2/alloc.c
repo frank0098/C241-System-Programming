@@ -148,7 +148,7 @@ void *malloc(size_t size)
 
     	//printf("next address is  %p\n",header.next);	
 
-        printf("head pointer is at %p\n",head_pointer );
+        printf("initiliaze finished: head pointer is at %p\n",head_pointer );
     	
         return return_pointer;
         
@@ -466,7 +466,7 @@ void free(void *ptr)
     	head_pointer = (dict*) h_ptr;
     }
 
-    printf("head pointer is at %p\n",head_pointer );
+    printf("free finished:head pointer is at %p\n",head_pointer );
 
 
 }
