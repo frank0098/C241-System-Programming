@@ -171,7 +171,7 @@ void *malloc(size_t size)
 
             printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         
-        if(tmp_size >= malloc_size + 4 || current_head->next == NULL)
+        if(tmp_size >= malloc_size + 4 )
         {
             
             //The fragment is enough to malloc
