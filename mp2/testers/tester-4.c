@@ -57,7 +57,7 @@ int main()
 	{
 		printf("started\n");
 		void *ptr = malloc(size);
-		printf("the address is %p",ptr);
+		printf("the address is %p\n",ptr);
 		ptr = reduce(ptr, size / 2);
 		free(ptr);
 		
