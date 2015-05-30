@@ -404,7 +404,7 @@ void free(void *ptr)
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
         
-        if(!(*next_ptr & 0x1))
+        if(*next_ptr %2 ==0)
         {
             break;
         }
