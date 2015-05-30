@@ -462,7 +462,7 @@ void free(void *ptr)
     }
     else
     {
-    	
+    	printf("oh yea\n");
     	head_pointer = (dict*) h_ptr;
     }
 
