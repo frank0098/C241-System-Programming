@@ -312,12 +312,14 @@ void *malloc(size_t size)
                     dict previous_head;
                     dict* previous_head_pointer;
                     previous_head_pointer = tmp_dict.prev;
+                    if(previous_head_pointer != NULL)
+                    {
                     previous_head = *previous_head_pointer;
-                    
                     previous_head.size = previous_head.size;
                     previous_head.prev = previous_head.prev;
                     previous_head.next = header_pointer;
                     *previous_head_pointer = previous_head;
+                	}
                     
                     //The header of the next free block
                     dict next_head;
