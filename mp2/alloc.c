@@ -445,7 +445,6 @@ void free(void *ptr)
     //coalescene possible
     if(find_next - h_ptr == current_size)
     	{
-    		printf("should not happen_next\n");
     		current_head.size = current_size +next_head.size;
     		current_head.next = next_head.next;
     	}
@@ -457,7 +456,6 @@ void free(void *ptr)
     //printf("previous address is  %p\n",find_prev);
     if(find_prev != NULL)
     {
-    	printf("should not happen_prev\n");
     	prev_head = *find_prev;
     	prev_head.size = prev_head.size;
     	prev_head.prev = prev_head.prev;
@@ -477,7 +475,10 @@ void free(void *ptr)
     	head_pointer =  h_ptr;
     }
 
-
+    int* fuck;
+    fuck = (int*) h_ptr;
+    fuck = fuck+12;
+    printf("the fuck number is %d",*fuck);
 
 }
 
