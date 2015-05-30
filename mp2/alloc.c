@@ -395,6 +395,7 @@ void free(void *ptr)
     void* find_next;
     find_next = h_ptr;
     printf("to free  pointer is  %p\n",ptr);
+    printf("the head address is   %p\n",head_pointer);
     while(1)
     {
     	//printf("freeloop\n");
