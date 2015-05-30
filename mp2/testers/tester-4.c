@@ -55,7 +55,9 @@ int main()
 	int size = START_MALLOC_SIZE;
 	while (size > STOP_MALLOC_SIZE)
 	{
+		printf("started\n");
 		void *ptr = malloc(size);
+		printf("loop\n");
 		printf("the address is %p",ptr);
 		ptr = reduce(ptr, size / 2);
 		free(ptr);
