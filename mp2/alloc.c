@@ -169,7 +169,7 @@ void *malloc(size_t size)
         tmp_size = tmp_dict.size;
         
 
-            printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
+            //printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         
         if(tmp_size >= malloc_size + 4 || current_head->next == NULL)
         {
@@ -464,6 +464,8 @@ void free(void *ptr)
     	
     	head_pointer = (dict*) h_ptr;
     }
+
+    printf("head pointer is at %p\n",head_pointer );
 
 
 }
