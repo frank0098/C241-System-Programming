@@ -429,10 +429,11 @@ void free(void *ptr)
     current_head_ptr = (dict*) h_ptr;
     current_head.size = current_size;
     current_head.prev = next_head.prev;
-    current_head.next = (dict*) find_next;
+    current_head.next = next_head_pointer;
 
     //next head
     next_head.prev = current_head_ptr;
+    next_head.next = next_head.next;
     *next_head_pointer = next_head;
 
 
