@@ -397,15 +397,11 @@ void free(void *ptr)
     
     fuck_tmp = h_ptr+8;
     fuck = (int*) fuck_tmp;
-    printf("the fuck number is %d\n",*fuck);
+    int tmp_fuck;
+    tmp_fuck = *fuck;
+    printf("the fucking number is %d\n",tmp_fuck);
     
-    fuck_tmp = h_ptr + 12;
-    printf("the fucking address is %p\n",fuck);
-
-    fuck_tmp = h_ptr+20;
-    fuck = (int*) fuck_tmp;
-    printf("the fuck number is %d\n",*fuck);
-    
+       
 
     //Find next free block
     void* find_next;
@@ -495,13 +491,6 @@ void free(void *ptr)
     fuck = (int*) fuck_tmp;
     printf("the fuck number is %d\n",*fuck);
     
-    fuck_tmp = h_ptr + 12;
-    printf("the fucking address is %p\n",fuck);
-
-    fuck_tmp = h_ptr+20;
-    fuck = (int*) fuck_tmp;
-    printf("the fuck number is %d\n",*fuck);
-
 
 }
 
