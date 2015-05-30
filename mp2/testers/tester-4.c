@@ -30,7 +30,7 @@ void *reduce(void *ptr, int size)
 
 		ptr1 = realloc(ptr1, size);
 		free(ptr2);
-		printf("to this point?\n");
+
 
 		if (*((int *)ptr1) != size / 2)
 		{
@@ -39,6 +39,7 @@ void *reduce(void *ptr, int size)
 		}
 
 		*((int *)ptr1) = size;
+		printf("to this point?\n");
 		return ptr1;
 	}
 	else
@@ -62,7 +63,8 @@ int main()
 		void *ptr = malloc(size);
 		//printf("the address is %p\n",ptr);
 		ptr = reduce(ptr, size / 2);
-		
+
+
 		free(ptr);
 		
 		size /= 2;
