@@ -173,7 +173,7 @@ void *malloc(size_t size)
         
         if(tmp_size >= malloc_size + 4 || current_head->next == NULL)
         {
-            
+            printf("seg here\n");
             //The fragment is enough to malloc
             //pointer current_head now points to the head of the spot to malloc
             
@@ -268,7 +268,7 @@ void *malloc(size_t size)
                 {
                     
                     //The header of the just-created free-block
-                    printf("seg here\n");
+
                     dict header;
                     header.size = memory_left;
                     header.prev = tmp_dict.prev; //question?
@@ -338,7 +338,7 @@ void *malloc(size_t size)
         
         current_head = current_head->next;
     }
-    //printf("this happens\n");
+    printf("this happens\n");
     return NULL;
     
     
