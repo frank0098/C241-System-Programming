@@ -149,6 +149,8 @@ void *malloc(size_t size)
     	//printf("next address is  %p\n",header.next);	
 
         printf("initiliaze finished: head pointer is at %p\n",head_pointer );
+
+        printf("returned pointer  is at %p\n",return_pointer );
     	
         return return_pointer;
         
