@@ -412,6 +412,8 @@ void free(void *ptr)
     next_head_pointer = (dict*) find_next;
     next_head = *next_head_pointer;
 
+    printf("previous address is  %p\n",next_head.prev);
+
 
     //current head
     dict current_head;
