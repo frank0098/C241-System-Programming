@@ -92,7 +92,6 @@ void *malloc(size_t size)
 {
     // //printf("\n");
     //getchar();
-    printf("malloc size is  %zu \n", size);
     int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
