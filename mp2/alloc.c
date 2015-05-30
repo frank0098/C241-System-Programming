@@ -392,9 +392,13 @@ void free(void *ptr)
 
     int tmp_current_size;
     int* next_ptr;
+    next_ptr = (int*) (h_ptr);
+    tmp_current_size = *next_ptr & ~1;
+    printf("the fucking number is %d\n",tmp_current_size);
     next_ptr = (int*) (h_ptr+12);
     tmp_current_size = *next_ptr & ~1;
     printf("the fucking number is %d\n",tmp_current_size);
+
     
        
 
@@ -452,11 +456,11 @@ void free(void *ptr)
     //coalescene possible
     if(find_next - h_ptr == current_size)
     	{
-    		current_head.size = current_size +next_head.size;
+    		current_head.size = current_size + next_head.size;
     		current_head.next = next_head.next;
     	}
 
-    //*current_head_ptr = current_head;
+    *current_head_ptr = current_head;
 
     
     dict prev_head;
@@ -481,7 +485,9 @@ void free(void *ptr)
     {
     	head_pointer =  h_ptr;
     }
-
+    next_ptr = (int*) (h_ptr);
+    tmp_current_size = *next_ptr & ~1;
+    printf("the fucking number is %d\n",tmp_current_size);
     next_ptr = (int*) (h_ptr+12);
     tmp_current_size = *next_ptr & ~1;
     printf("the fucking number is %d\n",tmp_current_size);
