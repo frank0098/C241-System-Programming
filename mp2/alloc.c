@@ -380,7 +380,7 @@ void free(void *ptr)
 
     void* h_ptr;
     h_ptr = ptr - 4;
-
+    printf("the h_ptr address is %p\n",h_ptr );
     
 
     //Find next free block
