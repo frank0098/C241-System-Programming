@@ -140,7 +140,7 @@ void *malloc(size_t size)
         tmp_head_pointer = (dict*) find_free_head;
         
         *tmp_head_pointer = header;
-        head_pointer = tmp_head_pointer;
+        head_pointer = (void*) tmp_head_pointer;
 
 
         //printf("this address is  %p\n",find_free_head);	
@@ -472,7 +472,7 @@ void free(void *ptr)
     }
     else
     {
-    	head_pointer = (dict*) h_ptr;
+    	head_pointer =  h_ptr;
     }
 
 
