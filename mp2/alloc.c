@@ -141,11 +141,10 @@ void *malloc(size_t size)
         *tmp_head_pointer = header;
         head_pointer = tmp_head_pointer;
 
-        void *u_ptr;
-        u_ptr = return_pointer;
-        u_ptr = return_pointer - 4;
-        int* size_ptr;
-        size_ptr = (int*) u_ptr;
+
+    	printf("previous address is  %p\n",header.prev);
+
+    	printf("next address is  %p\n",header,next);		
         return return_pointer;
         
     }
