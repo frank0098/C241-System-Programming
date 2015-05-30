@@ -429,14 +429,14 @@ void free(void *ptr)
     *current_head_ptr = current_head;
 
     //prev head
-    void* find_prev;
-    find_prev = (void*) next_head.prev;
+    dict* find_prev;
+    find_prev = next_head.prev;
 
     dict prev_head;
     dict* prev_head_ptr;
     prev_head_ptr = next_head.prev;
 
-    printf("previous is null %p\n",find_prev);
+    printf("previous address is  %p\n",prev_head_ptr);
     if(find_prev != NULL)
     {
     	prev_head = *prev_head_ptr;
