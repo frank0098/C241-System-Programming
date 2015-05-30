@@ -212,7 +212,7 @@ void *malloc(size_t size)
             if(tmp_size - malloc_size < 24)
             {
                 
-                printf("  not enough space to \n");
+                //printf("  not enough space to \n");
                 if(tmp_dict.next!=NULL)
                 return return_pointer;
                 else
@@ -409,7 +409,7 @@ void free(void *ptr)
         }
         find_next = find_next + tmp_current_size;
     }
-    //printf("this address is  %p\n",find_next);	
+    printf("this address is  %p\n",find_next);	
 
     //Unmask the current pointer;
 	int current_size;
