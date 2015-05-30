@@ -468,7 +468,6 @@ void free(void *ptr)
     	head_pointer = (dict*) h_ptr;
     }
 
-    printf("free finished:head pointer is at %p\n",head_pointer );
 
 
 }
