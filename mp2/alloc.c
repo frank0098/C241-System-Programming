@@ -402,7 +402,7 @@ void free(void *ptr)
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
-        //printf("the size is %d\n",*next_ptr);
+        printf("the size is %d\n",*next_ptr);
         tmp_current_size = *next_ptr & ~1;
         
         if(!(*next_ptr & 0x1))
@@ -447,7 +447,6 @@ void free(void *ptr)
     //coalescene possible
     if(find_next - h_ptr == current_size)
     	{
-    		printf("next_should not happen1\n");
     		current_head.size = current_size +next_head.size;
     		current_head.next = next_head.next;
     	}
@@ -458,7 +457,6 @@ void free(void *ptr)
     //printf("previous address is  %p\n",find_prev);
     if(find_prev != NULL)
     {
-    	printf("prev_should not happen2\n");
     	prev_head = *find_prev;
     	prev_head.size = prev_head.size;
     	prev_head.prev = prev_head.prev;
