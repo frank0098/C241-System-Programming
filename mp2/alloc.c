@@ -442,15 +442,15 @@ void free(void *ptr)
     next_head.next = next_head.next;
     *next_head_pointer = next_head;
 
-getchar();
+
     //coalescene possible
-    // if(find_next - h_ptr == current_size)
-    // 	{
-    // 		printf("should not happen_next\n");
-    // 		current_head.size = current_size +next_head.size;
-    // 		current_head.next = next_head.next;
-    // 	}
-    // *current_head_ptr = current_head;
+    if(find_next - h_ptr == current_size)
+    	{
+    		printf("should not happen_next\n");
+    		current_head.size = current_size +next_head.size;
+    		current_head.next = next_head.next;
+    	}
+    *current_head_ptr = current_head;
 
     
     // dict prev_head;
