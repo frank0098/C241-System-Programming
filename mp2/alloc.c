@@ -333,7 +333,7 @@ void *malloc(size_t size)
         
         current_head = current_head->next;
     }
-    
+    printf("this happens\n");
     return NULL;
     
     
