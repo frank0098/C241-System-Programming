@@ -39,7 +39,7 @@ void *reduce(void *ptr, int size)
 		}
 
 		*((int *)ptr1) = size;
-		printf("to this point?\n");
+		
 		return ptr1;
 	}
 	else
@@ -63,7 +63,7 @@ int main()
 		void *ptr = malloc(size);
 		//printf("the address is %p\n",ptr);
 		ptr = reduce(ptr, size / 2);
-
+		printf("to this point?\n");
 
 		free(ptr);
 		
