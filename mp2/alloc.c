@@ -268,6 +268,7 @@ void *malloc(size_t size)
                 {
                     
                     //The header of the just-created free-block
+                    printf("seg here\n");
                     dict header;
                     header.size = memory_left;
                     header.prev = tmp_dict.prev; //question?
@@ -513,7 +514,6 @@ void free(void *ptr)
 * */
 void *realloc(void *ptr, size_t size)
 {
-	printf("the realloc size %zu\n",size );
     // "In case that ptr is NULL, the function behaves exactly as malloc()"
     if (!ptr)
     return malloc(size);
