@@ -410,7 +410,7 @@ void free(void *ptr)
         }
         find_next = find_next + tmp_current_size;
     }
-    printf("this address is  %p\n",find_next);	
+    printf("this address is  %p\n\n",find_next);	
 
     //Unmask the current pointer;
 	int current_size;
