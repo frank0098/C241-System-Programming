@@ -395,7 +395,6 @@ void free(void *ptr)
     void* find_next;
     find_next = h_ptr;
     printf("to free  pointer is  %p\n",ptr);
-    printf("the head address is   %p\n",head_pointer);
     while(1)
     {
     	//printf("freeloop\n");
@@ -436,7 +435,6 @@ void free(void *ptr)
     current_head.size = current_size;
     current_head.prev = next_head.prev;
     current_head.next = next_head_pointer;
-    *current_head_ptr = current_head;
 
     //next head
     next_head.prev = current_head_ptr;
@@ -451,8 +449,8 @@ void free(void *ptr)
     		current_head.size = current_size +next_head.size;
     		current_head.next = next_head.next;
     	}
+
     //*current_head_ptr = current_head;
-    	getchar();
 
     
     dict prev_head;
