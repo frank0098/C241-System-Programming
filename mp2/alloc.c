@@ -436,7 +436,7 @@ void free(void *ptr)
     dict* prev_head_ptr;
     prev_head_ptr = next_head.prev;
 
-    printf("previous is null %p\n",prev_head);
+    printf("previous is null %p\n",prev_head_ptr);
     if(find_prev != NULL)
     {
     	prev_head = *prev_head_ptr;
