@@ -456,7 +456,7 @@ void free(void *ptr)
     		current_head.next = next_head.next;
     	}
 
-    *current_head_ptr = current_head;
+    //*current_head_ptr = current_head;
 
     
     dict prev_head;
