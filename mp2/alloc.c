@@ -142,11 +142,13 @@ void *malloc(size_t size)
         head_pointer = tmp_head_pointer;
 
 
+        printf("this address is  %p\n",find_free_head);	
+
     	printf("previous address is  %p\n",header.prev);
 
     	printf("next address is  %p\n",header.next);	
 
-    	printf("the head address is  %p\n",head_pointer);	
+    	
         return return_pointer;
         
     }
@@ -395,6 +397,7 @@ void free(void *ptr)
         }
         find_next = find_next + tmp_current_size;
     }
+    printf("this address is  %p\n",find_next);	
 
     //Unmask the current pointer;
 	int current_size;
