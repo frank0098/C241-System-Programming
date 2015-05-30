@@ -492,7 +492,7 @@ void free(void *ptr)
     fuck_tmp = h_ptr+16;
     fuck = (int*) fuck_tmp;
     printf("the fuck number is %d\n",*fuck);
-    fuck_tmp = fuck_tmp + 4;
+    fuck_tmp = h_ptr + 12;
     printf("the fucking address is %p\n",fuck);
 
 }
