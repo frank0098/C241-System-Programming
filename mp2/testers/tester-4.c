@@ -30,6 +30,7 @@ void *reduce(void *ptr, int size)
 
 		ptr1 = realloc(ptr1, size);
 		free(ptr2);
+		printf("to this point?\n");
 
 		if (*((int *)ptr1) != size / 2)
 		{

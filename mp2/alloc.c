@@ -299,7 +299,6 @@ void *malloc(size_t size)
                 //if it is not the last node
                 else
                 {
-                	printf("seg here\n");
                     //The header of the just-created free-block
                     //printf(" next pointer is not null\n");
                     dict header;
