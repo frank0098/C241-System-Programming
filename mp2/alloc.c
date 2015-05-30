@@ -480,20 +480,17 @@ void free(void *ptr)
     fuck = (int*) h_ptr;
     void* fuck_tmp;
     fuck_tmp= h_ptr;
-    fuck_tmp = h_ptr+4;
-    fuck = (int*) fuck_tmp;
-    printf("the fuck number is %d\n",*fuck);
+    
     fuck_tmp = h_ptr+8;
     fuck = (int*) fuck_tmp;
     printf("the fuck number is %d\n",*fuck);
-    fuck_tmp = h_ptr+12;
-    fuck = (int*) fuck_tmp;
-    printf("the fuck number is %d\n",*fuck);
-    fuck_tmp = h_ptr+16;
-    fuck = (int*) fuck_tmp;
-    printf("the fuck number is %d\n",*fuck);
+    
     fuck_tmp = h_ptr + 12;
     printf("the fucking address is %p\n",fuck);
+
+    fuck_tmp = h_ptr+20;
+    fuck = (int*) fuck_tmp;
+    printf("the fuck number is %d\n",*fuck);
 
 }
 
