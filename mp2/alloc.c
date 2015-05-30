@@ -419,6 +419,7 @@ void free(void *ptr)
 	curr = (int*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
+	printf("current size is %d\n",current_size);
 
     //next free head
     dict next_head;
