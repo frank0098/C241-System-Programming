@@ -412,8 +412,9 @@ void free(void *ptr)
     next_head_pointer = (dict*) find_next;
     next_head = *next_head_pointer;
 
-    printf("previous address is  %p\n",next_head.prev);
-
+    //prev head
+    dict* find_prev;
+    find_prev = next_head.prev;
 
     //current head
     dict current_head;
@@ -436,18 +437,12 @@ void free(void *ptr)
     	}
     *current_head_ptr = current_head;
 
-    //prev head
-    dict* find_prev;
-    find_prev = next_head.prev;
-
+    
     dict prev_head;
-    dict* prev_head_ptr;
-    prev_head_ptr = next_head.prev;
-
-    printf("previous address is  %p\n",prev_head_ptr);
+    printf("previous address is  %p\n",find_prev);
     if(find_prev != NULL)
     {
-    	prev_head = *prev_head_ptr;
+    	prev_head = *find_prev;
     	prev_head.size = prev_head.size;
     	prev_head.prev = prev_head.prev;
     	prev_head.next = (dict*) h_ptr;
@@ -459,7 +454,7 @@ void free(void *ptr)
     		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
     	}
-    	*prev_head_ptr = prev_head;
+    	*find_prev = prev_head;
     }
     else
     {
