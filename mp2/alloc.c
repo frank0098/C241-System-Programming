@@ -402,6 +402,7 @@ void free(void *ptr)
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
+        printf("the size is \n",*next_ptr);
         tmp_current_size = *next_ptr & ~1;
         
         if(*next_ptr %2 ==0)
