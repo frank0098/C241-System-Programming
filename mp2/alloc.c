@@ -165,7 +165,7 @@ void *malloc(size_t size)
         tmp_dict = *current_head;
         tmp_size = tmp_dict.size;
         
-        
+
             printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         
         if(tmp_size >= malloc_size + 4)
@@ -436,7 +436,7 @@ void free(void *ptr)
     dict* prev_head_ptr;
     prev_head_ptr = next_head.prev;
 
-    
+    printf("previous is null %p\n",prev_head);
     if(find_prev != NULL)
     {
     	prev_head = *prev_head_ptr;
@@ -455,7 +455,7 @@ void free(void *ptr)
     }
     else
     {
-    	printf("previous is null\n");
+    	
     	head_pointer = (dict*) h_ptr;
     }
 
