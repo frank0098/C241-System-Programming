@@ -9,6 +9,7 @@ void *reduce(void *ptr, int size)
 	if (size > STOP_MALLOC_SIZE)
 	{
 		void *ptr1 = realloc(ptr, size / 2);
+		printf("realloc this point\n");
 		void *ptr2 = malloc(size / 2);
 		printf("this point\n");
 
