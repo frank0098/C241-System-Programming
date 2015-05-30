@@ -412,70 +412,71 @@ void free(void *ptr)
         find_next = find_next + tmp_current_size;
     }
     printf("the next free address is   %p\n\n",find_next);	
-    getchar();
 
- //    //Unmask the current pointer;
-	// int current_size;
-	// int *curr;
-	// curr = (int*) h_ptr;
-	// *curr = *curr & ~1;
-	// current_size = *curr;
+    //Unmask the current pointer;
+	int current_size;
+	int *curr;
+	curr = (int*) h_ptr;
+	*curr = *curr & ~1;
+	current_size = *curr;
 
- //    //next free head
- //    dict next_head;
- //    dict* next_head_pointer;
- //    next_head_pointer = (dict*) find_next;
- //    next_head = *next_head_pointer;
+    //next free head
+    dict next_head;
+    dict* next_head_pointer;
+    next_head_pointer = (dict*) find_next;
+    next_head = *next_head_pointer;
 
- //    //prev head
- //    dict* find_prev;
- //    find_prev = next_head.prev;
+    //prev head
+    dict* find_prev;
+    find_prev = next_head.prev;
 
- //    //current head
- //    dict current_head;
- //    dict* current_head_ptr;
- //    current_head_ptr = (dict*) h_ptr;
- //    current_head.size = current_size;
- //    current_head.prev = next_head.prev;
- //    current_head.next = next_head_pointer;
+    //current head
+    dict current_head;
+    dict* current_head_ptr;
+    current_head_ptr = (dict*) h_ptr;
+    current_head.size = current_size;
+    current_head.prev = next_head.prev;
+    current_head.next = next_head_pointer;
 
- //    //next head
- //    next_head.prev = current_head_ptr;
- //    next_head.next = next_head.next;
- //    *next_head_pointer = next_head;
+    //next head
+    next_head.prev = current_head_ptr;
+    next_head.next = next_head.next;
+    *next_head_pointer = next_head;
 
 
- //    //coalescene possible
- //    if(find_next - h_ptr == current_size)
- //    	{
- //    		current_head.size = current_size +next_head.size;
- //    		current_head.next = next_head.next;
- //    	}
- //    *current_head_ptr = current_head;
+    //coalescene possible
+    if(find_next - h_ptr == current_size)
+    	{
+    		printf("should not happen_next\n");
+    		current_head.size = current_size +next_head.size;
+    		current_head.next = next_head.next;
+    	}
+    *current_head_ptr = current_head;
 
     
- //    dict prev_head;
- //    //printf("previous address is  %p\n",find_prev);
- //    if(find_prev != NULL)
- //    {
- //    	prev_head = *find_prev;
- //    	prev_head.size = prev_head.size;
- //    	prev_head.prev = prev_head.prev;
- //    	prev_head.next = (dict*) h_ptr;
+    dict prev_head;
+    //printf("previous address is  %p\n",find_prev);
+    if(find_prev != NULL)
+    {
+    	printf("should not happen_prev\n");
+    	prev_head = *find_prev;
+    	prev_head.size = prev_head.size;
+    	prev_head.prev = prev_head.prev;
+    	prev_head.next = (dict*) h_ptr;
     	
 
- //    	//coalescene
- //    	if(find_prev + prev_head.size == h_ptr)
- //    	{
- //    		prev_head.size = prev_head.size + current_head.size;
- //    		prev_head.next = current_head.next;
- //    	}
- //    	*find_prev = prev_head;
- //    }
- //    else
- //    {
- //    	head_pointer =  h_ptr;
- //    }
+    	//coalescene
+    	if(find_prev + prev_head.size == h_ptr)
+    	{
+    		prev_head.size = prev_head.size + current_head.size;
+    		prev_head.next = current_head.next;
+    	}
+    	*find_prev = prev_head;
+    }
+    else
+    {
+    	head_pointer =  h_ptr;
+    }
 
 
 
