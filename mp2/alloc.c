@@ -173,7 +173,7 @@ void *malloc(size_t size)
         
         if(tmp_size >= malloc_size + 4 || current_head->next == NULL)
         {
-            printf("seg here\n");
+            
             //The fragment is enough to malloc
             //pointer current_head now points to the head of the spot to malloc
             
@@ -254,6 +254,7 @@ void *malloc(size_t size)
             }
             else
             {
+            	printf("seg here\n");
                 //Find the next free block
                 void* find_next_head;
                 find_next_head = find_user_head;
