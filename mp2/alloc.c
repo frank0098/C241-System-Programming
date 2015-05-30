@@ -166,6 +166,8 @@ void *malloc(size_t size)
         tmp_size = tmp_dict.size;
         
         
+            printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
+        
         if(tmp_size >= malloc_size + 4)
         {
             
@@ -193,7 +195,6 @@ void *malloc(size_t size)
             int memory_left;
             memory_left = tmp_size - malloc_size - 4;
 
-            printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
             
             
             if(tmp_size - malloc_size < 24)
