@@ -6,7 +6,7 @@
 
 int main()
 {
-	//malloc(1);
+	malloc(10000);
 	
 	int i;
 	void *ptr = NULL;
