@@ -367,7 +367,7 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 
-	//printf("\n free \n");
+	printf("\n free \n");
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
@@ -380,9 +380,10 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = (void*) head_pointer;
-    //printf("the head pointer is   %p\n",head_pointer);
+    printf("the head pointer is   %p\n",head_pointer);
     while(1)
     {
+    	printf("loop\n");
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
@@ -438,7 +439,7 @@ void free(void *ptr)
     dict* prev_head_ptr;
     prev_head_ptr = next_head.prev;
 
-   // printf("previous address is  %p\n",prev_head_ptr);
+    printf("previous address is  %p\n",prev_head_ptr);
     if(find_prev != NULL)
     {
     	prev_head = *prev_head_ptr;
