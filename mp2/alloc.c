@@ -151,8 +151,6 @@ void *malloc(size_t size)
 
         printf("initiliaze finished: head pointer is at %p\n",head_pointer );
 
-        printf("returned pointer  is at %p\n",return_pointer );
-    	
         return return_pointer;
         
     }
@@ -388,7 +386,6 @@ void free(void *ptr)
 
     void* h_ptr;
     h_ptr = ptr - 4;
-    printf("the h_ptr address is %p\n",h_ptr );
     
 
     //Find next free block
