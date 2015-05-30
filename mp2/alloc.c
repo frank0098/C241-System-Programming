@@ -389,6 +389,22 @@ void free(void *ptr)
 
     void* h_ptr;
     h_ptr = ptr - 4;
+
+    int* fuck;
+    fuck = (int*) h_ptr;
+    void* fuck_tmp;
+    fuck_tmp= h_ptr;
+    
+    fuck_tmp = h_ptr+8;
+    fuck = (int*) fuck_tmp;
+    printf("the fuck number is %d\n",*fuck);
+    
+    fuck_tmp = h_ptr + 12;
+    printf("the fucking address is %p\n",fuck);
+
+    fuck_tmp = h_ptr+20;
+    fuck = (int*) fuck_tmp;
+    printf("the fuck number is %d\n",*fuck);
     
 
     //Find next free block
@@ -475,12 +491,6 @@ void free(void *ptr)
     	head_pointer =  h_ptr;
     }
 
-
-    int* fuck;
-    fuck = (int*) h_ptr;
-    void* fuck_tmp;
-    fuck_tmp= h_ptr;
-    
     fuck_tmp = h_ptr+8;
     fuck = (int*) fuck_tmp;
     printf("the fuck number is %d\n",*fuck);
@@ -491,6 +501,7 @@ void free(void *ptr)
     fuck_tmp = h_ptr+20;
     fuck = (int*) fuck_tmp;
     printf("the fuck number is %d\n",*fuck);
+
 
 }
 
