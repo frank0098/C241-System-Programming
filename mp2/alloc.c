@@ -172,8 +172,8 @@ void *malloc(size_t size)
 
         printf("current address is %p\n",current_head);
         printf("current size is %p\n",tmp_size);
-        printf("prv address is %p\n",tmp_dict->prev);
-        printf("next address is %p\n",tmp_dict->next);
+        printf("prv address is %p\n",tmp_dict.prev);
+        printf("next address is %p\n",tmp_dict.next);
         
 
             //printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
