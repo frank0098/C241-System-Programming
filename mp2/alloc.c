@@ -452,7 +452,7 @@ void free(void *ptr)
     	}
     *current_head_ptr = current_head;
 
-    
+    getchar();
     // dict prev_head;
     // //printf("previous address is  %p\n",find_prev);
     // if(find_prev != NULL)
