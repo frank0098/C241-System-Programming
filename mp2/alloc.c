@@ -525,8 +525,10 @@ void *realloc(void *ptr, size_t size)
         free(ptr);
         return NULL;
     }
+    void *new_ptr;
+    new_ptr = malloc(size);
+    free(ptr);
+    return new_ptr;
     
     
-    
-    return NULL;
 }
