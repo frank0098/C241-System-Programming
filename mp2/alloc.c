@@ -475,11 +475,15 @@ void free(void *ptr)
     	head_pointer =  h_ptr;
     }
 
+
     int* fuck;
     fuck = (int*) h_ptr;
-    fuck = fuck+12;
+    void* fuck_tmp;
+    fuck_tmp= h_ptr;
+    fuck_tmp = h_ptr+12;
+    fuck = (int*) fuck_tmp;
     printf("the fuck number is %d\n",*fuck);
-    fuck=fuck++;
+    fuck_tmp = fuck_tmp + 4;
     printf("the fucking address is %p\n",fuck);
 
 }
