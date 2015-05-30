@@ -171,7 +171,7 @@ void *malloc(size_t size)
 
             printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         
-        if(tmp_size >= malloc_size + 4 )
+        if(tmp_size >= malloc_size + 4 || current_head->next == NULL)
         {
             
             //The fragment is enough to malloc
@@ -203,7 +203,7 @@ void *malloc(size_t size)
             if(tmp_size - malloc_size < 24)
             {
                 
-                ////printf(" not gonna happen not enough space to \n");
+                printf("  not enough space to \n");
                 if(tmp_dict.next!=NULL)
                 return return_pointer;
                 else
