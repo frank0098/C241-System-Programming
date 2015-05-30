@@ -513,6 +513,7 @@ void free(void *ptr)
 * */
 void *realloc(void *ptr, size_t size)
 {
+	printf("the realloc size %zu\n",size );
     // "In case that ptr is NULL, the function behaves exactly as malloc()"
     if (!ptr)
     return malloc(size);
