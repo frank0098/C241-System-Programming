@@ -165,9 +165,9 @@ void *malloc(size_t size)
     while(1)
     {	//printf("mallocloop\n");
         //why this not working? *org->size
-count++;
-if(count>10)
-	break;
+// count++;
+// if(count>10)
+// 	break;
         int tmp_size;
         dict tmp_dict;
         tmp_dict = *current_head;
