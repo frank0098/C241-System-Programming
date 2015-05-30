@@ -164,7 +164,7 @@ void *malloc(size_t size)
     //Trasverse the linked list
     while(1)
     {	//printf("mallocloop\n");
-        ////printf("current address is %p\n",current_head);
+        printf("current address is %p\n",current_head);
         //why this not working? *org->size
         int tmp_size;
         dict tmp_dict;
