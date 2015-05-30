@@ -57,12 +57,13 @@ int main()
 	{
 		printf("started\n");
 		void *ptr = malloc(size);
-		printf("loop\n");
 		printf("the address is %p",ptr);
 		ptr = reduce(ptr, size / 2);
 		free(ptr);
 		
 		size /= 2;
+
+		printf("loop end\n");
 	}
 
 	printf("Memory was allocated, used, and freed!\n");	
