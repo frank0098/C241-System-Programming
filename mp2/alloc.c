@@ -390,16 +390,11 @@ void free(void *ptr)
     void* h_ptr;
     h_ptr = ptr - 4;
 
-    int* fuck;
-    fuck = (int*) h_ptr;
-    void* fuck_tmp;
-    fuck_tmp= h_ptr;
-    
-    fuck_tmp = h_ptr+8;
-    fuck = (int*) fuck_tmp;
-    int tmp_fuck;
-    tmp_fuck = *fuck;
-    printf("the fucking number is %d\n",tmp_fuck);
+    int tmp_current_size;
+    int* next_ptr;
+    next_ptr = (int*) h_ptr;
+    tmp_current_size = *next_ptr & ~1;
+    printf("the fucking number is %d\n",tmp_current_size);
     
        
 
@@ -487,9 +482,6 @@ void free(void *ptr)
     	head_pointer =  h_ptr;
     }
 
-    fuck_tmp = h_ptr+8;
-    fuck = (int*) fuck_tmp;
-    printf("the fuck number is %d\n",*fuck);
     
 
 }
