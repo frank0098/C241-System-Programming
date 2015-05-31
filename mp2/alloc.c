@@ -412,7 +412,7 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = h_ptr;
-    if( find_next < head_pointer)
+    if( find_next > head_pointer)
     {
     	find_next = head_pointer;
     	printf("here\n");
