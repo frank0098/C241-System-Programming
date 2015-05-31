@@ -419,7 +419,6 @@ void free(void *ptr)
 
     if( find_next < head_pointer)
     	find_next = head_pointer;
-    printf("to free  pointer is  %p\n",ptr);
     int count=0;
     while(1)
     {
@@ -428,7 +427,6 @@ void free(void *ptr)
         int* next_ptr;
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
-        printf("the size is %d\n",tmp_current_size);
 
         
         if(!(*next_ptr & 0x1))
@@ -436,13 +434,11 @@ void free(void *ptr)
             break;
         }
         find_next = find_next + tmp_current_size;
-        printf("the next free address is   %p\n",find_next);
         count++;
     	if(count==10)
     		;
     		//break;
-    }
-    printf("the next free address is   %p\n",find_next);	
+    }	
 
     //Unmask the current pointer;
 	int current_size;
