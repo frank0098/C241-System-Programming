@@ -120,7 +120,7 @@ void *malloc(size_t size)
         int* tmp_head;
         tmp_head = (int*) heap_end;
         printf("segfault herre\n");
-        *tmp_head = malloc_size + 4;
+        *tmp_head = malloc_size ;
         
         printf("segfault herre\n");
         //Mask the last bit to keep track of a "used" seg
