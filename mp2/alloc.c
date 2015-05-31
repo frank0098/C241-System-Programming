@@ -145,6 +145,7 @@ void *malloc(size_t size)
         
         *tmp_head_pointer = header;
         head_pointer = (void*) tmp_head_pointer;
+        printf("return successfully\n");
 
 
         return return_pointer;
