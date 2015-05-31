@@ -219,7 +219,7 @@ void *malloc(size_t size)
             if(tmp_size < malloc_size + 4 + 24 + 8)
             {
                 
-                //printf("  not enough space to \n");
+
                 if(tmp_dict.next!=NULL)
                 	{
                 		
@@ -300,6 +300,7 @@ void *malloc(size_t size)
         		printf("Allocated Size is %d\n\n", malloc_size);
 
         		//Mask the last bit to keep track of a "used" seg
+        		
             	*tmp_head = *tmp_head | 1;
                 return return_pointer;
             }
