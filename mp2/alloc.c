@@ -412,6 +412,8 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = h_ptr;
+    if( find_next < head_pointer)
+    	find_next = head_pointer;
     //("to free  pointer is  %p\n",ptr);
     while(1)
     {
@@ -445,13 +447,6 @@ void free(void *ptr)
     //prev head
     dict* find_prev;
     find_prev = next_head.prev;
-    void* comp;
-    comp = (void*) next_head.prev;
-    if(head_pointer - comp >0)
-    {
-    	find_prev = head_pointer;
-    	printf("thisthis?\n");
-    }
 
     //current head
     dict current_head;
