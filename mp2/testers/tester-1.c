@@ -8,7 +8,7 @@ int main()
 	void *ptr1 = realloc(ptr, size/2);
 	void *ptr2 = malloc(size/2);
 	void *ptr3 = realloc(ptr1, size/4);
-	void *ptr3 = malloc( size/4);
+	void *ptr4 = malloc( size/4);
 
 	free(ptr4);
 	free(ptr3);
