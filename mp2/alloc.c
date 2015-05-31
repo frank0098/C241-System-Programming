@@ -237,6 +237,7 @@ void *malloc(size_t size)
                 		next_head.prev = find_prev_head;
                 		*find_next_head = next_head;
 
+
                 		if(find_prev_head != NULL)
                 		{
                 			dict prev_head;
@@ -519,6 +520,13 @@ void free(void *ptr)
     	{
     		current_head.size = current_size + next_head.size;
     		current_head.next = next_head.next;
+
+    		dict next_next_head;
+    		dict* next_next_ptr;
+    		next_next_ptr = next_head.next;
+    		next_next_head = *next_next_ptr;
+    		next_next_head.prev = current_head_ptr;
+    		*next_next_ptr = next_next_head;
     	}
     *current_head_ptr = current_head;
 
@@ -538,8 +546,20 @@ void free(void *ptr)
     	{
     		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
+
+    		dict prev_prev_head;
+    		dict* prev_prev_ptr;
+    		prev_prev_ptr = prev_head.prev;
+    		if(prev_prev_ptr!= NULL)
+    		{
+    			prev_prev_head = *prev_prev_ptr;
+    			prev_prev_head.prev = current_head_ptr;
+    			*prev_prev_ptr = prev_prev_head;
+    			head_pointer = prev_prev_ptr;
+    		}
     	}
     	*find_prev = prev_head;
+    	head_pointer = find_prev;
     }
     else
     {
