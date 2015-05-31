@@ -99,8 +99,8 @@ void *malloc(size_t size)
     int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
-    printf("malloc, the size is %d\n",size);
-    printf("malloc, the size is %d\n",malloc_size);
+    // printf("malloc, the size is %d\n",size);
+    // printf("malloc, the size is %d\n",malloc_size);
     
     //first time call,the head pointer is null
     if(head_pointer == NULL)
@@ -120,10 +120,9 @@ void *malloc(size_t size)
         //malloc requested malloc_size + header for user
         int* tmp_head;
         tmp_head = (int*) heap_end;
-        printf("segfault herre\n");
         *tmp_head = malloc_size + 4 ;
         
-        printf("segfault herre\n");
+        //printf("segfault herre\n");
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
         
@@ -460,7 +459,7 @@ void free(void *ptr)
         tmp_dict_ptr = (dict*) find_next;
         tmp = *tmp_dict_ptr;
         find_next = (void*) tmp.next;
-        if(find_next >= ptr)
+        if(find_next > ptr)
             break;
         
         
