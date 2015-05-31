@@ -436,7 +436,7 @@ void free(void *ptr)
 {
 	//getchar();
 
-	//printf("\n free \n");
+	printf("\n free \n");
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
@@ -507,7 +507,6 @@ void free(void *ptr)
 
     //next head
     next_head.prev = current_head_ptr;
-    next_head.next = next_head.next;
     *next_head_pointer = next_head;
 
 
