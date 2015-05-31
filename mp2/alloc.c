@@ -63,7 +63,7 @@ void *calloc(size_t num, size_t size)
 * */
 
 typedef struct dict {
-    size_t size;
+    int size;
     struct dict *prev;
     struct dict *next;
 }dict;
@@ -71,9 +71,9 @@ typedef struct dict {
 
 
 
-size_t round_up(size_t size)
+int round_up(size_t size)
 {
-    size_t i=0;
+    int i=0;
     while(1)
     {
         if((size+i)%8==0)
@@ -90,18 +90,17 @@ size_t round_up(size_t size)
 
 void *head_pointer = NULL;
 void *tail_pointer = NULL;
-void *free_pointer = NULL;
 
 
 void *malloc(size_t size)
 {
     
     //getchar();
-    size_t malloc_size;
+    int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
-    printf("malloc, the size is %d\n",size);
-    printf("malloc, the size is %d\n",malloc_size);
+    // printf("malloc, the size is %d\n",size);
+    // printf("malloc, the size is %d\n",malloc_size);
     
     //first time call,the head pointer is null
     if(head_pointer == NULL)
@@ -119,8 +118,8 @@ void *malloc(size_t size)
         
         
         //malloc requested malloc_size + header for user
-        size_t* tmp_head;
-        tmp_head = (size_t*) heap_end;
+        int* tmp_head;
+        tmp_head = (int*) heap_end;
         *tmp_head = malloc_size + 4 ;
         
         //printf("segfault herre\n");
@@ -167,7 +166,7 @@ void *malloc(size_t size)
     {	
 
     	
-        size_t tmp_size;
+        int tmp_size;
         dict tmp_dict;
         tmp_dict = *current_head;
         tmp_size = tmp_dict.size;
@@ -185,8 +184,8 @@ void *malloc(size_t size)
             find_user_head = (void*) current_head;
             
             //malloc requested malloc_size + header for user
-            size_t* tmp_head;
-            tmp_head = (size_t*) find_user_head;
+            int* tmp_head;
+            tmp_head = (int*) find_user_head;
             *tmp_head = malloc_size + 4;
             
             
@@ -197,7 +196,7 @@ void *malloc(size_t size)
             
             
             //Keep track of memory remained
-            size_t memory_left;
+            int memory_left;
             memory_left = tmp_size - malloc_size - 4;
 
             
@@ -245,7 +244,7 @@ void *malloc(size_t size)
                 else
                 {
                     //Allocate New memory
-                    size_t new_allocated_memory;
+                    int new_allocated_memory;
                     new_allocated_memory = 1024 * size;
                     sbrk(new_allocated_memory);
                     tail_pointer = sbrk(0);
@@ -431,45 +430,46 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = head_pointer;
-    if(free_pointer <=h_ptr)
-        find_next = free_pointer;
-    
 
     
 
-    size_t tmp_current_size;
-        size_t* next_ptr;
-        next_ptr = (size_t*) h_ptr;
+    int tmp_current_size;
+        int* next_ptr;
+        next_ptr = (int*) h_ptr;
         tmp_current_size = *next_ptr & ~1;
+    int count=0;
     while(1)
     {
 
-    	("current address is %p\n",find_next); 
+    	//("current address is %p\n",find_next); 
     	
-        int tmp_current_size;
-        int* next_ptr;
-        next_ptr = (int*) find_next;
-        tmp_current_size = *next_ptr & ~1;
+        // int tmp_current_size;
+        // int* next_ptr;
+        // next_ptr = (int*) find_next;
+        // tmp_current_size = *next_ptr & ~1;
 
-        if(!(*next_ptr & 0x1))
-        {
-            break;
-        }
-
-        // dict tmp;
-        // dict* tmp_dict_ptr;
-        // tmp_dict_ptr = (dict*) find_next;
-        // tmp = *tmp_dict_ptr;
-        // if(find_next >= h_ptr)
+        // if(!(*next_ptr & 0x1))
+        // {
         //     break;
-        // find_next = (void*) tmp.next;
+        // }
+
+        dict tmp;
+        dict* tmp_dict_ptr;
+        tmp_dict_ptr = (dict*) find_next;
+        tmp = *tmp_dict_ptr;
+        if(find_next >= h_ptr)
+            break;
+        find_next = (void*) tmp.next;
         
+        
+        
+    		//break;
     }	
 
     //Unmask the current pointer;
-	size_t current_size;
-	size_t *curr;
-	curr = (size_t*) h_ptr;
+	int current_size;
+	int *curr;
+	curr = (int*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
 
@@ -550,7 +550,7 @@ void free(void *ptr)
     {
     	head_pointer =  h_ptr;
     }
-    free_pointer = h_ptr;
+    
 
 }
 
