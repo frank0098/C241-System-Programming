@@ -337,7 +337,7 @@ void *malloc(size_t size)
                     //printf(" next pointer is not null\n");
                     dict header;
                     header.size = memory_left;
-                    header.prev = current_head;
+                    header.prev = tmp_dict.prev;
                     header.next = tmp_dict.next;
                     *header_pointer = header;
                     
