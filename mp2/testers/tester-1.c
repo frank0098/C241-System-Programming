@@ -7,7 +7,10 @@ int main()
 	void *ptr = malloc(size);
 	free(ptr);
 	ptr = malloc(size);
-	
+	free(ptr);
+	ptr = malloc(size);
+	free(ptr);
+	ptr = malloc(size);
 
 	
 	if (ptr == NULL)
