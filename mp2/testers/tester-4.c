@@ -1,8 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define START_MALLOC_SIZE 1024*1024*128
-#define STOP_MALLOC_SIZE  1024
+#define K 1024
+#define M (1024 * 1024)
+#define G (1024 * 1024 * 1024)
+
+#ifdef PART2
+  #define START_MALLOC_SIZE (1536 * M)
+  #define STOP_MALLOC_SIZE  (1 * K)
+#else
+  #define START_MALLOC_SIZE (1 * G)
+  #define STOP_MALLOC_SIZE  (1 * K)
+#endif
 
 void *reduce(void *ptr, int size)
 {
@@ -26,9 +35,8 @@ void *reduce(void *ptr, int size)
 			exit(2);
 		}
 
-		ptr1 = realloc(ptr1, size);
 		free(ptr2);
-
+		ptr1 = realloc(ptr1, size);
 
 		if (*((int *)ptr1) != size / 2)
 		{
@@ -56,15 +64,11 @@ int main()
 	int size = START_MALLOC_SIZE;
 	while (size > STOP_MALLOC_SIZE)
 	{
-		printf("started\n");
 		void *ptr = malloc(size);
-		//printf("the address is %p\n",ptr);
 		ptr = reduce(ptr, size / 2);
 		free(ptr);
 		
 		size /= 2;
-
-		printf("loop end\n");
 	}
 
 	printf("Memory was allocated, used, and freed!\n");	
