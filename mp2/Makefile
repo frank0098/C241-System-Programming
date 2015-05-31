@@ -24,7 +24,7 @@ mreplace: mreplace.c
 mcontest: mcontest.c
 	$(CC) $^ $(FLAGS) -o $@ -ldl -lpthread
 
-tester-agents: tester-1 tester-2 tester-3 tester-4 tester-5 tester-9
+tester-agents: tester-1 tester-2 tester-3 tester-4 tester-5 tester-6 tester-7 tester-8 tester-9
 
 tester-1: testers/tester-1.c 
 	$(CC) $^ $(FLAGS) -o $@
@@ -41,10 +41,19 @@ tester-4: testers/tester-4.c
 tester-5: testers/tester-5.c 
 	$(CC) $^ $(FLAGS) -o $@
 
+tester-6: testers/tester-5.c 
+	$(CC) $^ $(FLAGS) -o $@
+
+tester-7: testers/tester-5.c 
+	$(CC) $^ $(FLAGS) -o $@
+
+tester-8: testers/tester-5.c 
+	$(CC) $^ $(FLAGS) -o $@
+
 tester-9: testers/tester-9.c 
 	$(CC) $^ $(FLAGS) -o $@
 	
 .PHONY : clean
 clean:
-	-rm -f *.o *.so mreplace mcontest tester-1 tester-2 tester-3 tester-4 tester-5 tester-9
+	-rm -f *.o *.so mreplace mcontest tester-1 tester-2 tester-3 tester-4 tester-5 tester-6 tester-7 tester-8 tester-9
 	-rm -rf doc/html
