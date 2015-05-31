@@ -530,7 +530,6 @@ void free(void *ptr)
     		next_next_head = *next_next_ptr;
     		next_next_head.prev = current_head_ptr;
     		*next_next_ptr = next_next_head;
-    		current_head.size = current_head.size + next_next_head.size;
     		}
     	}
     *current_head_ptr = current_head;
@@ -558,10 +557,9 @@ void free(void *ptr)
     		if(prev_prev_ptr!= NULL)
     		{
     			prev_prev_head = *prev_prev_ptr;
-    			prev_prev_head.prev = current_head_ptr;
+    			prev_prev_head.next = current_head_ptr;
     			*prev_prev_ptr = prev_prev_head;
-    			head_pointer = prev_prev_ptr;
-    			prev_prev_head.size = prev_prev_head.size + prev_head.size;
+    			
     		}
     	}
     	*find_prev = prev_head;
