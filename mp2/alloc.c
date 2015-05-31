@@ -152,7 +152,7 @@ void *malloc(size_t size)
 
     	//printf("next address is  %p\n",header.next);	
 
-        printf("initiliaze finished: head pointer is at %p\n",head_pointer );
+        printf("Initiliaze finished: head pointer is at %p\n",head_pointer );
         printf("Allocated Size is %d\n", malloc_size);
 
         return return_pointer;
@@ -212,7 +212,7 @@ void *malloc(size_t size)
             int memory_left;
             memory_left = tmp_size - malloc_size - 4;
 
-          	printf("return pointer is at %p\n",return_pointer );
+          	printf("Allocated pointer is at %p\n",return_pointer );
         	printf("Allocated Size is %d\n", malloc_size);
 
             
