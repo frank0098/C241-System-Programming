@@ -101,7 +101,7 @@ void *malloc(size_t size)
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
     // printf("malloc, the size is %d\n",size);
-    // printf("malloc, the size is %d\n",malloc_size);
+     printf("malloc, the size is %d\n",malloc_size);
     
     //first time call,the head pointer is null
     if(head_pointer == NULL)
