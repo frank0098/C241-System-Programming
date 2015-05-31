@@ -442,7 +442,7 @@ void free(void *ptr)
     //current head
     dict current_head;
     dict* current_head_ptr;
-    current_head_ptr = (dict*) (ptr - 4);
+    current_head_ptr = (dict*) h_ptr;
     current_head.size = current_size;
     current_head.prev = next_head.prev;
     current_head.next = next_head_pointer;
@@ -459,7 +459,7 @@ void free(void *ptr)
     		current_head.size = current_size + next_head.size;
     		current_head.next = next_head.next;
     	}
-
+    printf("current_head_ptr is %p\n",current_head_ptr);
     *current_head_ptr = current_head;
 
     
