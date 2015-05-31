@@ -82,11 +82,14 @@ int round_up(size_t size)
     {
         if((size+i)%8==0)
         {
-            return size+i;
             break;
         }
         i++;
     }
+    if(size+i < 24)
+    	return 24;
+    else 
+     	return size+i;
 }
 
 void *head_pointer = NULL;
@@ -470,7 +473,6 @@ void free(void *ptr)
     dict0 fuck0;
     fuck = *current_head_ptr;
     printf("the fucking current_head_ptr is %d\n",fuck.size);
-    printf("size of dict is %d\n",sizeof(int*));
 
     
     dict prev_head;
