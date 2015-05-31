@@ -423,7 +423,7 @@ void free(void *ptr)
         printf("the next free address is   %p\n",find_next);
         count++;
     	if(count==10)
-    		break;
+    		//break;
     }
     printf("the next free address is   %p\n",find_next);	
 
