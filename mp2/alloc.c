@@ -18,13 +18,13 @@
 * *    Size of elements.
 * *
 * * @return
-* *    A pointer to the memory block allocated by the function.
+* *    A posize_ter to the memory block allocated by the function.
 * *
-* *    The type of this pointer is always void*, which can be cast to the
-* *    desired type of data pointer in order to be dereferenceable.
+* *    The type of this posize_ter is always void*, which can be cast to the
+* *    desired type of data posize_ter in order to be dereferenceable.
 * *
 * *    If the function failed to allocate the requested block of memory, a
-* *    NULL pointer is returned.
+* *    NULL posize_ter is returned.
 * *
 * * @see http://www.cplusplus.com/reference/clibrary/cstdlib/calloc/
 * */
@@ -43,7 +43,7 @@ void *calloc(size_t num, size_t size)
 /**
 * * Allocate memory block
 * *
-* * Allocates a block of size bytes of memory, returning a pointer to the
+* * Allocates a block of size bytes of memory, returning a posize_ter to the
 * * beginning of the block.  The content of the newly allocated block of
 * * memory is not initialized, remaining with indeterminate values.
 * *
@@ -51,19 +51,19 @@ void *calloc(size_t num, size_t size)
 * *    Size of the memory block, in bytes.
 * *
 * * @return
-* *    On success, a pointer to the memory block allocated by the function.
+* *    On success, a posize_ter to the memory block allocated by the function.
 * *
-* *    The type of this pointer is always void*, which can be cast to the
-* *    desired type of data pointer in order to be dereferenceable.
+* *    The type of this posize_ter is always void*, which can be cast to the
+* *    desired type of data posize_ter in order to be dereferenceable.
 * *
 * *    If the function failed to allocate the requested block of memory,
-* *    a null pointer is returned.
+* *    a null posize_ter is returned.
 * *
 * * @see http://www.cplusplus.com/reference/clibrary/cstdlib/malloc/
 * */
 
 typedef struct dict {
-    int size;
+    size_t size;
     struct dict *prev;
     struct dict *next;
 }dict;
@@ -71,9 +71,9 @@ typedef struct dict {
 
 
 
-int round_up(size_t size)
+size_t round_up(size_t size)
 {
-    int i=0;
+    size_t i=0;
     while(1)
     {
         if((size+i)%8==0)
@@ -88,51 +88,51 @@ int round_up(size_t size)
      	return size+i;
 }
 
-void *head_pointer = NULL;
-void *tail_pointer = NULL;
+void *head_posize_ter = NULL;
+void *tail_posize_ter = NULL;
 
 
 void *malloc(size_t size)
 {
     
     //getchar();
-    int malloc_size;
+    size_t malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
-    printf("malloc, the size is %d\n",size);
-    printf("malloc, the size is %d\n",malloc_size);
+    prsize_tf("malloc, the size is %d\n",size);
+    prsize_tf("malloc, the size is %d\n",malloc_size);
     
-    //first time call,the head pointer is null
-    if(head_pointer == NULL)
+    //first time call,the head posize_ter is null
+    if(head_posize_ter == NULL)
     {
         //Allocate Enough Space
         void *heap_end;
         heap_end = sbrk(0);
         sbrk(4*malloc_size);
-        tail_pointer = sbrk(0);
+        tail_posize_ter = sbrk(0);
         
         if(heap_end == NULL)
         return NULL;
-        //Find the pointer to the new seg
+        //Find the posize_ter to the new seg
         heap_end = heap_end + 4;
         
         
         //malloc requested malloc_size + header for user
-        int* tmp_head;
-        tmp_head = (int*) heap_end;
-        printf("segfault herre\n");
+        size_t* tmp_head;
+        tmp_head = (size_t*) heap_end;
+        prsize_tf("segfault herre\n");
         *tmp_head = malloc_size + 4 ;
         
-        printf("segfault herre\n");
+        prsize_tf("segfault herre\n");
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
         
-        //The returned pointer to user;
-        void *return_pointer;
+        //The returned posize_ter to user;
+        void *return_posize_ter;
         void *user_ptr;
         user_ptr = (void*) tmp_head;
         user_ptr = user_ptr + 4;
-        return_pointer = user_ptr;
+        return_posize_ter = user_ptr;
         
         //Then go to next free-block
         void *find_free_head;
@@ -145,30 +145,30 @@ void *malloc(size_t size)
         header.next = NULL;
 
         
-        dict* tmp_head_pointer;
-        tmp_head_pointer = (dict*) find_free_head;
+        dict* tmp_head_posize_ter;
+        tmp_head_posize_ter = (dict*) find_free_head;
         
-        *tmp_head_pointer = header;
-        head_pointer = (void*) tmp_head_pointer;
-        printf("return successfully\n");
+        *tmp_head_posize_ter = header;
+        head_posize_ter = (void*) tmp_head_posize_ter;
+        prsize_tf("return successfully\n");
 
 
-        return return_pointer;
+        return return_posize_ter;
         
     }
     
     //if it is not null
     
     dict* current_head;
-    current_head = head_pointer;
+    current_head = head_posize_ter;
     
     //Trasverse the linked list
-    int count=0;
+    size_t count=0;
     while(1)
     {	
 
     	
-        int tmp_size;
+        size_t tmp_size;
         dict tmp_dict;
         tmp_dict = *current_head;
         tmp_size = tmp_dict.size;
@@ -179,26 +179,26 @@ void *malloc(size_t size)
         {
             
             //The fragment is enough to malloc
-            //pointer current_head now points to the head of the spot to malloc
+            //posize_ter current_head now posize_ts to the head of the spot to malloc
             
             //find out the user_head
             void* find_user_head;
             find_user_head = (void*) current_head;
             
             //malloc requested malloc_size + header for user
-            int* tmp_head;
-            tmp_head = (int*) find_user_head;
+            size_t* tmp_head;
+            tmp_head = (size_t*) find_user_head;
             *tmp_head = malloc_size + 4;
             
             
             
             find_user_head = find_user_head + 4;
-            void* return_pointer;
-            return_pointer = find_user_head;
+            void* return_posize_ter;
+            return_posize_ter = find_user_head;
             
             
             //Keep track of memory remained
-            int memory_left;
+            size_t memory_left;
             memory_left = tmp_size - malloc_size - 4;
 
             
@@ -234,7 +234,7 @@ void *malloc(size_t size)
                 		}
                 		else
                 		{
-                			head_pointer = find_next_head;
+                			head_posize_ter = find_next_head;
                 		}
 
                 		*tmp_head = tmp_size;
@@ -246,41 +246,41 @@ void *malloc(size_t size)
                 else
                 {
                     //Allocate New memory
-                    int new_allocated_memory;
+                    size_t new_allocated_memory;
                     new_allocated_memory = 512 * size;
                     sbrk(new_allocated_memory);
-                    tail_pointer = sbrk(0);
+                    tail_posize_ter = sbrk(0);
                     
                     //find out the next head
                     void* find_next_head;
                     find_next_head = find_user_head;
                     find_next_head = find_next_head + malloc_size;
                     
-                    //Now find_next_head points to the start point of next availabe block
-                    dict* header_pointer;
-                    header_pointer = find_next_head;
+                    //Now find_next_head posize_ts to the start posize_t of next availabe block
+                    dict* header_posize_ter;
+                    header_posize_ter = find_next_head;
                     
                     //The header of the just-created free-block
                     dict header;
                     header.size = tmp_dict.size + new_allocated_memory - malloc_size - 4;
                     header.prev = tmp_dict.prev; 
                     header.next = NULL;
-                    *header_pointer = header;
+                    *header_posize_ter = header;
                     
                     
                     //The header of the previous free block
                     dict previous_head;
-                    dict* previous_head_pointer;
-                    previous_head_pointer = tmp_dict.prev;
-                    if(previous_head_pointer != NULL)
+                    dict* previous_head_posize_ter;
+                    previous_head_posize_ter = tmp_dict.prev;
+                    if(previous_head_posize_ter != NULL)
                     {
-                        previous_head = *previous_head_pointer;
-                        previous_head.next = header_pointer;
-                        *previous_head_pointer = previous_head;
+                        previous_head = *previous_head_posize_ter;
+                        previous_head.next = header_posize_ter;
+                        *previous_head_posize_ter = previous_head;
                     }
                     else
                     {
-                        head_pointer = find_next_head;
+                        head_posize_ter = find_next_head;
                     }
                     
                     
@@ -290,7 +290,7 @@ void *malloc(size_t size)
         		//Mask the last bit to keep track of a "used" seg
 
             	*tmp_head = *tmp_head | 1;
-                return return_pointer;
+                return return_posize_ter;
             }
             else
             {
@@ -300,9 +300,9 @@ void *malloc(size_t size)
                 find_next_head = find_user_head;
                 find_next_head = find_next_head + malloc_size;
                 
-                //Now find_next_head points to the start point of next availabe block
-                dict* header_pointer;
-                header_pointer = find_next_head;
+                //Now find_next_head posize_ts to the start posize_t of next availabe block
+                dict* header_posize_ter;
+                header_posize_ter = find_next_head;
                 
                 //If current node is already the last node in the linked list
                 if(tmp_dict.next == NULL)
@@ -314,76 +314,76 @@ void *malloc(size_t size)
                     header.size = memory_left;
                     header.prev = tmp_dict.prev; //question?
                     header.next = NULL;
-                    *header_pointer = header;
+                    *header_posize_ter = header;
                     
                     //The header of the previous free block
                     dict previous_head;
-                    dict* previous_head_pointer;
-                    previous_head_pointer = tmp_dict.prev;
-                    if(previous_head_pointer != NULL)
+                    dict* previous_head_posize_ter;
+                    previous_head_posize_ter = tmp_dict.prev;
+                    if(previous_head_posize_ter != NULL)
                     {
-                        previous_head = *previous_head_pointer;
+                        previous_head = *previous_head_posize_ter;
                         previous_head.size = previous_head.size;
                         previous_head.prev = previous_head.prev;
-                        previous_head.next = header_pointer;
-                        *previous_head_pointer = previous_head;
+                        previous_head.next = header_posize_ter;
+                        *previous_head_posize_ter = previous_head;
                     }
                     else
                     {
-                        head_pointer = find_next_head;
+                        head_posize_ter = find_next_head;
                     }
                 }
                 //if it is not the last node
                 else
                 {
                     //The header of the just-created free-block
-                    ////(" next pointer is not null\n");
+                    ////(" next posize_ter is not null\n");
                     dict header;
                     header.size = memory_left;
                     header.prev = tmp_dict.prev;
                     header.next = tmp_dict.next;
-                    *header_pointer = header;
+                    *header_posize_ter = header;
                     
                     //The header of the previous free block
                     dict previous_head;
-                    dict* previous_head_pointer;
-                    previous_head_pointer = tmp_dict.prev;
+                    dict* previous_head_posize_ter;
+                    previous_head_posize_ter = tmp_dict.prev;
 
-                    if(previous_head_pointer != NULL)
+                    if(previous_head_posize_ter != NULL)
                     {
                     	//("this situation?\n");
-                    previous_head = *previous_head_pointer;
+                    previous_head = *previous_head_posize_ter;
                     previous_head.size = previous_head.size;
                     previous_head.prev = previous_head.prev;
-                    previous_head.next = header_pointer;
-                    *previous_head_pointer = previous_head;
+                    previous_head.next = header_posize_ter;
+                    *previous_head_posize_ter = previous_head;
                 	}
                 	else
     				{
-    					head_pointer = find_next_head;
+    					head_posize_ter = find_next_head;
     					//("look at here\n");
     				}
 
                     
                     //The header of the next free block
                     dict next_head;
-                    dict *next_head_pointer;
-                    next_head_pointer = tmp_dict.next;
-                    next_head = *next_head_pointer;
+                    dict *next_head_posize_ter;
+                    next_head_posize_ter = tmp_dict.next;
+                    next_head = *next_head_posize_ter;
                     
-                    next_head.prev = header_pointer;
-                    *next_head_pointer = next_head;
+                    next_head.prev = header_posize_ter;
+                    *next_head_posize_ter = next_head;
                     
                     
                     
                 }
-                //("Head pointer is at %p\n",head_pointer );
-          		//("Allocated pointer is at %p\n",return_pointer );
+                //("Head posize_ter is at %p\n",head_posize_ter );
+          		//("Allocated posize_ter is at %p\n",return_posize_ter );
         		//("Allocated Size is %d\n\n", malloc_size);
         		
         		//Mask the last bit to keep track of a "used" seg
             	*tmp_head = *tmp_head | 1;
-                return return_pointer;
+                return return_posize_ter;
             }
         }
         
@@ -407,19 +407,19 @@ void *malloc(size_t size)
 * * further allocations.
 * *
 * * Notice that this function leaves the value of ptr unchanged, hence
-* * it still points to the same (now invalid) location, and not to the
-* * null pointer.
+* * it still posize_ts to the same (now invalid) location, and not to the
+* * null posize_ter.
 * *
 * * @param ptr
-* *    Pointer to a memory block previously allocated with malloc(),
-* *    calloc() or realloc() to be deallocated.  If a null pointer is
+* *    Posize_ter to a memory block previously allocated with malloc(),
+* *    calloc() or realloc() to be deallocated.  If a null posize_ter is
 * *    passed as argument, no action occurs.
 * */
 void free(void *ptr)
 {
 	//getchar();
 
-    //"If a null pointer is passed as argument, no action occurs."
+    //"If a null posize_ter is passed as argument, no action occurs."
     if (!ptr)
     return;
 
@@ -433,26 +433,26 @@ void free(void *ptr)
     void* find_next;
     find_next = h_ptr;
 
-    if( find_next < head_pointer)
-    	find_next = head_pointer;
+    if( find_next < head_posize_ter)
+    	find_next = head_posize_ter;
 
-    int tmp_current_size;
-        int* next_ptr;
-        next_ptr = (int*) h_ptr;
+    size_t tmp_current_size;
+        size_t* next_ptr;
+        next_ptr = (size_t*) h_ptr;
         tmp_current_size = *next_ptr & ~1;
 
-        //("current_head_pointer is %p\n",head_pointer);
-    //("free pointer is at %p\n",ptr );
+        //("current_head_posize_ter is %p\n",head_posize_ter);
+    //("free posize_ter is at %p\n",ptr );
       //("Free Size is %d\n\n", tmp_current_size);
-    int count=0;
+    size_t count=0;
     while(1)
     {
 
     	//("current address is %p\n",find_next); 
     	
-        int tmp_current_size;
-        int* next_ptr;
-        next_ptr = (int*) find_next;
+        size_t tmp_current_size;
+        size_t* next_ptr;
+        next_ptr = (size_t*) find_next;
         tmp_current_size = *next_ptr & ~1;
 
         if(!(*next_ptr & 0x1))
@@ -464,18 +464,18 @@ void free(void *ptr)
     		//break;
     }	
 
-    //Unmask the current pointer;
-	int current_size;
-	int *curr;
-	curr = (int*) h_ptr;
+    //Unmask the current posize_ter;
+	size_t current_size;
+	size_t *curr;
+	curr = (size_t*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
 
     //next free head
     dict next_head;
-    dict* next_head_pointer;
-    next_head_pointer = (dict*) find_next;
-    next_head = *next_head_pointer;
+    dict* next_head_posize_ter;
+    next_head_posize_ter = (dict*) find_next;
+    next_head = *next_head_posize_ter;
 
     //prev head
     dict* find_prev;
@@ -487,11 +487,11 @@ void free(void *ptr)
     current_head_ptr = (dict*) h_ptr;
     current_head.size = current_size;
     current_head.prev = find_prev;
-    current_head.next = next_head_pointer;
+    current_head.next = next_head_posize_ter;
 
     //next head
     next_head.prev = current_head_ptr;
-    *next_head_pointer = next_head;
+    *next_head_posize_ter = next_head;
 
 
     //coalescene possible
@@ -538,7 +538,7 @@ void free(void *ptr)
     			
     		}
     		next_head.prev = find_prev;
-    		*next_head_pointer = next_head;
+    		*next_head_posize_ter = next_head;
 
 
     	}
@@ -546,7 +546,7 @@ void free(void *ptr)
     }
     else
     {
-    	head_pointer =  h_ptr;
+    	head_posize_ter =  h_ptr;
     }
     
 
@@ -556,7 +556,7 @@ void free(void *ptr)
 /**
 * * Reallocate memory block
 * *
-* * The size of the memory block pointed to by the ptr parameter is changed
+* * The size of the memory block posize_ted to by the ptr parameter is changed
 * * to the size bytes, expanding or reducing the amount of memory available
 * * in the block.
 * *
@@ -567,33 +567,33 @@ void free(void *ptr)
 * * indeterminate.
 * *
 * * In case that ptr is NULL, the function behaves exactly as malloc, assigning
-* * a new block of size bytes and returning a pointer to the beginning of it.
+* * a new block of size bytes and returning a posize_ter to the beginning of it.
 * *
 * * In case that the size is 0, the memory previously allocated in ptr is
-* * deallocated as if a call to free was made, and a NULL pointer is returned.
+* * deallocated as if a call to free was made, and a NULL posize_ter is returned.
 * *
 * * @param ptr
-* *    Pointer to a memory block previously allocated with malloc(), calloc()
+* *    Posize_ter to a memory block previously allocated with malloc(), calloc()
 * *    or realloc() to be reallocated.
 * *
-* *    If this is NULL, a new block is allocated and a pointer to it is
+* *    If this is NULL, a new block is allocated and a posize_ter to it is
 * *    returned by the function.
 * *
 * * @param size
 * *    New size for the memory block, in bytes.
 * *
-* *    If it is 0 and ptr points to an existing block of memory, the memory
-* *    block pointed by ptr is deallocated and a NULL pointer is returned.
+* *    If it is 0 and ptr posize_ts to an existing block of memory, the memory
+* *    block posize_ted by ptr is deallocated and a NULL posize_ter is returned.
 * *
 * * @return
-* *    A pointer to the reallocated memory block, which may be either the
+* *    A posize_ter to the reallocated memory block, which may be either the
 * *    same as the ptr argument or a new location.
 * *
-* *    The type of this pointer is void*, which can be cast to the desired
-* *    type of data pointer in order to be dereferenceable.
+* *    The type of this posize_ter is void*, which can be cast to the desired
+* *    type of data posize_ter in order to be dereferenceable.
 * *
 * *    If the function failed to allocate the requested block of memory,
-* *    a NULL pointer is returned, and the memory block pointed to by
+* *    a NULL posize_ter is returned, and the memory block posize_ted to by
 * *    argument ptr is left unchanged.
 * *
 * * @see http://www.cplusplus.com/reference/clibrary/cstdlib/realloc/
@@ -605,7 +605,7 @@ void *realloc(void *ptr, size_t size)
     return malloc(size);
     
     // "In case that the size is 0, the memory previously allocated in ptr
-    //  is deallocated as if a call to free() was made, and a NULL pointer
+    //  is deallocated as if a call to free() was made, and a NULL posize_ter
     //  is returned."
     if (!size)
     {
