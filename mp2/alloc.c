@@ -283,7 +283,7 @@ void *malloc(size_t size)
                     
                     
                 }
-                printf("Initiliaze finished: head pointer is at %p\n",head_pointer );
+                printf("Head pointer is at %p\n",head_pointer );
           		printf("Allocated pointer is at %p\n",return_pointer );
         		printf("Allocated Size is %d\n\n", malloc_size);
 
@@ -368,7 +368,7 @@ void *malloc(size_t size)
                     
                     
                 }
-                printf("Initiliaze finished: head pointer is at %p\n",head_pointer );
+                printf("Head pointer is at %p\n",head_pointer );
           		printf("Allocated pointer is at %p\n",return_pointer );
         		printf("Allocated Size is %d\n\n", malloc_size);
                 
