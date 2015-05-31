@@ -424,17 +424,12 @@ void free(void *ptr)
 
     void* h_ptr;
     h_ptr = ptr - 4;
-
-    
-       
-
+printf("free\n");
     //Find next free block
     void* find_next;
     find_next = head_pointer;
     // if(free_pointer < h_ptr)
     //     find_next = free_pointer;
-
-    
 
     int tmp_current_size;
         int* next_ptr;
@@ -443,7 +438,7 @@ void free(void *ptr)
     int count=0;
     while(1)
     {
-
+printf("loop\n");
     	//("current address is %p\n",find_next); 
     	
         // int tmp_current_size;
@@ -500,22 +495,22 @@ void free(void *ptr)
 
 
     //coalescene possible
-    // if(find_next - h_ptr == current_size)
-    // 	{
-    // 		current_head.size = current_size + next_head.size;
-    // 		current_head.next = next_head.next;
+    if(find_next - h_ptr == current_size)
+    	{
+    		current_head.size = current_size + next_head.size;
+    		current_head.next = next_head.next;
 
     		
-    // 		dict next_next_head;
-    // 		dict* next_next_ptr;
-    // 		next_next_ptr = next_head.next;
-    // 		if(next_next_ptr!= NULL)
-    // 		{
-    // 		next_next_head = *next_next_ptr;
-    // 		next_next_head.prev = current_head_ptr;
-    // 		*next_next_ptr = next_next_head;
-    // 		}
-    // 	}
+    		dict next_next_head;
+    		dict* next_next_ptr;
+    		next_next_ptr = next_head.next;
+    		if(next_next_ptr!= NULL)
+    		{
+    		next_next_head = *next_next_ptr;
+    		next_next_head.prev = current_head_ptr;
+    		*next_next_ptr = next_next_head;
+    		}
+    	}
     *current_head_ptr = current_head;
 
     
