@@ -21,7 +21,7 @@ int main()
 		printf("Memory failed to allocate!\n");
 		return 1;
 	}
-       
+
 	for (i = 0; i < TOTAL_ALLOCS; i++)
 	{
 		arr[i] = malloc(sizeof(int));
@@ -33,7 +33,7 @@ int main()
 		
 		*(arr[i]) = i;
 	}
-        
+
 	for (i = 0; i < TOTAL_ALLOCS; i++)
 	{
 		if (*(arr[i]) != i)

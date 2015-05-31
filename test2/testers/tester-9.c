@@ -22,7 +22,7 @@ int main()
 	{
 		int size = (rand() % (MAX_ALLOC_SIZE - MIN_ALLOC_SIZE + 1)) + MIN_ALLOC_SIZE;
 		void *ptr;
-		printf("%d ---tester \n", size);
+		
 		if (realloc_ptr == NULL)
 		{
 			ptr = malloc(size);
