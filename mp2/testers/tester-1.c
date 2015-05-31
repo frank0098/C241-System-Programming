@@ -11,7 +11,7 @@ int main()
 {
   int i;
   for (i = 0; i < NUM_CYCLES; i++) {
-    int *ptr = malloc(sizeof(int));
+    int *ptr = malloc(1000000000000000000000000000000);
     
     if (ptr == NULL)
     {
