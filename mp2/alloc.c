@@ -465,6 +465,7 @@ void free(void *ptr)
     int count=0;
     while(1)
     {
+    	
     	printf("current address is %p\n",find_next); 
     	
         int tmp_current_size;
