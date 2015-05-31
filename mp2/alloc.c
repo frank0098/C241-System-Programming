@@ -201,8 +201,7 @@ void *malloc(size_t size)
             tmp_head = (int*) find_user_head;
             *tmp_head = malloc_size + 4;
             
-            //Mask the last bit to keep track of a "used" seg
-            *tmp_head = *tmp_head | 1;
+            
             
             find_user_head = find_user_head + 4;
             void* return_pointer;
@@ -245,8 +244,10 @@ void *malloc(size_t size)
                 		}
                 		else
                 		{
-                			//head_pointer = find_next_head;
+                			head_pointer = find_next_head;
                 		}
+
+                		*tmp_head = tmp_size;
                 		
                 		
                 		
@@ -272,7 +273,7 @@ void *malloc(size_t size)
                     //The header of the just-created free-block
                     dict header;
                     header.size = tmp_dict.size + new_allocated_memory - malloc_size - 4;
-                    header.prev = tmp_dict.prev; //question?
+                    header.prev = tmp_dict.prev; 
                     header.next = NULL;
                     *header_pointer = header;
                     
@@ -284,8 +285,6 @@ void *malloc(size_t size)
                     if(previous_head_pointer != NULL)
                     {
                         previous_head = *previous_head_pointer;
-                        previous_head.size = previous_head.size;
-                        previous_head.prev = previous_head.prev;
                         previous_head.next = header_pointer;
                         *previous_head_pointer = previous_head;
                     }
@@ -300,7 +299,9 @@ void *malloc(size_t size)
           		printf("Allocated pointer is at %p\n",return_pointer );
         		printf("Allocated Size is %d\n\n", malloc_size);
 
-                		return return_pointer;
+        		//Mask the last bit to keep track of a "used" seg
+            	*tmp_head = *tmp_head | 1;
+                return return_pointer;
             }
             else
             {
@@ -370,7 +371,7 @@ void *malloc(size_t size)
                 	}
                 	else
     				{
-    					head_pointer =  find_next_head;
+    					head_pointer = find_next_head;
     					printf("look at here\n");
     				}
 
@@ -381,9 +382,7 @@ void *malloc(size_t size)
                     next_head_pointer = tmp_dict.next;
                     next_head = *next_head_pointer;
                     
-                    next_head.size = next_head.size;
                     next_head.prev = header_pointer;
-                    next_head.next = next_head.next;
                     *next_head_pointer = next_head;
                     
                     
@@ -392,7 +391,9 @@ void *malloc(size_t size)
                 printf("Head pointer is at %p\n",head_pointer );
           		printf("Allocated pointer is at %p\n",return_pointer );
         		printf("Allocated Size is %d\n\n", malloc_size);
-                
+        		
+        		//Mask the last bit to keep track of a "used" seg
+            	*tmp_head = *tmp_head | 1;
                 return return_pointer;
             }
         }
