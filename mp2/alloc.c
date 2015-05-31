@@ -94,11 +94,12 @@ void *tail_pointer = NULL;
 
 void *malloc(size_t size)
 {
-    // ////("\n");
+    
     //getchar();
     int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
+    printf("malloc, the size is %d\n",malloc_size);
     
     //first time call,the head pointer is null
     if(head_pointer == NULL)
@@ -508,7 +509,6 @@ void free(void *ptr)
 
     
     dict prev_head;
-    ////("previous address is  %p\n",find_prev);
     if(find_prev != NULL)
     {
     	prev_head = *find_prev;
@@ -543,9 +543,6 @@ void free(void *ptr)
     	head_pointer =  h_ptr;
     }
     
-
-        //("current_head_pointer is %p\n",head_pointer);
-    //("\n");
 
 }
 
