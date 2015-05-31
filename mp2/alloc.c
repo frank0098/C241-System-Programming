@@ -462,6 +462,10 @@ void free(void *ptr)
     printf("current_head_ptr is %p\n",current_head_ptr);
     *current_head_ptr = current_head;
 
+    dict fuck;
+    fuck = *current_head;
+    printf("the fucking current_head_ptr is %p\n",fuck.size);
+
     
     dict prev_head;
     //printf("previous address is  %p\n",find_prev);
