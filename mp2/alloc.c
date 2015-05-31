@@ -469,6 +469,8 @@ void free(void *ptr)
 	*curr = *curr & ~1;
 	current_size = *curr;
 
+    free_pointer = h_ptr;
+
     //next free head
     dict next_head;
     dict* next_head_pointer;
@@ -530,6 +532,7 @@ void free(void *ptr)
     		dict prev_prev_head;
     		dict* prev_prev_ptr;
     		prev_prev_ptr = prev_head.prev;
+            free_pointer = find_prev;
     		if(prev_prev_ptr!= NULL)
     		{
     			prev_prev_head = *prev_prev_ptr;
@@ -548,7 +551,7 @@ void free(void *ptr)
     {
     	head_pointer =  h_ptr;
     }
-    free_pointer = h_ptr;
+    
     
 
 }
