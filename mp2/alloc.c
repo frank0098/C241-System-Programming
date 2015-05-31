@@ -169,8 +169,8 @@ void *malloc(size_t size)
     int count=0;
     while(1)
     {	
-    	
-    	printf("current address is %p\n",find_next); 
+
+    	printf("current address is %p\n",current_head); 
         //why this not working? *org->size
 // count++;
 // if(count>10)
