@@ -90,6 +90,7 @@ int round_up(size_t size)
 
 void *head_pointer = NULL;
 void *tail_pointer = NULL;
+void *free_pointer = NULL;
 
 
 void *malloc(size_t size)
@@ -430,6 +431,8 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = head_pointer;
+    if(free_pointer <= h_ptr)
+        find_next = free_pointer;
 
     
 
@@ -550,6 +553,7 @@ void free(void *ptr)
     {
     	head_pointer =  h_ptr;
     }
+    free_pointer = h_ptr;
     
 
 }
