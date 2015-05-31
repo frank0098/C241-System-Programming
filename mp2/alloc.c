@@ -113,7 +113,7 @@ void *malloc(size_t size)
         if(heap_end == NULL)
         return NULL;
         //Find the pointer to the new seg
-        heap_end = heap_end + 4;
+        heap_end = heap_end + 8;
         
         printf("segfault herre\n");
         //malloc requested malloc_size + header for user
