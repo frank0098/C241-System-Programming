@@ -559,7 +559,7 @@ void free(void *ptr)
     			*prev_prev_ptr = prev_prev_head;
     			
     		}
-    		next_head.prev = prev_head;
+    		next_head.prev = find_prev;
     		*next_head_pointer = next_head;
 
 
