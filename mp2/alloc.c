@@ -166,7 +166,7 @@ void *malloc(size_t size)
     //Trasverse the linked list
     int count=0;
     while(1)
-    {	printf("mallocloop\n");
+    {	
         //why this not working? *org->size
 // count++;
 // if(count>10)
