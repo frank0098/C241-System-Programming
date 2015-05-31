@@ -10,6 +10,7 @@ void *reduce(void *ptr, int size)
 	{
 		void *ptr1 = realloc(ptr, size / 2);
 		void *ptr2 = malloc(size / 2);
+		printf("finished once\n");
 
 		if (ptr1 == NULL || ptr2 == NULL)
 		{
