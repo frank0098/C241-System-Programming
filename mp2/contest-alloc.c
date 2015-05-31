@@ -106,9 +106,9 @@ static void contest_tracking()
 		sbrk_largest = sbrk_current;
 		stats->max_heap_used = current_mem_usage;
 
-		if (current_mem_usage > (1024L * 1024L * 1024L * 3L)) 
+		if (current_mem_usage > (1024L * 1024L * 1024L * 2L))
 		{
-			fprintf(stderr, "Exceeded 3 GB\n");
+			fprintf(stderr, "Exceeded 2 GB\n");
 			exit(68);
 		}
 	}

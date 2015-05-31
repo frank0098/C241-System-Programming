@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-#define TOTAL_ALLOCS 6000
+#define TOTAL_ALLOCS 200000
 #define ALLOC_SIZE 1024*1024
 
 int main()
@@ -20,9 +19,7 @@ int main()
 			printf("Memory failed to allocate!\n");
 			return 1;
 		}
-
-    memset(ptr, 0xab, ALLOC_SIZE);
-
+		
 		free(ptr);
 	}
 

@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define M (1024 * 1024)
-#define K (1024)
-
-#ifdef PART2
-  #define TOTAL_ALLOCS 5*M
-#else
-  #define TOTAL_ALLOCS 50*K
-#endif
+#define TOTAL_ALLOCS 50000
 
 int main()
 {
