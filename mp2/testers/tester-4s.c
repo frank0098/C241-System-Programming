@@ -1,8 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define START_MALLOC_SIZE 1024*1024*128
-#define STOP_MALLOC_SIZE  1024
+#define K 1024
+#define M (1024 * 1024)
+#define G (1024 * 1024 * 1024)
+
+#ifdef PART2
+  #define START_MALLOC_SIZE (1536 * M)
+  #define STOP_MALLOC_SIZE  (1 * K)
+#else
+  #define START_MALLOC_SIZE (1 * G)
+  #define STOP_MALLOC_SIZE  (1 * K)
+#endif
 
 void *reduce(void *ptr, int size)
 {
@@ -26,8 +35,8 @@ void *reduce(void *ptr, int size)
 			exit(2);
 		}
 
-		ptr1 = realloc(ptr1, size);
 		free(ptr2);
+		ptr1 = realloc(ptr1, size);
 
 		if (*((int *)ptr1) != size / 2)
 		{
