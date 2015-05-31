@@ -430,8 +430,8 @@ void free(void *ptr)
        
 
     //Find next free block
-    dict* find_next;
-    find_next = (dict*) head_pointer;
+    void* find_next;
+    find_next = head_pointer;
 
     
 
@@ -456,8 +456,10 @@ void free(void *ptr)
         // }
 
         dict tmp;
-        tmp = *find_next;
-        find_next = tmp.next;
+        dict* tmp_dict_ptr;
+        tmp_dict_ptr = (dict*) find_next;
+        tmp = *tmp_dict_ptr;
+        find_next = (void*) tmp.next;
         if(find_next >= ptr)
             break;
         
