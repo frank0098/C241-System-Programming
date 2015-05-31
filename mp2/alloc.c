@@ -135,7 +135,7 @@ void *malloc(size_t size)
         
         //Assign the header of the new free block
         dict header;
-        header.size = 2*malloc_size - malloc_size - 4;
+        header.size = 4*malloc_size - malloc_size - 4;
         header.prev = NULL;
         header.next = NULL;
         
