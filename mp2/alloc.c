@@ -146,16 +146,6 @@ void *malloc(size_t size)
         head_pointer = (void*) tmp_head_pointer;
 
 
-        ////("this address is  %p\n",find_free_head);	
-
-    	////("previous address is  %p\n",header.prev);
-
-    	////("next address is  %p\n",header.next);	
-
-        //("Initiliaze finished: head pointer is at %p\n",head_pointer );
-        //("Allocated Pointer is %p\n",return_pointer );
-        //("Allocated Size is %d\n\n", malloc_size);
-
         return return_pointer;
         
     }
@@ -170,23 +160,13 @@ void *malloc(size_t size)
     while(1)
     {	
 
-    	//("current address is %p\n",current_head); 
-        //why this not working? *org->size
-// count++;
-// if(count>10)
-// 	break;
+    	
         int tmp_size;
         dict tmp_dict;
         tmp_dict = *current_head;
         tmp_size = tmp_dict.size;
 
-        // //("current address is %p\n",current_head);
-        // //("current size is %d\n",tmp_size);
-        // //("prv address is %p\n",tmp_dict.prev);
-        // //("next address is %p\n",tmp_dict.next);
-        
 
-           // //("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         //&& tmp_size >= 32
         if((tmp_size >= malloc_size + 4 ) || current_head->next == NULL)
         {
@@ -298,9 +278,7 @@ void *malloc(size_t size)
                     
                     
                 }
-                //("Head pointer is at %p\n",head_pointer );
-          		//("Allocated pointer is at %p\n",return_pointer );
-        		//("Allocated Size is %d\n\n", malloc_size);
+    
 
         		//Mask the last bit to keep track of a "used" seg
 
@@ -407,15 +385,10 @@ void *malloc(size_t size)
         
         current_head = current_head->next;
     }
-    //("this happens\n");
+    ("this happens\n");
     return NULL;
 
 }
-
-
-
-
-
 
 
 
@@ -439,7 +412,6 @@ void free(void *ptr)
 {
 	//getchar();
 
-	//("\n free \n");
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
