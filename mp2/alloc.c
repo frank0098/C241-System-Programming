@@ -69,8 +69,9 @@ typedef struct dict {
 }dict;
 
 typedef struct dict0 {
-    struct dict *prev;
-    struct dict *next;
+	int size;
+    dict0 *prev;
+    dict0 *next;
     
 }dict0;
 
