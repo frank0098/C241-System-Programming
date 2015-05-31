@@ -223,20 +223,33 @@ void *malloc(size_t size)
                 //printf("  not enough space to \n");
                 if(tmp_dict.next!=NULL)
                 	{
-                		dict* find_prev_head;
-                		find_prev_head = tmp_dict.prev;
-                		dict prev_head;
-                		prev_head = *find_prev_head;
-
+                		
+                		
                 		dict* find_next_head;
                 		find_next_head = tmp_dict.next;
                 		dict next_head;
                 		next_head = *find_next_head;
 
-                		prev_head.next = find_prev_head;
+                		dict* find_prev_head;
+                		find_prev_head = tmp_dict.prev;
+
                 		next_head.prev = find_prev_head;
-                		*find_prev_head = prev_head;
                 		*find_next_head = next_head;
+
+                		if(find_prev_head != NULL)
+                		{
+                			dict prev_head;
+                			prev_head = *find_prev_head;
+                			prev_head.next = find_next_head;
+                			*find_prev_head = prev_head;
+                		}
+                		else
+                		{
+                			head_pointer = find_next_head;
+                		}
+                		
+                		
+                		
 
                 	}
                 else
