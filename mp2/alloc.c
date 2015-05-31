@@ -85,7 +85,7 @@ int round_up(size_t size)
     if(size+i < 24)
     	return 24;
     else 
-     		return size+i;
+     	return size+i;
 }
 
 void *head_pointer = NULL;
@@ -413,6 +413,7 @@ void free(void *ptr)
         int* next_ptr;
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
+        printf("the size is %d\n",tmp_current_size );
         
         if(!(*next_ptr & 0x1))
         {
