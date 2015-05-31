@@ -406,15 +406,14 @@ void free(void *ptr)
     int count=0;
     while(1)
     {
-    	count++;
-    	if(count=10)
-    		break;
+    	
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
         printf("loop\n");
         printf("the size is %d\n",tmp_current_size);
+
         
         if(!(*next_ptr & 0x1))
         {
@@ -422,6 +421,9 @@ void free(void *ptr)
         }
         find_next = find_next + tmp_current_size;
         printf("the next free address is   %p\n",find_next);
+        count++;
+    	if(count==10)
+    		break;
     }
     printf("the next free address is   %p\n",find_next);	
 
