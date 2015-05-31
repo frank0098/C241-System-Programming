@@ -431,8 +431,8 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = head_pointer;
-    // if(free_pointer <=h_ptr)
-    //     find_next = free_pointer;
+    if(free_pointer <=h_ptr)
+        find_next = free_pointer;
     
 
     
@@ -441,29 +441,28 @@ void free(void *ptr)
         size_t* next_ptr;
         next_ptr = (size_t*) h_ptr;
         tmp_current_size = *next_ptr & ~1;
-    int count=0;
     while(1)
     {
 
-    	//("current address is %p\n",find_next); 
+    	("current address is %p\n",find_next); 
     	
-        // int tmp_current_size;
-        // int* next_ptr;
-        // next_ptr = (int*) find_next;
-        // tmp_current_size = *next_ptr & ~1;
+        int tmp_current_size;
+        int* next_ptr;
+        next_ptr = (int*) find_next;
+        tmp_current_size = *next_ptr & ~1;
 
-        // if(!(*next_ptr & 0x1))
-        // {
-        //     break;
-        // }
-
-        dict tmp;
-        dict* tmp_dict_ptr;
-        tmp_dict_ptr = (dict*) find_next;
-        tmp = *tmp_dict_ptr;
-        if(find_next >= h_ptr)
+        if(!(*next_ptr & 0x1))
+        {
             break;
-        find_next = (void*) tmp.next;
+        }
+
+        // dict tmp;
+        // dict* tmp_dict_ptr;
+        // tmp_dict_ptr = (dict*) find_next;
+        // tmp = *tmp_dict_ptr;
+        // if(find_next >= h_ptr)
+        //     break;
+        // find_next = (void*) tmp.next;
         
     }	
 
