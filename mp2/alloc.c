@@ -217,7 +217,7 @@ void *malloc(size_t size)
 
             
             
-            if(tmp_size - malloc_size < 24)
+            if(tmp_size < malloc_size + 4 + 24 + 8)
             {
                 
                 //printf("  not enough space to \n");
