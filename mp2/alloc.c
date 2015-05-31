@@ -389,126 +389,129 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 
-	// ////("\n free \n");
- //    //"If a null pointer is passed as argument, no action occurs."
- //    if (!ptr)
- //    return;
+	////("\n free \n");
+    //"If a null pointer is passed as argument, no action occurs."
+    if (!ptr)
+    return;
 
- //    void* h_ptr;
- //    h_ptr = ptr - 4;
+    void* h_ptr;
+    h_ptr = ptr - 4;
 
- //    int tmp_current_size;
- //    int* next_ptr;
- //    next_ptr = (int*) (h_ptr);
- //    tmp_current_size = *next_ptr & ~1;
- //    //("the fucking number is %d\n",tmp_current_size);
- //    next_ptr = (int*) (h_ptr+12);
- //    tmp_current_size = *next_ptr & ~1;
- //    //("the fucking number is %d\n",tmp_current_size);
+    int tmp_current_size;
+    int* next_ptr;
+    next_ptr = (int*) (h_ptr);
+    tmp_current_size = *next_ptr & ~1;
+    //("the fucking number is %d\n",tmp_current_size);
+    next_ptr = (int*) (h_ptr+12);
+    tmp_current_size = *next_ptr & ~1;
+    //("the fucking number is %d\n",tmp_current_size);
 
     
        
 
- //    //Find next free block
- //    void* find_next;
- //    find_next = h_ptr;
- //    //("to free  pointer is  %p\n",ptr);
- //    while(1)
- //    {
- //    	////("freeloop\n");
- //        int tmp_current_size;
- //        int* next_ptr;
- //        next_ptr = (int*) find_next;
- //        tmp_current_size = *next_ptr & ~1;
+    //Find next free block
+    void* find_next;
+    find_next = h_ptr;
+    //("to free  pointer is  %p\n",ptr);
+    while(1)
+    {
+    	////("freeloop\n");
+        int tmp_current_size;
+        int* next_ptr;
+        next_ptr = (int*) find_next;
+        tmp_current_size = *next_ptr & ~1;
         
- //        if(!(*next_ptr & 0x1))
- //        {
- //            break;
- //        }
- //        find_next = find_next + tmp_current_size;
- //    }
- //    //("the next free address is   %p\n",find_next);	
+        if(!(*next_ptr & 0x1))
+        {
+            break;
+        }
+        find_next = find_next + tmp_current_size;
+    }
+    //("the next free address is   %p\n",find_next);	
 
- //    //Unmask the current pointer;
-	// int current_size;
-	// int *curr;
-	// curr = (int*) h_ptr;
-	// *curr = *curr & ~1;
-	// current_size = *curr;
+    //Unmask the current pointer;
+	int current_size;
+	int *curr;
+	curr = (int*) h_ptr;
+	*curr = *curr & ~1;
+	current_size = *curr;
 
- //    //next free head
- //    dict next_head;
- //    dict* next_head_pointer;
- //    next_head_pointer = (dict*) find_next;
- //    next_head = *next_head_pointer;
+    //next free head
+    dict next_head;
+    dict* next_head_pointer;
+    next_head_pointer = (dict*) find_next;
+    next_head = *next_head_pointer;
 
- //    //prev head
- //    dict* find_prev;
- //    find_prev = next_head.prev;
- //    void* comp;
- //    comp = (void*) next_head.prev;
- //    if(head_pointer - comp >0)
- //    	find_prev = head_pointer;
+    //prev head
+    dict* find_prev;
+    find_prev = next_head.prev;
+    void* comp;
+    comp = (void*) next_head.prev;
+    if(head_pointer - comp >0)
+    {
+    	find_prev = head_pointer;
+    	printf("thisthis?\n");
+    }
 
- //    //current head
- //    dict current_head;
- //    dict* current_head_ptr;
- //    current_head_ptr = (dict*) h_ptr;
- //    current_head.size = current_size;
- //    current_head.prev = next_head.prev;
- //    current_head.next = next_head_pointer;
+    //current head
+    dict current_head;
+    dict* current_head_ptr;
+    current_head_ptr = (dict*) h_ptr;
+    current_head.size = current_size;
+    current_head.prev = next_head.prev;
+    current_head.next = next_head_pointer;
 
- //    //next head
- //    next_head.prev = current_head_ptr;
- //    next_head.next = next_head.next;
- //    *next_head_pointer = next_head;
+    //next head
+    next_head.prev = current_head_ptr;
+    next_head.next = next_head.next;
+    *next_head_pointer = next_head;
 
 
- //    //coalescene possible
- //    if(find_next - h_ptr == current_size)
- //    	{
- //    		current_head.size = current_size + next_head.size;
- //    		current_head.next = next_head.next;
- //    	}
- //    //("current_head_ptr is %p\n",current_head_ptr);
- //    *current_head_ptr = current_head;
+    //coalescene possible
+    if(find_next - h_ptr == current_size)
+    	{
+    		current_head.size = current_size + next_head.size;
+    		current_head.next = next_head.next;
+    	}
+    //("current_head_ptr is %p\n",current_head_ptr);
+    *current_head_ptr = current_head;
 
- //    dict fuck;
- //    dict0 fuck0;
- //    fuck = *current_head_ptr;
- //    //("the fucking current_head_ptr is %d\n",fuck.size);
+    dict fuck;
+    dict0 fuck0;
+    fuck = *current_head_ptr;
+    //("the fucking current_head_ptr is %d\n",fuck.size);
 
     
- //    dict prev_head;
- //    ////("previous address is  %p\n",find_prev);
- //    if(find_prev != NULL)
- //    {
- //    	prev_head = *find_prev;
- //    	prev_head.size = prev_head.size;
- //    	prev_head.prev = prev_head.prev;
- //    	prev_head.next = (dict*) h_ptr;
+    dict prev_head;
+    ////("previous address is  %p\n",find_prev);
+    if(find_prev != NULL)
+    {
+    	prev_head = *find_prev;
+    	prev_head.size = prev_head.size;
+    	prev_head.prev = prev_head.prev;
+    	prev_head.next = (dict*) h_ptr;
     	
 
- //    	//coalescene
- //    	if(find_prev + prev_head.size == h_ptr)
- //    	{
- //    		prev_head.size = prev_head.size + current_head.size;
- //    		prev_head.next = current_head.next;
- //    	}
- //    	*find_prev = prev_head;
- //    }
- //    else
- //    {
- //    	head_pointer =  h_ptr;
- //    }
- //    next_ptr = (int*) (h_ptr);
- //    tmp_current_size = *next_ptr & ~1;
- //    //("the fucking number is %d\n",tmp_current_size);
- //    next_ptr = (int*) (h_ptr+12);
- //    tmp_current_size = *next_ptr & ~1;
- //    //("the fucking number is %d\n",tmp_current_size);
+    	//coalescene
+    	if(find_prev + prev_head.size == h_ptr)
+    	{
+    		prev_head.size = prev_head.size + current_head.size;
+    		prev_head.next = current_head.next;
+    	}
+    	*find_prev = prev_head;
+    }
+    else
+    {
+    	head_pointer =  h_ptr;
+    }
+    next_ptr = (int*) (h_ptr);
+    tmp_current_size = *next_ptr & ~1;
+    //("the fucking number is %d\n",tmp_current_size);
+    next_ptr = (int*) (h_ptr+12);
+    tmp_current_size = *next_ptr & ~1;
+    //("the fucking number is %d\n",tmp_current_size);
 
- //    //("\n");
+    //("\n");
 
 }
 
