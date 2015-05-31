@@ -5,11 +5,12 @@
 
 CC = gcc
 INC = -I.
-FLAGS += -O3 -Wextra -Wall -Werror
-FLAGS += -Wno-unused
-TESTERS = $(patsubst %.c, %, $(wildcard testers/*))
+FLAGS = -O2 -W -Wall
 
-all: alloc.so contest-alloc.so mreplace mcontest tester-agents
+all: alloc.so contest-alloc.so mreplace mcontest tester-agents doc/html
+
+doc/html:
+	doxygen doc/Doxyfile
 
 alloc.so: alloc.c
 	$(CC) $^ $(FLAGS) -o $@ -shared -fPIC
@@ -23,18 +24,27 @@ mreplace: mreplace.c
 mcontest: mcontest.c
 	$(CC) $^ $(FLAGS) -o $@ -ldl -lpthread
 
-tester-agents: part1 part2
+tester-agents: tester-1 tester-2 tester-3 tester-4 tester-5 tester-9
 
-part1: part1/tester-1 part1/tester-2 part1/tester-3 part1/tester-4
-
-part2: $(subst testers, part2, $(TESTERS))
-
-part1/%: testers/%.c
+tester-1: testers/tester-1.c 
 	$(CC) $^ $(FLAGS) -o $@
 
-part2/%: testers/%.c
-	$(CC) $^ $(FLAGS) -DPART2 -o $@
+tester-2: testers/tester-2.c 
+	$(CC) $^ $(FLAGS) -o $@
+
+tester-3: testers/tester-3.c 
+	$(CC) $^ $(FLAGS) -o $@
+
+tester-4: testers/tester-4.c 
+	$(CC) $^ $(FLAGS) -o $@
+
+tester-5: testers/tester-5.c 
+	$(CC) $^ $(FLAGS) -o $@
+
+tester-9: testers/tester-9.c 
+	$(CC) $^ $(FLAGS) -o $@
 	
 .PHONY : clean
 clean:
-	-rm -f *.o *.so mreplace mcontest part1/* part2/*
+	-rm -f *.o *.so mreplace mcontest tester-1 tester-2 tester-3 tester-4 tester-5 tester-9
+	-rm -rf doc/html
