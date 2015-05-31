@@ -149,7 +149,6 @@ void *malloc(size_t size)
         
         *tmp_head_pointer = header;
         head_pointer = (void*) tmp_head_pointer;
-        printf("return successfully\n");
 
 
         return return_pointer;
@@ -459,6 +458,7 @@ void free(void *ptr)
         tmp_dict_ptr = (dict*) find_next;
         tmp = *tmp_dict_ptr;
         find_next = (void*) tmp.next;
+        printf("segsegseg\n");
         if(find_next > ptr)
             break;
         
