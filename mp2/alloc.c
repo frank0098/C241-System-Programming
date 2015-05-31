@@ -113,7 +113,7 @@ void *malloc(size_t size)
         if(heap_end == NULL)
         return NULL;
         //Find the pointer to the new seg
-        heap_end = heap_end+4;
+        heap_end = heap_end + 4;
         
         //malloc requested malloc_size + header for user
         int* tmp_head;
@@ -185,7 +185,7 @@ void *malloc(size_t size)
 
             //printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         
-        if(tmp_size >= malloc_size + 4 || current_head->next == NULL)
+        if((tmp_size >= malloc_size + 4 && tmp_size >= 32) || current_head->next == NULL)
         {
             
             //The fragment is enough to malloc
@@ -357,8 +357,7 @@ void *malloc(size_t size)
     }
     printf("this happens\n");
     return NULL;
-    
-    
+
 }
 
 
