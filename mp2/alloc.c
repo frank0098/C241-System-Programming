@@ -516,7 +516,7 @@ printf("free\n");
     dict prev_head;
     if(find_prev != NULL)
     {
-        printf("yes!\n");
+
     	prev_head = *find_prev;
     	prev_head.next = (dict*) h_ptr;
     	
@@ -524,6 +524,7 @@ printf("free\n");
     	//coalescene
     	if(find_prev + prev_head.size == h_ptr)
     	{
+            printf("yes!\n");
     		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
 
