@@ -63,7 +63,7 @@ void *calloc(size_t num, size_t size)
 * */
 
 typedef struct dict {
-    int size;
+    size_t size;
     struct dict *prev;
     struct dict *next;
 }dict;
@@ -71,9 +71,9 @@ typedef struct dict {
 
 
 
-int round_up(size_t size)
+size_t round_up(size_t size)
 {
-    int i=0;
+    size_t i=0;
     while(1)
     {
         if((size+i)%8==0)
@@ -96,7 +96,7 @@ void *malloc(size_t size)
 {
     
     //getchar();
-    int malloc_size;
+    size_t malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
     printf("malloc, the size is %d\n",size);
@@ -118,8 +118,8 @@ void *malloc(size_t size)
         
         
         //malloc requested malloc_size + header for user
-        int* tmp_head;
-        tmp_head = (int*) heap_end;
+        size_t* tmp_head;
+        tmp_head = (size_t*) heap_end;
         *tmp_head = malloc_size + 4 ;
         
         //printf("segfault herre\n");
@@ -166,7 +166,7 @@ void *malloc(size_t size)
     {	
 
     	
-        int tmp_size;
+        size_t tmp_size;
         dict tmp_dict;
         tmp_dict = *current_head;
         tmp_size = tmp_dict.size;
@@ -184,8 +184,8 @@ void *malloc(size_t size)
             find_user_head = (void*) current_head;
             
             //malloc requested malloc_size + header for user
-            int* tmp_head;
-            tmp_head = (int*) find_user_head;
+            size_t* tmp_head;
+            tmp_head = (size_t*) find_user_head;
             *tmp_head = malloc_size + 4;
             
             
@@ -196,7 +196,7 @@ void *malloc(size_t size)
             
             
             //Keep track of memory remained
-            int memory_left;
+            size_t memory_left;
             memory_left = tmp_size - malloc_size - 4;
 
             
@@ -244,7 +244,7 @@ void *malloc(size_t size)
                 else
                 {
                     //Allocate New memory
-                    int new_allocated_memory;
+                    size_t new_allocated_memory;
                     new_allocated_memory = 1024 * size;
                     sbrk(new_allocated_memory);
                     tail_pointer = sbrk(0);
@@ -433,9 +433,9 @@ void free(void *ptr)
 
     
 
-    int tmp_current_size;
-        int* next_ptr;
-        next_ptr = (int*) h_ptr;
+    size_t tmp_current_size;
+        size_t* next_ptr;
+        next_ptr = (size_t*) h_ptr;
         tmp_current_size = *next_ptr & ~1;
     int count=0;
     while(1)
@@ -467,9 +467,9 @@ void free(void *ptr)
     }	
 
     //Unmask the current pointer;
-	int current_size;
-	int *curr;
-	curr = (int*) h_ptr;
+	size_t current_size;
+	size_t *curr;
+	curr = (size_t*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
 
