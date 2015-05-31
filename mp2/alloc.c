@@ -402,7 +402,7 @@ void free(void *ptr)
     next_ptr = (int*) (h_ptr);
     tmp_current_size = *next_ptr & ~1;
     printf("the fucking number is %d\n",tmp_current_size);
-    next_ptr = (int*) (h_ptr+12);
+    next_ptr = (int*) (h_ptr+28);
     tmp_current_size = *next_ptr & ~1;
     printf("the fucking number is %d\n",tmp_current_size);
 
@@ -503,7 +503,7 @@ void free(void *ptr)
     next_ptr = (int*) (h_ptr);
     tmp_current_size = *next_ptr & ~1;
     printf("the fucking number is %d\n",tmp_current_size);
-    next_ptr = (int*) (h_ptr+12);
+    next_ptr = (int*) (h_ptr+28);
     tmp_current_size = *next_ptr & ~1;
     printf("the fucking number is %d\n",tmp_current_size);
 
