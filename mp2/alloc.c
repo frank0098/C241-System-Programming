@@ -424,7 +424,6 @@ void free(void *ptr)
 
     void* h_ptr;
     h_ptr = ptr - 4;
-printf("free\n");
     //Find next free block
     void* find_next;
     find_next = head_pointer;
@@ -525,7 +524,6 @@ printf("free\n");
 
     	if((void*) find_prev + prev_head.size == h_ptr)
     	{
-            printf("yes!\n");
     		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
 
