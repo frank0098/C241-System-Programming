@@ -4,9 +4,14 @@
 int main()
 {
 
-	int *ptr = malloc(80000);
-	ptr = realloc(ptr,40000);
-	ptr = realloc(ptr,20000);
+	void *ptr = malloc(80000);
+	void *ptr1 = realloc(ptr, 40000);
+	void *ptr2 = malloc(40000);
+	void *ptr3 = realloc(ptr1, 20000);
+	free(ptr3);
+	free(ptr2);
+	free(ptr1);
+
 	
 	if (ptr == NULL)
 	{
@@ -14,7 +19,6 @@ int main()
 		return 1;
 	}
 
-	*ptr = 4;
 	free(ptr);
 
 	printf("Memory was allocated, used, and freed!\n");	
