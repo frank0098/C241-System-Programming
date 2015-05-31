@@ -104,6 +104,7 @@ void *malloc(size_t size)
     //first time call,the head pointer is null
     if(head_pointer == NULL)
     {
+        printf("head is null\n");
         //Allocate Enough Space
         void *heap_end;
         heap_end = sbrk(0);
