@@ -120,6 +120,7 @@ void *malloc(size_t size)
         tmp_head = (int*) heap_end;
         *tmp_head = malloc_size + 4;
         
+        printf("segfault herre\n");
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
         
@@ -134,7 +135,6 @@ void *malloc(size_t size)
         void *find_free_head;
         find_free_head = user_ptr + malloc_size;
         
-        printf("segfault herre\n");
         //Assign the header of the new free block
         dict header;
         header.size = 4*malloc_size - malloc_size - 4;
