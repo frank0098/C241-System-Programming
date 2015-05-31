@@ -427,8 +427,8 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = head_pointer;
-    // if(free_pointer < h_ptr)
-    //     find_next = free_pointer;
+    if(free_pointer < h_ptr)
+        find_next = free_pointer;
 
     int tmp_current_size;
         int* next_ptr;
