@@ -68,11 +68,7 @@ typedef struct dict {
     struct dict *next;
 }dict;
 
-typedef struct dict0 {
-	int* size;
-    
-    
-}dict0;
+
 
 
 int round_up(size_t size)
@@ -186,7 +182,7 @@ void *malloc(size_t size)
         // printf("next address is %p\n",tmp_dict.next);
         
 
-            //printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
+            printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         
         if((tmp_size >= malloc_size + 4 && tmp_size >= 32) || current_head->next == NULL)
         {
