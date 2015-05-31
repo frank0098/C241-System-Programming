@@ -406,6 +406,8 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 	getchar();
+	
+        printf("current_head_pointer is %p\n",head_pointer);
 	//printf("\n free \n");
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
@@ -428,7 +430,6 @@ void free(void *ptr)
         int* next_ptr;
         next_ptr = (int*) h_ptr;
         tmp_current_size = *next_ptr & ~1;
-        printf("current_head_pointer is %p\n",head_pointer);
     printf("free pointer is at %p\n",ptr );
       printf("Free Size is %d\n", tmp_current_size);
     int count=0;
@@ -490,9 +491,6 @@ void free(void *ptr)
     	}
     *current_head_ptr = current_head;
 
-    dict fuck;
-    
-
     
     dict prev_head;
     //printf("previous address is  %p\n",find_prev);
@@ -518,6 +516,7 @@ void free(void *ptr)
     }
     
 
+        printf("current_head_pointer is %p\n",head_pointer);
     printf("\n");
 
 }
