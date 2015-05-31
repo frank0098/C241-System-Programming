@@ -405,7 +405,6 @@ void free(void *ptr)
     printf("to free  pointer is  %p\n",ptr);
     while(1)
     {
-    	printf("freeloop\n");
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
@@ -416,6 +415,7 @@ void free(void *ptr)
             break;
         }
         find_next = find_next + tmp_current_size;
+        printf("the next free address is   %p\n",find_next);
     }
     printf("the next free address is   %p\n",find_next);	
 
