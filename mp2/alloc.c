@@ -353,6 +353,11 @@ void *malloc(size_t size)
                     previous_head.next = header_pointer;
                     *previous_head_pointer = previous_head;
                 	}
+                	else
+    				{
+    					head_pointer =  find_next_head;
+    				}
+
                     
                     //The header of the next free block
                     dict next_head;
