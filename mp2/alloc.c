@@ -438,7 +438,6 @@ printf("free\n");
     int count=0;
     while(1)
     {
-printf("loop\n");
     	//("current address is %p\n",find_next); 
     	
         // int tmp_current_size;
@@ -517,6 +516,7 @@ printf("loop\n");
     dict prev_head;
     if(find_prev != NULL)
     {
+        printf("yes!\n");
     	prev_head = *find_prev;
     	prev_head.next = (dict*) h_ptr;
     	
