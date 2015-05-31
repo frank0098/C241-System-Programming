@@ -300,7 +300,7 @@ void *malloc(size_t size)
         		printf("Allocated Size is %d\n\n", malloc_size);
 
         		//Mask the last bit to keep track of a "used" seg
-        		
+
             	*tmp_head = *tmp_head | 1;
                 return return_pointer;
             }
@@ -476,9 +476,7 @@ void free(void *ptr)
             break;
         }
         find_next = find_next + tmp_current_size;
-        count++;
-    	if(count==10)
-    		;
+        
     		//break;
     }	
 
@@ -504,7 +502,7 @@ void free(void *ptr)
     dict* current_head_ptr;
     current_head_ptr = (dict*) h_ptr;
     current_head.size = current_size;
-    current_head.prev = next_head.prev;
+    current_head.prev = find_prev;
     current_head.next = next_head_pointer;
 
     //next head
