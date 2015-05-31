@@ -356,6 +356,7 @@ void *malloc(size_t size)
                 	else
     				{
     					head_pointer =  find_next_head;
+    					printf("look at here\n");
     				}
 
                     
