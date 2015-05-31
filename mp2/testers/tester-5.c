@@ -9,6 +9,13 @@
 
 int main()
 {
+ 
+  void* p1 = malloc(800);
+  void* p2 = malloc(10000);
+  free(p1);
+  void* p3 = malloc(100);
+  printf("test %p %p\n",p2, p3);
+
 	malloc(1);
 	
 	int i;
