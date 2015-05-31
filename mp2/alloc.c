@@ -153,6 +153,7 @@ void *malloc(size_t size)
     	//printf("next address is  %p\n",header.next);	
 
         printf("initiliaze finished: head pointer is at %p\n",head_pointer );
+        printf("Allocated Size is %d\n", malloc_size);
 
         return return_pointer;
         
@@ -210,6 +211,9 @@ void *malloc(size_t size)
             //Keep track of memory remained
             int memory_left;
             memory_left = tmp_size - malloc_size - 4;
+
+          	printf("return pointer is at %p\n",return_pointer );
+        	printf("Allocated Size is %d\n", malloc_size);
 
             
             
@@ -419,6 +423,13 @@ void free(void *ptr)
 
     if( find_next < head_pointer)
     	find_next = head_pointer;
+
+    int tmp_current_size;
+        int* next_ptr;
+        next_ptr = (int*) h_ptr;
+        tmp_current_size = *next_ptr & ~1;
+    printf("free pointer is at %p\n",ptr );
+      printf("Free Size is %d\n", tmp_current_size);
     int count=0;
     while(1)
     {
@@ -477,7 +488,6 @@ void free(void *ptr)
     		current_head.size = current_size + next_head.size;
     		current_head.next = next_head.next;
     	}
-    printf("current_head_ptr is %p\n",current_head_ptr);
     *current_head_ptr = current_head;
 
     dict fuck;
