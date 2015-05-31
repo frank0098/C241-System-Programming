@@ -106,7 +106,7 @@ void *malloc(size_t size)
         //Allocate Enough Space
         void *heap_end;
         heap_end = sbrk(0);
-        sbrk(4*malloc_size);
+        sbrk(8*malloc_size);
         tail_pointer = sbrk(0);
         
         if(heap_end == NULL)
@@ -428,7 +428,6 @@ void free(void *ptr)
         int* next_ptr;
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
-        printf("loop\n");
         printf("the size is %d\n",tmp_current_size);
 
         
