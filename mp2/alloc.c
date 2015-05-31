@@ -430,36 +430,37 @@ void free(void *ptr)
        
 
     //Find next free block
-    void* find_next;
-    find_next = h_ptr;
+    dict* find_next;
+    find_next = (dict*) head_pointer;
 
-    if( find_next < head_pointer)
-    	find_next = head_pointer;
+    
 
     int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) h_ptr;
         tmp_current_size = *next_ptr & ~1;
-
-        //("current_head_pointer is %p\n",head_pointer);
-    //("free pointer is at %p\n",ptr );
-      //("Free Size is %d\n\n", tmp_current_size);
     int count=0;
     while(1)
     {
 
     	//("current address is %p\n",find_next); 
     	
-        int tmp_current_size;
-        int* next_ptr;
-        next_ptr = (int*) find_next;
-        tmp_current_size = *next_ptr & ~1;
+        // int tmp_current_size;
+        // int* next_ptr;
+        // next_ptr = (int*) find_next;
+        // tmp_current_size = *next_ptr & ~1;
 
-        if(!(*next_ptr & 0x1))
-        {
+        // if(!(*next_ptr & 0x1))
+        // {
+        //     break;
+        // }
+
+        dict tmp;
+        tmp = *find_next;
+        find_next = tmp.next;
+        if(find_next >= ptr)
             break;
-        }
-        find_next = find_next + tmp_current_size;
+        
         
     		//break;
     }	
