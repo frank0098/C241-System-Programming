@@ -465,6 +465,7 @@ void free(void *ptr)
     dict fuck;
     fuck = *current_head_ptr;
     printf("the fucking current_head_ptr is %d\n",fuck.size);
+    printf("size of dict is %d\n",sizeof(fuck));
 
     
     dict prev_head;
