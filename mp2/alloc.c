@@ -245,7 +245,7 @@ void *malloc(size_t size)
                 {
                     //Allocate New memory
                     int new_allocated_memory;
-                    new_allocated_memory = 512 * size;
+                    new_allocated_memory = 64 * size;
                     sbrk(new_allocated_memory);
                     tail_pointer = sbrk(0);
                     
