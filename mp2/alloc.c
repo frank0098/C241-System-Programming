@@ -220,12 +220,12 @@ void *malloc(size_t size)
                 if(tmp_dict.next!=NULL)
                 	{
                 		dict* find_prev_head;
-                		find_prev_head = dict.prev;
+                		find_prev_head = tmp_dict.prev;
                 		dict prev_head;
                 		prev_head = *find_prev_head;
 
                 		dict* find_next_head;
-                		find_next_head = dict.next;
+                		find_next_head = tmp_dict.next;
                 		dict next_head;
                 		next_head = *find_next_head;
 
