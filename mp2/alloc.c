@@ -427,8 +427,8 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = head_pointer;
-    if(free_pointer < h_ptr)
-        find_next = free_pointer;
+    // if(free_pointer < h_ptr)
+    //     find_next = free_pointer;
 
     int tmp_current_size;
         int* next_ptr;
@@ -458,8 +458,6 @@ void free(void *ptr)
         find_next = (void*) tmp.next;
         
         
-        
-    		//break;
     }	
 
     //Unmask the current pointer;
@@ -468,8 +466,6 @@ void free(void *ptr)
 	curr = (int*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
-
-    free_pointer = h_ptr;
 
     //next free head
     dict next_head;
@@ -532,7 +528,6 @@ void free(void *ptr)
     		dict prev_prev_head;
     		dict* prev_prev_ptr;
     		prev_prev_ptr = prev_head.prev;
-            free_pointer = find_prev;
     		if(prev_prev_ptr!= NULL)
     		{
     			prev_prev_head = *prev_prev_ptr;
@@ -551,7 +546,6 @@ void free(void *ptr)
     {
     	head_pointer =  h_ptr;
     }
-    
     
 
 }
