@@ -245,7 +245,7 @@ void *malloc(size_t size)
                 		}
                 		else
                 		{
-                			head_pointer = find_next_head;
+                			//head_pointer = find_next_head;
                 		}
                 		
                 		
