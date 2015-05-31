@@ -413,7 +413,10 @@ void free(void *ptr)
     void* find_next;
     find_next = h_ptr;
     if( find_next < head_pointer)
+    {
     	find_next = head_pointer;
+    	printf("here\n");
+    }
     //("to free  pointer is  %p\n",ptr);
     while(1)
     {
