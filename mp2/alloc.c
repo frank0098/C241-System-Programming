@@ -522,6 +522,8 @@ printf("free\n");
     	
 
     	//coalescene
+        printf("prev size is %d\n",prev_head.size );
+        printf("the  distance is %d\n",h_ptr - find_prev );
     	if(find_prev + prev_head.size == h_ptr)
     	{
             printf("yes!\n");
