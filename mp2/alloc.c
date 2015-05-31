@@ -428,6 +428,7 @@ void free(void *ptr)
         int* next_ptr;
         next_ptr = (int*) h_ptr;
         tmp_current_size = *next_ptr & ~1;
+        printf("current_head_pointer is %p\n",head_pointer);
     printf("free pointer is at %p\n",ptr );
       printf("Free Size is %d\n", tmp_current_size);
     int count=0;
@@ -439,7 +440,6 @@ void free(void *ptr)
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
 
-        
         if(!(*next_ptr & 0x1))
         {
             break;
