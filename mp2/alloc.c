@@ -68,6 +68,10 @@ typedef struct dict {
     struct dict *next;
 }dict;
 
+typedef struct dict0 {
+    int size;
+    
+}dict0;
 
 
 int round_up(size_t size)
@@ -463,9 +467,10 @@ void free(void *ptr)
     *current_head_ptr = current_head;
 
     dict fuck;
+    dict0 fuck0;
     fuck = *current_head_ptr;
     printf("the fucking current_head_ptr is %d\n",fuck.size);
-    printf("size of dict is %d\n",sizeof(fuck));
+    printf("size of dict is %d\n",sizeof(fuck0));
 
     
     dict prev_head;
