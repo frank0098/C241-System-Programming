@@ -403,8 +403,12 @@ void free(void *ptr)
     if( find_next < head_pointer)
     	find_next = head_pointer;
     printf("to free  pointer is  %p\n",ptr);
+    int count=0;
     while(1)
     {
+    	count++;
+    	if(count=10)
+    		break;
         int tmp_current_size;
         int* next_ptr;
         next_ptr = (int*) find_next;
