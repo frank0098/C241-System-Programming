@@ -166,7 +166,7 @@ void *malloc(size_t size)
     //Trasverse the linked list
     int count=0;
     while(1)
-    {	//printf("mallocloop\n");
+    {	printf("mallocloop\n");
         //why this not working? *org->size
 // count++;
 // if(count>10)
@@ -393,15 +393,6 @@ void free(void *ptr)
     void* h_ptr;
     h_ptr = ptr - 4;
 
-    int tmp_current_size;
-    int* next_ptr;
-    next_ptr = (int*) (h_ptr);
-    tmp_current_size = *next_ptr & ~1;
-    printf("the fucking number is %d\n",tmp_current_size);
-    next_ptr = (int*) (h_ptr+28);
-    tmp_current_size = *next_ptr & ~1;
-    printf("the fucking number is %d\n",tmp_current_size);
-
     
        
 
@@ -494,12 +485,7 @@ void free(void *ptr)
     {
     	head_pointer =  h_ptr;
     }
-    next_ptr = (int*) (h_ptr);
-    tmp_current_size = *next_ptr & ~1;
-    printf("the fucking number is %d\n",tmp_current_size);
-    next_ptr = (int*) (h_ptr+28);
-    tmp_current_size = *next_ptr & ~1;
-    printf("the fucking number is %d\n",tmp_current_size);
+    
 
     printf("\n");
 
