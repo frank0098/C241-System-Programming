@@ -153,6 +153,7 @@ void *malloc(size_t size)
     	//printf("next address is  %p\n",header.next);	
 
         printf("Initiliaze finished: head pointer is at %p\n",head_pointer );
+        printf("Allocated Pointer is %p\n",return_pointer );
         printf("Allocated Size is %d\n", malloc_size);
 
         return return_pointer;
@@ -406,7 +407,7 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 	getchar();
-	
+
         printf("current_head_pointer is %p\n",head_pointer);
 	//printf("\n free \n");
     //"If a null pointer is passed as argument, no action occurs."
