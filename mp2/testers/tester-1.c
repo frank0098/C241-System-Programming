@@ -6,12 +6,8 @@ int main()
 	int size = 1024;
 	void *ptr = malloc(size);
 	free(ptr);
-	ptr = malloc(size);
+	void *ptr2 = malloc(size);
 	free(ptr);
-	ptr = malloc(size);
-	free(ptr);
-	ptr = malloc(size);
-
 	
 	if (ptr == NULL)
 	{
@@ -19,7 +15,7 @@ int main()
 		return 1;
 	}
 
-	free(ptr);
+	free(ptr2);
 
 	printf("Memory was allocated, used, and freed!\n");	
 	return 0;
