@@ -134,13 +134,13 @@ void *malloc(size_t size)
         void *find_free_head;
         find_free_head = user_ptr + malloc_size;
         
+        printf("segfault herre\n");
         //Assign the header of the new free block
         dict header;
         header.size = 4*malloc_size - malloc_size - 4;
         header.prev = NULL;
         header.next = NULL;
 
-        printf("segfault herre\n");
         
         dict* tmp_head_pointer;
         tmp_head_pointer = (dict*) find_free_head;
