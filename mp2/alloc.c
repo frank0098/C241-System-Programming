@@ -304,7 +304,7 @@ void *malloc(size_t size)
                 //If current node is already the last node in the linked list
                 if(tmp_dict.next == NULL)
                 {
-                    
+                    printf("this situation?\n");
                     //The header of the just-created free-block
 
                     dict header;
