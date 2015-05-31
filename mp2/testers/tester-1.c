@@ -5,6 +5,8 @@ int main()
 {
 
 	int *ptr = malloc(80000);
+	ptr = realloc(ptr,40000);
+	ptr = realloc(ptr,20000);
 	
 	if (ptr == NULL)
 	{
