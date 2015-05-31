@@ -70,6 +70,7 @@ typedef struct dict {
 
 typedef struct dict0 {
     struct dict *prev;
+    struct dict *next;
     
 }dict0;
 
