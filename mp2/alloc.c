@@ -540,30 +540,31 @@ void free(void *ptr)
     if(find_prev != NULL)
     {
     	prev_head = *find_prev;
-    	prev_head.size = prev_head.size;
-    	prev_head.prev = prev_head.prev;
     	prev_head.next = (dict*) h_ptr;
     	
 
-    	// //coalescene
-    	// if(find_prev + prev_head.size == h_ptr)
-    	// {
-    	// 	prev_head.size = prev_head.size + current_head.size;
-    	// 	prev_head.next = current_head.next;
+    	//coalescene
+    	if(find_prev + prev_head.size == h_ptr)
+    	{
+    		prev_head.size = prev_head.size + current_head.size;
+    		prev_head.next = current_head.next;
 
-    	// 	dict prev_prev_head;
-    	// 	dict* prev_prev_ptr;
-    	// 	prev_prev_ptr = prev_head.prev;
-    	// 	if(prev_prev_ptr!= NULL)
-    	// 	{
-    	// 		prev_prev_head = *prev_prev_ptr;
-    	// 		prev_prev_head.next = current_head_ptr;
-    	// 		*prev_prev_ptr = prev_prev_head;
+    		dict prev_prev_head;
+    		dict* prev_prev_ptr;
+    		prev_prev_ptr = prev_head.prev;
+    		if(prev_prev_ptr!= NULL)
+    		{
+    			prev_prev_head = *prev_prev_ptr;
+    			prev_prev_head.next = current_head_ptr;
+    			*prev_prev_ptr = prev_prev_head;
     			
-    	// 	}
-    	// }
-    	// *find_prev = prev_head;
-    	// head_pointer = find_prev;
+    		}
+    		next_head.prev = prev_head;
+    		*next_head_pointer = next_head;
+
+
+    	}
+    	*find_prev = prev_head;
     }
     else
     {
