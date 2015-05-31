@@ -463,7 +463,7 @@ void free(void *ptr)
     *current_head_ptr = current_head;
 
     dict fuck;
-    fuck = *current_head;
+    fuck = *current_head_ptr;
     printf("the fucking current_head_ptr is %p\n",fuck.size);
 
     
