@@ -445,7 +445,9 @@ void free(void *ptr)
     //prev head
     dict* find_prev;
     find_prev = next_head.prev;
-    if(find_prev < head_pointer)
+    void* comp;
+    comp = (void*) next_head.prev;
+    if(head_pointer - comp >0)
     	find_prev = head_pointer;
 
     //current head
