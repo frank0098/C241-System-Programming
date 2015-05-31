@@ -9,7 +9,11 @@ int main()
 	void *ptr2 = malloc(size/2);
 	void *ptr3 = realloc(ptr1, size/4);
 	void *ptr4 = malloc( size/4);
+	void *ptr5 = realloc(ptr1, size/8);
+	void *ptr6 = malloc( size/8);
 
+	free(ptr6);
+	free(ptr5);
 	free(ptr4);
 	free(ptr3);
 	free(ptr2);
