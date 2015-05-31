@@ -94,7 +94,7 @@ void *tail_pointer = NULL;
 
 void *malloc(size_t size)
 {
-    // //printf("\n");
+    // ////("\n");
     //getchar();
     int malloc_size;
     //malloc_size is the multiple of 8
@@ -106,7 +106,7 @@ void *malloc(size_t size)
         //Allocate Enough Space
         void *heap_end;
         heap_end = sbrk(0);
-        sbrk(8*malloc_size);
+        sbrk(256*malloc_size);
         tail_pointer = sbrk(0);
         
         if(heap_end == NULL)
@@ -146,13 +146,13 @@ void *malloc(size_t size)
         head_pointer = (void*) tmp_head_pointer;
 
 
-        //printf("this address is  %p\n",find_free_head);	
+        ////("this address is  %p\n",find_free_head);	
 
-    	//printf("previous address is  %p\n",header.prev);
+    	////("previous address is  %p\n",header.prev);
 
-    	//printf("next address is  %p\n",header.next);	
+    	////("next address is  %p\n",header.next);	
 
-        printf("initiliaze finished: head pointer is at %p\n",head_pointer );
+        //("initiliaze finished: head pointer is at %p\n",head_pointer );
 
         return return_pointer;
         
@@ -176,13 +176,13 @@ void *malloc(size_t size)
         tmp_dict = *current_head;
         tmp_size = tmp_dict.size;
 
-        // printf("current address is %p\n",current_head);
-        // printf("current size is %d\n",tmp_size);
-        // printf("prv address is %p\n",tmp_dict.prev);
-        // printf("next address is %p\n",tmp_dict.next);
+        // //("current address is %p\n",current_head);
+        // //("current size is %d\n",tmp_size);
+        // //("prv address is %p\n",tmp_dict.prev);
+        // //("next address is %p\n",tmp_dict.next);
         
 
-           // printf("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
+           // //("tmp_size %zu malloc_size %zu\n", tmp_size,malloc_size);
         
         if((tmp_size >= malloc_size + 4 && tmp_size >= 32) || current_head->next == NULL)
         {
@@ -216,7 +216,7 @@ void *malloc(size_t size)
             if(tmp_size - malloc_size < 24)
             {
                 
-                //printf("  not enough space to \n");
+                ////("  not enough space to \n");
                 if(tmp_dict.next!=NULL)
                 	{
                 		dict* find_prev_head;
@@ -327,7 +327,7 @@ void *malloc(size_t size)
                 else
                 {
                     //The header of the just-created free-block
-                    //printf(" next pointer is not null\n");
+                    ////(" next pointer is not null\n");
                     dict header;
                     header.size = memory_left;
                     header.prev = current_head;
@@ -371,7 +371,7 @@ void *malloc(size_t size)
         
         current_head = current_head->next;
     }
-    printf("this happens\n");
+    //("this happens\n");
     return NULL;
 
 }
@@ -402,7 +402,7 @@ void *malloc(size_t size)
 void free(void *ptr)
 {
 
-	//printf("\n free \n");
+	////("\n free \n");
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
@@ -419,7 +419,7 @@ void free(void *ptr)
 
     if( find_next < head_pointer)
     	find_next = head_pointer;
-    printf("to free  pointer is  %p\n",ptr);
+    //("to free  pointer is  %p\n",ptr);
     int count=0;
     while(1)
     {
@@ -428,7 +428,7 @@ void free(void *ptr)
         int* next_ptr;
         next_ptr = (int*) find_next;
         tmp_current_size = *next_ptr & ~1;
-        printf("the size is %d\n",tmp_current_size);
+        //("the size is %d\n",tmp_current_size);
 
         
         if(!(*next_ptr & 0x1))
@@ -436,13 +436,13 @@ void free(void *ptr)
             break;
         }
         find_next = find_next + tmp_current_size;
-        printf("the next free address is   %p\n",find_next);
+        //("the next free address is   %p\n",find_next);
         count++;
     	if(count==10)
     		;
     		//break;
     }
-    printf("the next free address is   %p\n",find_next);	
+    //("the next free address is   %p\n",find_next);	
 
     //Unmask the current pointer;
 	int current_size;
@@ -481,7 +481,7 @@ void free(void *ptr)
     		current_head.size = current_size + next_head.size;
     		current_head.next = next_head.next;
     	}
-    printf("current_head_ptr is %p\n",current_head_ptr);
+    //("current_head_ptr is %p\n",current_head_ptr);
     *current_head_ptr = current_head;
 
     dict fuck;
@@ -489,7 +489,7 @@ void free(void *ptr)
 
     
     dict prev_head;
-    //printf("previous address is  %p\n",find_prev);
+    ////("previous address is  %p\n",find_prev);
     if(find_prev != NULL)
     {
     	prev_head = *find_prev;
@@ -512,7 +512,7 @@ void free(void *ptr)
     }
     
 
-    printf("\n");
+    //("\n");
 
 }
 
