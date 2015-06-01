@@ -100,7 +100,7 @@ void *malloc(size_t size)
     int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
-    // printf("malloc, the size is %d\n",size);
+     printf("malloc, the size is %d\n",size);
      printf("malloc, the size is %d\n",malloc_size);
     
     //first time call,the head pointer is null
@@ -111,8 +111,8 @@ void *malloc(size_t size)
         heap_end = sbrk(0);
         size_t to_malloc;
         to_malloc = 64*malloc_size;
-        if(to_malloc >=1073741824)
-            to_malloc = 1073741824+4;
+        if(to_malloc >=100000000)
+            to_malloc = 4*malloc_size;
 
         sbrk(to_malloc);
         
