@@ -204,11 +204,6 @@ void *malloc(size_t size)
             //Keep track of memory remained
             int memory_left;
             memory_left = tmp_size - malloc_size - 4;
-
-            
-
-            
-            
             if(tmp_size < malloc_size + 4 + 24 + 8)
             {
                 
@@ -515,23 +510,12 @@ void free(void *ptr)
 
     		dict new_next_head;
     		dict* new_next_head_ptr;
-            if(new_next_head_ptr!=NULL)
-            {
+
             new_next_head_ptr = current_head.next;
             new_next_head = *new_next_head_ptr;
             new_next_head.prev = find_prev;
             *new_next_head_ptr = new_next_head;
-            }
-    		// prev_prev_ptr = prev_head.prev;
-    		// if(prev_prev_ptr!= NULL)
-    		// {
-    		// 	prev_prev_head = *prev_prev_ptr;
-    		// 	prev_prev_head.next = current_head_ptr;
-    		// 	*prev_prev_ptr = prev_prev_head;
-    			
-    		// }
-    		// next_head.prev = find_prev;
-    		// *next_head_pointer = next_head;
+    		
 
 
     	}
