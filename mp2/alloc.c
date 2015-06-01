@@ -512,9 +512,12 @@ void free(void *ptr)
 
             new_next_head_ptr = current_head.next;
             printf("the new_next head %p\n",new_next_head_ptr);
+            if(new_next_head_ptr!= NULL)
+            {
             new_next_head = *new_next_head_ptr;
             new_next_head.prev = find_prev;
             *new_next_head_ptr = new_next_head;
+            }
     		printf("seg here\n");
 
 
