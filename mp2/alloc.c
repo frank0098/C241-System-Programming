@@ -111,7 +111,7 @@ void *malloc(size_t size)
         heap_end = sbrk(0);
         size_t to_malloc;
         to_malloc = 64*malloc_size;
-        if(to_malloc >1073741824)
+        if(to_malloc >=1073741824)
             to_malloc = 1073741824+4;
 
         sbrk(to_malloc);
