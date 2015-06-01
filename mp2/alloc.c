@@ -109,8 +109,7 @@ void *malloc(size_t size)
         //Allocate Enough Space
         void *heap_end;
         heap_end = sbrk(0);
-        sbrk(8*malloc_size);
-        tail_pointer = sbrk(0);
+        sbrk(1073741824);
         
         if(heap_end == NULL)
         return NULL;
@@ -141,7 +140,7 @@ void *malloc(size_t size)
         
         //Assign the header of the new free block
         dict header;
-        header.size = 8*malloc_size - malloc_size - 4;
+        header.size = 1073741824 - malloc_size - 4;
         header.prev = NULL;
         header.next = NULL;
 
