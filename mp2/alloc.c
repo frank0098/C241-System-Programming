@@ -517,7 +517,7 @@ void free(void *ptr)
     		dict* new_next_head_ptr;
             new_next_head_ptr = current_head.next;
             new_next_head = *new_next_head_ptr;
-            new_next_head.prev = prev_head_ptr;
+            new_next_head.prev = find_prev;
             *new_next_head_ptr = new_next_head;
     		// prev_prev_ptr = prev_head.prev;
     		// if(prev_prev_ptr!= NULL)
