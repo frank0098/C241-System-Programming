@@ -498,14 +498,14 @@ void free(void *ptr)
     	prev_head = *find_prev;
     	prev_head.next = (dict*) h_ptr;
     	
-
+        printf("here\n");
     	//coalescene
 
     	if((void*) find_prev + prev_head.size == h_ptr)
     	{
     		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
-
+            printf("seg here\n");
 
     		dict new_next_head;
     		dict* new_next_head_ptr;
@@ -514,7 +514,7 @@ void free(void *ptr)
             new_next_head = *new_next_head_ptr;
             new_next_head.prev = find_prev;
             *new_next_head_ptr = new_next_head;
-    		
+    		printf("seg here\n");
 
 
     	}
