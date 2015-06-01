@@ -432,28 +432,10 @@ void free(void *ptr)
     //Find next free block
     void* find_next;
     find_next = head_pointer;
-    // if(free_pointer < h_ptr)
-    //     find_next = free_pointer;
-
-    // int tmp_current_size;
-    //     int* next_ptr;
-    //     next_ptr = (int*) h_ptr;
-    //     tmp_current_size = *next_ptr & ~1;
-    // int count=0;
+  
     while(1)
     {
-    	//("current address is %p\n",find_next); 
     	
-        // int tmp_current_size;
-        // int* next_ptr;
-        // next_ptr = (int*) find_next;
-        // tmp_current_size = *next_ptr & ~1;
-
-        // if(!(*next_ptr & 0x1))
-        // {
-        //     break;
-        // }
-
         dict tmp;
         dict* tmp_dict_ptr;
         tmp_dict_ptr = (dict*) find_next;
@@ -530,9 +512,14 @@ void free(void *ptr)
     		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
 
-    		dict prev_prev_head;
-    		dict* prev_prev_ptr;
-    		prev_prev_ptr = prev_head.prev;
+
+    		dict new_next_head;
+    		dict* new_next_head_ptr;
+            new_next_head_ptr = current_head.next;
+            new_next_head = *new_next_head_ptr;
+            new_next_head.prev = prev_head_ptr;
+            *new_next_head_ptr = new_next_head;
+    		// prev_prev_ptr = prev_head.prev;
     		// if(prev_prev_ptr!= NULL)
     		// {
     		// 	prev_prev_head = *prev_prev_ptr;
@@ -540,8 +527,8 @@ void free(void *ptr)
     		// 	*prev_prev_ptr = prev_prev_head;
     			
     		// }
-    		next_head.prev = find_prev;
-    		*next_head_pointer = next_head;
+    		// next_head.prev = find_prev;
+    		// *next_head_pointer = next_head;
 
 
     	}
