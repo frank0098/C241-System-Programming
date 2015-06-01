@@ -100,7 +100,6 @@ void *malloc(size_t size)
     int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
-     printf("malloc, the size is %d\n",size);
      printf("malloc, the size is %d\n",malloc_size);
     
     //first time call,the head pointer is null
@@ -418,6 +417,7 @@ void free(void *ptr)
 {
 	//getchar();
 
+
     //"If a null pointer is passed as argument, no action occurs."
     if (!ptr)
     return;
@@ -448,6 +448,7 @@ void free(void *ptr)
 	curr = (int*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
+    printf("free size is %d\n",current_size);
 
     //next free head
     dict next_head;
