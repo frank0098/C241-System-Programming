@@ -435,11 +435,11 @@ void free(void *ptr)
     // if(free_pointer < h_ptr)
     //     find_next = free_pointer;
 
-    int tmp_current_size;
-        int* next_ptr;
-        next_ptr = (int*) h_ptr;
-        tmp_current_size = *next_ptr & ~1;
-    int count=0;
+    // int tmp_current_size;
+    //     int* next_ptr;
+    //     next_ptr = (int*) h_ptr;
+    //     tmp_current_size = *next_ptr & ~1;
+    // int count=0;
     while(1)
     {
     	//("current address is %p\n",find_next); 
