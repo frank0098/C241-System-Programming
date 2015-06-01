@@ -109,7 +109,7 @@ void *malloc(size_t size)
         void *heap_end;
         heap_end = sbrk(0);
         size_t to_malloc;
-        to_malloc = 64*malloc_size;
+        to_malloc = 4*malloc_size;
         if(malloc_size >=1000000)
             to_malloc = 4*malloc_size;
 
@@ -124,10 +124,8 @@ void *malloc(size_t size)
         //malloc requested malloc_size + header for user
         int* tmp_head;
         tmp_head = (int*) heap_end;
-        printf("segfault herre\n");
         *tmp_head = malloc_size + 4 ;
         
-        printf("segfault herre\n");
         //Mask the last bit to keep track of a "used" seg
         *tmp_head = *tmp_head | 1;
         
