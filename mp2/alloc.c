@@ -458,7 +458,7 @@ void free(void *ptr)
         dict* tmp_dict_ptr;
         tmp_dict_ptr = (dict*) find_next;
         tmp = *tmp_dict_ptr;
-        if(find_next >= h_ptr)
+        if(find_next > h_ptr)
             break;
         find_next = (void*) tmp.next;
         
