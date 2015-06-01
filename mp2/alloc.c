@@ -100,7 +100,7 @@ void *malloc(size_t size)
     int malloc_size;
     //malloc_size is the multiple of 8
     malloc_size=round_up(size);
-     printf("malloc, the size is %d\n",malloc_size);
+     //printf("malloc, the size is %d\n",malloc_size);
     
     //first time call,the head pointer is null
     if(head_pointer == NULL)
@@ -446,7 +446,7 @@ void free(void *ptr)
 	curr = (int*) h_ptr;
 	*curr = *curr & ~1;
 	current_size = *curr;
-    printf("free size is %d\n",current_size);
+    //printf("free size is %d\n",current_size);
 
     //next free head
     dict next_head;
@@ -498,27 +498,27 @@ void free(void *ptr)
     	prev_head = *find_prev;
     	prev_head.next = (dict*) h_ptr;
     	
-        printf("here\n");
+        //printf("here\n");
     	//coalescene
 
     	if((void*) find_prev + prev_head.size == h_ptr)
     	{
     		prev_head.size = prev_head.size + current_head.size;
     		prev_head.next = current_head.next;
-            printf("seg here\n");
+            //printf("seg here\n");
 
     		dict new_next_head;
     		dict* new_next_head_ptr;
 
             new_next_head_ptr = current_head.next;
-            printf("the new_next head %p\n",new_next_head_ptr);
+            //printf("the new_next head %p\n",new_next_head_ptr);
             if(new_next_head_ptr!= NULL)
             {
             new_next_head = *new_next_head_ptr;
             new_next_head.prev = find_prev;
             *new_next_head_ptr = new_next_head;
             }
-    		printf("seg here\n");
+    		//printf("seg here\n");
 
 
     	}
