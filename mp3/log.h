@@ -2,10 +2,12 @@
 
 #ifndef __LOG_H_
 #define __LOG_H_
-
+#define MAXSIZE 1024
 /** The log data structure. */
 typedef struct _log_t
 {
+	char* pointer[MAXSIZE];
+	int size;
 
 } log_t;
 

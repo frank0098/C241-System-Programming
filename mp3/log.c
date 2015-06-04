@@ -16,7 +16,11 @@
  */
 void log_init(log_t* l)
 {
-
+	for(int i=0;i<MAXSIZE;i++)
+	{
+		l->pointer[i]=NULL;
+	}
+	l->size = 0;
 }
 
 /**
@@ -32,7 +36,14 @@ void log_init(log_t* l)
  */
 void log_destroy(log_t* l)
 {
-
+	int curr_size = l->size;
+	if(l->size !=0)
+	{
+		for(int i=0;i<curr_size;i++)
+		{
+			free(l->pointer[i]);
+		}
+	}
 }
 
 /**
@@ -50,6 +61,14 @@ void log_destroy(log_t* l)
  */
 void log_append(log_t* l, char *item)
 {
+	size_t item_len;
+	item_len = strlen(item);
+	char *new_ptr;
+	new_ptr = malloc(item_len);
+	strcpy(new_ptr,item);
+
+	l->pointer[l->size] = new_ptr;
+	l->size++;
 
 }
 
@@ -154,5 +173,18 @@ unsigned int log_size(log_t* l)
  */
 char *log_search(log_t* l, const char *prefix)
 {
+	int query_len = strlen(prefix);
+	char comp_str[query_len];
+	for(int i=0;i<l->size;i++)
+	{
+
+		for(int j=0;j<query_len;j++)
+			comp_str[j] = (l->pointer[i])[j];
+		comp_str[query_len]='\0';
+		if(strcmp(prefix,comp_str) == 0)
+			return l->pointer[i];
+		
+
+	}
     return NULL;
 }
