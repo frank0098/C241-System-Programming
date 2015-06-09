@@ -175,7 +175,7 @@ char *log_search(log_t* l, const char *prefix)
 {
 	int query_len = strlen(prefix);
 	char comp_str[query_len];
-	for(int i=0;i<l->size;i++)
+	for(int i=l->size-1;i>=0;i--)
 	{
 
 		for(int j=0;j<query_len;j++)

@@ -32,7 +32,6 @@ int main()
     
     while(1)
     {
-        printf("loop...\n\n");
         //Current pid and working directory
         pid_t pid;
         char *cwd = NULL;
@@ -78,13 +77,13 @@ int main()
             new_string[i]=line[i];
         }
         new_string[read-1]='\0';
-
+        
         
         
         
         if(strcmp(p_ptr,"exit") == 0)
         {
-
+            
             free(line);
             break;
         }
@@ -115,7 +114,7 @@ int main()
         else
         {
             char *exec_string;
-            exec_string = string;
+            exec_string = new_string;
             char query_string[read-2];
             
             if(new_string[0] == '!')
@@ -129,13 +128,10 @@ int main()
                 else
                 printf("%s matches %s\n", query_string, exec_string);
             }
-            printf("point 1\n");
             if(exec_string != NULL)
             {
-                printf("point 2\n");
                 if(exec_string[0]=='c' && exec_string[1]=='d' && exec_string[2]==' ')
                 {
-                    printf("i am here!!!\n");
                     char* new_next;
                     new_next = &exec_string[3];
                     
@@ -148,10 +144,9 @@ int main()
                     
                     log_append(my_log,exec_string);   
                 }
-
+                
                 else
                 {
-                    printf("not cd!\n");
                     log_append(my_log,exec_string);
                     
                     pid_t new_child = fork();
@@ -181,14 +176,14 @@ int main()
             
             
         }
-
+        
         
         
         free(line);
         
     }
-
-            
+    
+    
     
     log_destroy(my_log);
     
