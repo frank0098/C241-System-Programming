@@ -64,7 +64,7 @@ void log_append(log_t* l, char *item)
 	size_t item_len;
 	item_len = strlen(item);
 	char *new_ptr;
-	new_ptr = malloc(item_len);
+	new_ptr = malloc(item_len+1);
 	strcpy(new_ptr,item);
 
 	l->pointer[l->size] = new_ptr;

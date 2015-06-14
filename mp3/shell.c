@@ -29,20 +29,23 @@ int main()
     struct _log_t *my_log;
     my_log = malloc(sizeof(log_t));
     log_init(my_log);
+    char *line;
     
     while(1)
     {
         //Current pid and working directory
         pid_t pid;
         char *cwd = NULL;
-        cwd = malloc(1000);
+        cwd = getcwd(NULL,0);
+        cwd[strlen(cwd)+1]='\0';
         pid = getpid();
-        strcpy(cwd,getcwd(NULL,0));
-        printf("(pid=%d)%s$ ", pid, cwd);
+        char pr[strlen(cwd)+1];
+        strcpy(pr,cwd);
+        printf("(pid=%d)%s$ ", pid, pr);
         free(cwd);
         
         //read the input
-        char *line = NULL;
+        line = NULL;
         size_t len = 0;
         ssize_t read;
         read = getline(&line , &len, stdin);
