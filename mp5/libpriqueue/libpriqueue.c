@@ -35,14 +35,14 @@
  */
  int priqueue_offer(priqueue_t *q, void *ptr)
  {
+     int count=0;
      priqueue_entry_t *test;
      test = q->top;
      int debug;
      debug = *(int*)ptr;
-     
      priqueue_entry_t *new_entry;
      new_entry = malloc(sizeof(priqueue_entry_t));
-     new_entry->value = (int*) ptr;
+     new_entry->value =  ptr;
      q->size++;
      priqueue_entry_t* current_entry;
      priqueue_entry_t* tmp;
@@ -59,51 +59,46 @@
          // }
          
          // printf("\n");
-         
          return 0;
      }
      else
      {
          current_entry = q->top;
          
-         if(q->comp(ptr,(void*) current_entry->value) <= 0)
+         if(q->comp(ptr, current_entry->value) < 0)
          {
              new_entry->next = current_entry;
              q->top = new_entry;
              // test=q->top;
-             
              // while(test!=NULL)
              // {
              //     printf("%d ",*test->value);
              //     test = test->next;
              // }
-             
              // printf("\n");
              return 0;
          }
          
          while(current_entry != NULL)
          {
-             
-             if(q->comp(ptr,(void*) current_entry->value) < 0)
+             //printf("loop\n");
+             if(q->comp(ptr,current_entry->value) < 0)
              {
                  
                  new_entry->next = tmp->next;
                  tmp->next = new_entry;
-                 
                  // test=q->top;
-                 
                  // while(test!=NULL)
                  // {
                  //     printf("%d ",*test->value);
                  //     test = test->next;
                  // }
                  // printf("\n");
-                 return 0;
+                 return count;
              }
-             
              tmp = current_entry;
              current_entry = current_entry->next;
+             count++;
          }
      }
      new_entry->next = NULL;
@@ -114,13 +109,9 @@
      //     printf("%d ",*test->value);
      //     test = test->next;
      // }
-     
      // printf("\n");
-     
-     
-     
-     
-     return 0;
+
+     return count;
  }
  
  
@@ -140,7 +131,7 @@
      {
          priqueue_entry_t* first;
          first = q->top;
-         return (void*) first->value;
+         return first->value;
      }
  }
  
@@ -162,7 +153,7 @@
          void* return_ptr;
          priqueue_entry_t* first;
          first = q->top;
-         return_ptr = (void*) first->value;
+         return_ptr = first->value;
          q->top = first->next;
          q->size--;
          free(first);
@@ -198,7 +189,7 @@
              
              if(count==index)
              {
-                 return (void*) current_entry->value;
+                 return current_entry->value;
              }
              current_entry = current_entry->next;
              count++;
@@ -236,7 +227,7 @@
          {
              if(current_entry == q->top)
              {
-                 if(ptr == (void*)current_entry->value)
+                 if(ptr == current_entry->value)
                  {
                      return_value++;
                      q->top = current_entry->next;
@@ -249,7 +240,7 @@
              }
              else
              {  
-                 if(ptr == (void*)current_entry->value)
+                 if(ptr == current_entry->value)
                  {
                      return_value++;
                      tmp->next=current_entry->next;
@@ -283,9 +274,9 @@
  */
  void *priqueue_remove_at(priqueue_t *q, int index)
  {
-     int count=1;
+     int count=0;
      int size = q->size;
-     if(index>size || index<=0)
+     if(index>size || index<0)
      return NULL;
      else
      {
@@ -294,27 +285,29 @@
          priqueue_entry_t* tmp;
          void* return_ptr;
          tmp = NULL;
-         if(index == 1)
+         if(index == 0)
          {
              return_ptr = current_entry->value;
              q->size--;
              q->top = current_entry->next;
              free(current_entry);
-             return (void*) return_ptr;
+             return return_ptr;
          }
          
          while(current_entry != NULL)
          {
              if(count==index)
              {
+
                  return_ptr = current_entry->value;
                  q->size--;
                  tmp->next = current_entry->next;
                  free(current_entry);
-                 return (void*) return_ptr;;
+                 return return_ptr;;
              }
-             current_entry = current_entry->next;
+
              tmp = current_entry;
+             current_entry = current_entry->next;
              count++;
          }
      }

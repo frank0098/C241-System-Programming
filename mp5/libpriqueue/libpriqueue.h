@@ -10,7 +10,7 @@
 
 typedef struct _priqueue_entry_t
 {
-	int *value;
+	void *value;
 	struct _priqueue_entry_t* next;
 
 } priqueue_entry_t;
