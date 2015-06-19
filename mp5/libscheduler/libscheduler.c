@@ -213,11 +213,6 @@ int scheduler_new_job(int job_number, int time, int running_time, int priority)
   }
   
   
-
-
-  
-
-
 }
 
 
@@ -271,7 +266,6 @@ int scheduler_job_finished(int core_id, int job_number, int time)
   total_turnaround_time=total_turnaround_time+(time - finished_job->arrival_time);
   total_waiting_time=total_waiting_time+(time - finished_job->arrival_time -finished_job->total_run_time);
   total_response_time = total_response_time +(finished_job->start_time- finished_job->arrival_time);
-  printf("##########responsetime#############%d\n",finished_job->start_time- finished_job->arrival_time );
 
   priqueue_remove_at(&queue,index);
   free(finished_job);
@@ -326,13 +320,11 @@ int scheduler_quantum_expired(int core_id, int time)
 {
   if(core_status[core_id]==-1)
     {
-      printf("free cores exists\n");
       return -1;
     }
   job_t *next_job;
   if(max_core>=max_round)
   {
-    printf("i can see ya\n");
     for(int i=0;i<priqueue_size(&queue);i++)
     {
       next_job = (job_t *)priqueue_at(&queue,i);
@@ -343,7 +335,6 @@ int scheduler_quantum_expired(int core_id, int time)
     exit(-1);
   }
 
-  printf("expeced here\n");
   int expired_job_index;
   int to_schedule_job_index;
   job_t *to_schedule_job;
@@ -364,7 +355,6 @@ int scheduler_quantum_expired(int core_id, int time)
   {
     next_job= (job_t *)priqueue_at(&queue,i);
 
-    printf("index is %d,round is %d\n",i,next_job->round );
     if(next_job->core_id!=-1)
     next_job->run_time_already = next_job->run_time_already + time- next_job->last_update_time;
     next_job->last_update_time = time;
@@ -461,21 +451,19 @@ void scheduler_clean_up()
  */
 void scheduler_show_queue()
 {
-    int queue_size = priqueue_size(&queue);
-    for(int i=0;i<queue_size;i++)
-      printf("%d(%d) ", ((job_t *)priqueue_at(&queue, i))->job_id,((job_t *)priqueue_at(&queue, i))->core_id );
-    printf("\n");
-    for(int i=0;i<queue_size;i++)
-      printf("%d #(%d %d)", ((job_t *)priqueue_at(&queue, i))->job_id,((job_t *)priqueue_at(&queue, i))->arrival_time,((job_t *)priqueue_at(&queue, i))->start_time);
-    printf("\n");
+    // int queue_size = priqueue_size(&queue);
+    // for(int i=0;i<queue_size;i++)
+    //   printf("%d(%d) ", ((job_t *)priqueue_at(&queue, i))->job_id,((job_t *)priqueue_at(&queue, i))->core_id );
+    // printf("\n");
+    // for(int i=0;i<queue_size;i++)
+    //   printf("%d #(%d %d)", ((job_t *)priqueue_at(&queue, i))->job_id,((job_t *)priqueue_at(&queue, i))->arrival_time,((job_t *)priqueue_at(&queue, i))->start_time);
+    // printf("\n");
 
 
-    printf("core status\n");
-    for(int i=0;i<max_core;i++)
-      printf("core%d: %d ",i,core_status[i]);
-     printf("\n");
-
-
+    // printf("core status\n");
+    // for(int i=0;i<max_core;i++)
+    //   printf("core%d: %d ",i,core_status[i]);
+    //  printf("\n");
 
 }
 

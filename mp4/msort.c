@@ -238,7 +238,6 @@ int main(int argc, char **argv)
     
     //*filename = "/Users/Frank/Desktop/CS241-System-Programming/mp4/example1.txt";
     
-    printf("seg fault\n");
     if(argc != 3)
     {
         fprintf(stderr, "Wrong Input Parameter\n");
