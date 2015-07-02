@@ -41,7 +41,8 @@ void new_dependency_func (char *target, char *dependency)
 	int rule_list_size;
 	rule_list_size = queue_size(rule_list);
 	rule_t* find_rule;
-	for(int i=0; i<rule_list_size; i++)
+	int i;
+	for(i=0; i<rule_list_size; i++)
 	{
 		find_rule = (rule_t*) queue_at(rule_list,i);
 		if(strcmp(find_rule->target, target) == 0)
@@ -62,7 +63,8 @@ void new_command_func (char *target, char *command)
 	int rule_list_size;
 	rule_list_size = queue_size(rule_list);
 	rule_t* find_rule;
-	for(int i=0; i<rule_list_size; i++)
+	int i;
+	for(i=0; i<rule_list_size; i++)
 	{
 		find_rule = (rule_t*) queue_at(rule_list,i);
 		if(strcmp(find_rule->target, target) == 0)
@@ -81,7 +83,8 @@ void cleanup()
 	int rule_list_size;
 	rule_t* find_rule;
 	rule_list_size = queue_size(rule_list);
-	for(int i=0; i<rule_list_size; i++)
+	int i;
+	for(i=0; i<rule_list_size; i++)
 	{
 		find_rule = (rule_t*) queue_at(rule_list,i);
 		free(find_rule->target);
@@ -115,7 +118,8 @@ void show_rule_list()
 	int rule_list_size;
 	rule_t* find_rule;
 	rule_list_size = queue_size(rule_list);
-	for(int i=0; i<rule_list_size; i++)
+	int i;
+	for(i=0; i<rule_list_size; i++)
 	{
 		find_rule = (rule_t*) queue_at(rule_list,i);
 		printf("target%d: %s\n",i,find_rule->target );
@@ -180,12 +184,12 @@ void *parmake_worker()
 			if(queue_size(find_rule->commands) == 0)
 			{
 				
-
-				for(int i=0;i<queue_size(rule_list);i++)
+				int i;
+				for(i=0;i<queue_size(rule_list);i++)
 				{
 					tmp_rule = (rule_t*)queue_at(rule_list,i);
-
-					for(int j=0;j<queue_size(tmp_rule->deps);j++)
+					int j;
+					for(j=0;j<queue_size(tmp_rule->deps);j++)
 					{
 						if(strcmp(find_rule->target,(char*)queue_at(tmp_rule->deps,j))==0)
 							{
@@ -338,7 +342,8 @@ int main(int argc, char **argv)
 	sem_init(&sitems,0,0);
 	pthread_t threads[threads_no];
 	int rc;
-	for(int i=0; i<threads_no; i++)
+	int i;
+	for(i=0; i<threads_no; i++)
 	{
 
 		rc=pthread_create(&threads[i],NULL,parmake_worker,NULL);
