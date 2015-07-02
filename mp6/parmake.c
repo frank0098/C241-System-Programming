@@ -89,12 +89,13 @@ void cleanup()
 		find_rule = (rule_t*) queue_at(rule_list,i);
 		free(find_rule->target);
 		char* tmp_char;
-		for(int j=0; j<queue_size(find_rule->deps);j++)
+		int j;
+		for(j=0; j<queue_size(find_rule->deps);j++)
 		{
 			tmp_char = (char*) queue_at(find_rule->deps,j);
 			free(tmp_char);
 		}
-		for(int j=0; j<queue_size(find_rule->commands);j++)
+		for(j=0; j<queue_size(find_rule->commands);j++)
 		{
 			tmp_char = (char*) queue_at(find_rule->commands,j);
 			free(tmp_char);
@@ -124,12 +125,13 @@ void show_rule_list()
 		find_rule = (rule_t*) queue_at(rule_list,i);
 		printf("target%d: %s\n",i,find_rule->target );
 		char* tmp_char;
-		for(int j=0; j<queue_size(find_rule->deps);j++)
+		int j;
+		for(j=0; j<queue_size(find_rule->deps);j++)
 		{
 			tmp_char = (char*) queue_at(find_rule->deps,j);
 			printf("dependency%d: %s\n",j,tmp_char );
 		}
-		for(int j=0; j<queue_size(find_rule->commands);j++)
+		for(j=0; j<queue_size(find_rule->commands);j++)
 		{
 			tmp_char = (char*) queue_at(find_rule->commands,j);
 			printf("commands%d: %s\n",j,tmp_char );
@@ -353,7 +355,8 @@ int main(int argc, char **argv)
             exit(-1);
         }
 	}
-	for(int j=0;j<threads_no;j++)
+	int j;
+	for(j=0;j<threads_no;j++)
     {
         pthread_join(threads[j],NULL);
     }
