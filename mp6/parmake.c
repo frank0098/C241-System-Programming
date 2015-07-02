@@ -155,8 +155,8 @@ void *parmake_worker()
 		next_command = NULL;
 		pthread_mutex_lock(&m_lock);
 
-		printf("the tid is %d\n", (unsigned int)pthread_self());
-		show_rule_list();
+		//printf("the tid is %d\n", (unsigned int)pthread_self());
+		//show_rule_list();
 
 		int index = 0;
 		for(index=0;index<queue_size(rule_list);index++)
@@ -175,7 +175,7 @@ void *parmake_worker()
 			//printf("enqueue: %s\n\n",next_command );
 			pthread_mutex_lock(&w_lock);
 			queue_enqueue(work_list,next_command);
-			sem_post(&sitems);
+			//sem_post(&sitems);
 			pthread_mutex_unlock(&w_lock);
 
 			pthread_mutex_lock(&m_lock);
@@ -209,8 +209,7 @@ void *parmake_worker()
 			pthread_mutex_unlock(&m_lock);
 		}
 
-		printf("the semaphore is %d\n", sitems);
-		sem_wait(&sitems);
+		//sem_wait(&sitems);
 		pthread_mutex_lock(&w_lock);
 		if(error_flag==1)
 			{
@@ -233,11 +232,7 @@ void *parmake_worker()
 					//exit(1);
 				}
 		}
-		else
-		{
-			printf("wtf???the tid is %d\n", (unsigned int)pthread_self());
-		}
-
+		
 		pthread_mutex_unlock(&w_lock);
 
 	}
