@@ -206,8 +206,14 @@ void parser_parse_makefile
 
 	char *lineBuf = NULL;
 	size_t bytes;
-	while(getline(&lineBuf, &bytes, f) != -1){
-		if(lineBuf[strlen(lineBuf)-1] == '\n') lineBuf[strlen(lineBuf)-1] = '\0';
+	size_t len;
+	while((len = getline(&lineBuf, &bytes, f)) != -1){
+	 
+		if(len && lineBuf[len-1] == '\n'){
+			lineBuf[--len] = '\0';
+			if(len && lineBuf[len-1] == '\r')	
+				lineBuf[--len] = '\0';
+		}
 
 		if(isalnum(lineBuf[0])){
 			char *depLine = strstr(lineBuf, ":");

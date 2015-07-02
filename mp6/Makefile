@@ -1,7 +1,7 @@
 all: parmake doc/html
 
 doc/html: parmake.c
-	doxygen doc/Doxyfile &> /dev/null
+	doxygen doc/Doxyfile 2> /dev/null
 
 parmake: parmake.o queue.o parser.o rule.o
 	gcc -pthread -Wall parmake.o queue.o parser.o rule.o -o parmake
